@@ -10,7 +10,7 @@ import {
 } from './type';
 
 export const LoadingProcessState: TLoadingProcessState = {
-  enabled: true,
+  enabled: false,
   type: LoadingProcessType.BounceSmooth,
   body: 'LOADING...',
 };

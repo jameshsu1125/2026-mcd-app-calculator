@@ -1,3 +1,4 @@
+import Container from '@/components/container';
 import LoadingProcess from '@/components/loadingProcess';
 import { PAGE } from '@/settings/config';
 import { Context, InitialState, Reducer } from '@/settings/constant';
@@ -48,7 +49,9 @@ const App = () => {
   return (
     <div className='App'>
       <Context.Provider {...{ value }}>
-        <Pages />
+        <Container>
+          <Pages />
+        </Container>
         {state[ActionType.LoadingProcess]?.enabled && <LoadingProcess />}
       </Context.Provider>
     </div>
