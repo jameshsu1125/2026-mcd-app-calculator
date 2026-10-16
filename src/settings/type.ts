@@ -14,6 +14,7 @@ export enum LoadingProcessType {
   Spin = 'spin',
   SpinningBubbles = 'spinningBubbles',
   Spokes = 'spokes',
+  BounceSmooth = 'bounceSmooth',
 }
 
 export enum TransitionType {
@@ -29,7 +30,7 @@ export enum TransitionType {
 export type TLoadingProcessState = {
   enabled?: boolean;
   type?: LoadingProcessType;
-  body?: '';
+  body?: string;
 };
 
 export interface IState {

@@ -42,6 +42,8 @@ export default defineConfig(async ({ mode }) => {
             description: env.VITE_SUBSCRIPTION,
             url: env.VITE_URL,
             facebookID: env.VITE_FACEBOOK_ID,
+            googleAnalyticsID: env.VITE_GOOGLE_ANALYTICS_ID,
+            facebookAnalyticsID: env.VITE_FACEBOOK_ANALYTICS_ID,
           },
         },
       }),

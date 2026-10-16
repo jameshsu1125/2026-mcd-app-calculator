@@ -10,9 +10,9 @@ import {
 } from './type';
 
 export const LoadingProcessState: TLoadingProcessState = {
-  enabled: false,
-  type: LoadingProcessType.Spokes,
-  body: '',
+  enabled: true,
+  type: LoadingProcessType.BounceSmooth,
+  body: 'LOADING...',
 };
 
 export const InitialState: IState = {

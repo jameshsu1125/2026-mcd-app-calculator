@@ -9,7 +9,7 @@ const Background = () => (
 );
 
 const Text = ({ children }: IReactProps) => (
-  <span className='text-textColor relative'>{children}</span>
+  <span className='text-primary relative ml-2 text-xs'>{children}</span>
 );
 
 const LoadingSvg = ({ className, type }: { className: string; type?: string }) => {
@@ -19,7 +19,7 @@ const LoadingSvg = ({ className, type }: { className: string; type?: string }) =
         className,
         'mask-contain mask-center',
         'h-16 w-16',
-        'bg-white',
+        'bg-primary',
         type || LoadingProcessType.Spin,
       )}
     />
@@ -30,7 +30,7 @@ const LoadingProcess = memo(() => {
   const [context] = useContext(Context);
   const data = context[ActionType.LoadingProcess];
   return (
-    <div className='LoadingProcess absolute top-0 z-50 flex h-full w-full flex-col items-center justify-center space-y-3'>
+    <div className='LoadingProcess absolute top-0 z-50 flex h-full w-full flex-col items-center justify-center space-y-1'>
       <Background />
       <LoadingSvg className='relative' type={data?.type} />
       {data?.body && <Text>{data.body}</Text>}
