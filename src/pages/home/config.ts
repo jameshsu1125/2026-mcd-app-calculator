@@ -5,15 +5,15 @@ export enum HomeStepType {
   fadeIn,
 }
 
-export enum THomePage {
+export enum HomePage {
   intro,
   calculator,
   result,
 }
 
-export type THomeState = { step: HomeStepType; page: THomePage };
+export type HomeState = { step: HomeStepType; page: HomePage };
 
-export type THomeContext = [THomeState, Dispatch<SetStateAction<THomeState>>];
+export type HomeContext = [HomeState, Dispatch<SetStateAction<HomeState>>];
 
-export const HomeState = { step: HomeStepType.unset, page: THomePage.intro };
-export const HomeContext = createContext<THomeContext>([HomeState, () => {}]);
+export const HomeState = { step: HomeStepType.unset, page: HomePage.intro };
+export const HomeContext = createContext<HomeContext>([HomeState, () => {}]);

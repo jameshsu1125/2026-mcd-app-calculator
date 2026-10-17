@@ -1,10 +1,10 @@
 import { memo, useMemo, useState } from 'react';
-import { HomeContext, HomeState, THomeState } from './config';
+import { HomeContext, HomeState, HomeState } from './config';
 import './index.less';
 import Intro from './intro';
 
 const Home = memo(() => {
-  const [state, setState] = useState<THomeState>(HomeState);
+  const [state, setState] = useState<HomeState>(HomeState);
 
   const page = useMemo(() => {
     switch (state.page) {

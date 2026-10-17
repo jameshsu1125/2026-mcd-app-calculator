@@ -43,7 +43,7 @@ const Glow = memo(() => {
         },
       }}
       shouldFadeIn={state.step === IntroStepType.fadeIn}
-      fadeOutStyle={{ opacity: 1, scale: 2.5, y: -200, x: 50 }}
+      fadeOutStyle={{ opacity: 1, scale: 2.5, y: -200, x: 100 }}
       optionsFadeOut={{
         duration: 800,
         easing: Bezier.inOutQuart,
@@ -52,6 +52,12 @@ const Glow = memo(() => {
         },
       }}
       shouldFadeOut={shouldFadeOut}
+      tweenQueue={[{ opacity: 0, y: -window.innerHeight }]}
+      shouldUseTweenQueue={state.step === IntroStepType.patternDidFadeIn}
+      tweenQueueOptions={{
+        duration: 300,
+        easing: Bezier.inBack,
+      }}
     />
   );
 });
