@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 
 export enum MediaType {
   Unset = 0,
-  XXS = 1,
-  XS = 2,
-  SM = 3,
-  MD = 4,
-  LG = 5,
+  XXS = '<=430',
+  XS = '<=768',
+  SM = '<=1024',
+  MD = '<=1280',
+  LG = '>1280',
 }
 
 const useMedia = () => {
