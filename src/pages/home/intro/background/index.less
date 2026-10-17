@@ -1,0 +1,20 @@
+@import url('@/settings/global.css');
+@import url('@/settings/config.less');
+
+.Intro {
+  .glow {
+    transform-origin: left top;
+
+    @img: './img/glow-s.png';
+    @apply absolute top-1/2 left-1/2 w-full;
+
+    &::before {
+      padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+      background-image: url(@img);
+      content: '';
+      transform: translate(-50%, -50%);
+
+      @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+    }
+  }
+}

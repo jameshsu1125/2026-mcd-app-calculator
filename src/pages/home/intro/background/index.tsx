@@ -1,18 +1,65 @@
-import useTween from 'lesca-use-tween';
-import { memo, useContext, useEffect } from 'react';
+import TweenerProvider from '@/components/tweenerProvider';
+import { Bezier } from 'lesca-use-tween';
+import { memo, useContext, useRef, useState } from 'react';
 import { IntroContext, IntroStepType } from '../config';
+import './index.less';
 
-const Background = memo(() => {
+const Color = memo(() => {
   const [state] = useContext(IntroContext);
 
-  const [style, setStyle] = useTween({ backgroundColor: '#000' });
-
-  useEffect(() => {
-    if (state.step === IntroStepType.fadeIn) {
-      //setStyle({ backgroundColor: '#ffcc00' });
-    }
-  }, [state.step]);
-
-  return <div className='absolute top-0 h-full w-full bg-black' style={style} />;
+  return (
+    <TweenerProvider
+      className='absolute top-0 h-full w-full bg-black'
+      initialStyle={{ backgroundColor: '#000' }}
+      tweenTo={{ backgroundColor: '#ffbc0d' }}
+      options={{ duration: 15000, easing: Bezier.inQuart, onEnd: () => {} }}
+      shouldFadeIn={state.step === IntroStepType.fadeIn}
+    />
+  );
 });
+
+const Glow = memo(() => {
+  const [state, setState] = useContext(IntroContext);
+  const timeRef = useRef(new Date().getTime());
+
+  const [shouldFadeOut, setShouldFadeOut] = useState(false);
+
+  return (
+    <TweenerProvider
+      className='glow mix-blend-lighten'
+      initialStyle={{ opacity: 0, scale: 1, y: 0, x: 0 }}
+      tweenTo={{ opacity: 1, scale: 2 }}
+      options={{
+        duration: 15000,
+        easing: Bezier.inQuart,
+        onStart: () => {
+          timeRef.current = new Date().getTime();
+        },
+        onUpdate: () => {
+          const now = new Date().getTime();
+          const delta = now - timeRef.current;
+          if (delta < 14000) return;
+          setShouldFadeOut(true);
+        },
+      }}
+      shouldFadeIn={state.step === IntroStepType.fadeIn}
+      fadeOutStyle={{ opacity: 1, scale: 2.5, y: -200, x: 50 }}
+      optionsFadeOut={{
+        duration: 800,
+        easing: Bezier.inOutQuart,
+        onStart: () => {
+          setState((prev) => ({ ...prev, shouldEndFadeIn: true }));
+        },
+      }}
+      shouldFadeOut={shouldFadeOut}
+    />
+  );
+});
+
+const Background = memo(() => (
+  <div className='absolute top-0 h-full w-full'>
+    <Color />
+    <Glow />
+  </div>
+));
 export default Background;

@@ -6,11 +6,19 @@ export enum IntroStepType {
   fadeIn,
   frameDidBlanking,
   frameDidFadeIn,
-  zoomIn,
+  frameDidZoomed,
   ending,
 }
-export type TIntroState = { step: IntroStepType };
+export type TIntroState = {
+  step: IntroStepType;
+  appendFastPass: boolean;
+  shouldEndFadeIn: boolean;
+};
 export type TIntroContext = [TIntroState, Dispatch<SetStateAction<TIntroState>>];
 
-export const IntroState = { step: IntroStepType.unset };
+export const IntroState = {
+  step: IntroStepType.unset,
+  appendFastPass: true,
+  shouldEndFadeIn: false,
+};
 export const IntroContext = createContext<TIntroContext>([IntroState, () => {}]);

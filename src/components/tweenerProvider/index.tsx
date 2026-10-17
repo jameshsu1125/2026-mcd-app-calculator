@@ -1,6 +1,6 @@
 import { IReactProps } from '@/settings/type';
 import useTween from 'lesca-use-tween';
-import { CSSProperties, memo, useEffect } from 'react';
+import { CSSProperties, memo, useEffect, useRef } from 'react';
 
 interface CSS extends Omit<CSSProperties, 'rotate'> {
   x?: string | number;
@@ -12,6 +12,8 @@ interface CSS extends Omit<CSSProperties, 'rotate'> {
   rotateZ?: string | number;
   skewX?: string | number;
   skewY?: string | number;
+  scaleX?: string | number;
+  scaleY?: string | number;
 }
 
 export type Options = {
@@ -19,7 +21,7 @@ export type Options = {
   easing?: number[];
   delay?: number;
   onStart?: () => void;
-  onUpdate?: () => void;
+  onUpdate?: (e: CSS) => void;
   onEnd?: () => void;
 };
 
@@ -46,6 +48,7 @@ const TweenerProvider = memo((props: TTweenerProvider) => {
   const { children, initialStyle, tweenTo, options, shouldFadeIn } = props;
   const { fadeOutStyle, optionsFadeOut, shouldFadeOut } = props;
   const [style, setStyle, destroy] = useTween(initialStyle);
+  const destroyRef = useRef(destroy);
 
   useEffect(() => {
     if (props.shouldUseTweenQueue && props.tweenQueue && props.tweenQueue.length > 0) {
@@ -69,8 +72,9 @@ const TweenerProvider = memo((props: TTweenerProvider) => {
 
   useEffect(() => {
     if (shouldFadeIn && tweenTo) setStyle(tweenTo, { ...options });
-    return () => destroy();
   }, [shouldFadeIn]);
+
+  useEffect(() => () => destroyRef.current(), []);
 
   useEffect(() => {
     if (shouldFadeOut && fadeOutStyle)

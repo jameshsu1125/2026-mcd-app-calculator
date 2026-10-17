@@ -1,0 +1,100 @@
+@import url('@/settings/global.css');
+
+.Intro {
+  .End {
+    @apply absolute top-0 flex h-full w-full flex-col items-center justify-center gap-8;
+
+    & > .logo {
+      width: (unit(image-width(@img))) / 738 * 100%;
+      filter: drop-shadow(0 7px 8px rgba(0, 0, 0, 0.5));
+
+      @img: '../../img/logo-flag.svg';
+
+      &::before {
+        padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+        background-image: url(@img);
+        content: '';
+
+        @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+      }
+    }
+
+    & > .pattern {
+      width: (unit(image-width(@img))) / 738 * 100%;
+
+      @img: './img/tmp.png';
+      @apply relative;
+
+      &::before {
+        padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+        // background-image: url(@img);
+        content: '';
+        opacity: 0.5;
+
+        @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+      }
+
+      & > div {
+        @apply absolute;
+
+        &::before {
+          content: '';
+
+          @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      & > div:nth-child(1) {
+        top: 0%;
+        left: 0%;
+
+        @img: '../../img/pattern-text.svg';
+        @apply w-full;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+        }
+      }
+
+      & > div:nth-child(2) {
+        top: 3.7%;
+        left: 8.4%;
+        width: 12.3%;
+
+        @img: '../../img/pattern-glass.svg';
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+        }
+      }
+
+      & > div:nth-child(3) {
+        top: 60%;
+        left: 40.8%;
+        width: (unit(image-width(@img))) / 300 * 100%;
+
+        @img: '../../img/pattern-checkBox.svg';
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+        }
+      }
+
+      & > div:nth-child(4) {
+        top: 35.4%;
+        left: 42.3%;
+        width: (unit(image-width(@img))) / 300 * 100%;
+
+        @img: '../../img/pattern-check.svg';
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+        }
+      }
+    }
+  }
+}

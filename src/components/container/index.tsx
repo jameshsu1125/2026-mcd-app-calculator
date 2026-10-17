@@ -17,7 +17,11 @@ const Container = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
     }
 
     return (
-      <div ref={ref} style={{ ...style, height: height ? `${height}px` : '100vh' }} {...other}>
+      <div
+        ref={ref}
+        style={{ ...style, height: height ? `${height}px` : '100vh', overflow: 'hidden' }}
+        {...other}
+      >
         <div className='flex h-full w-full justify-center'>
           <div className='relative w-full max-w-xl'>{children}</div>
         </div>

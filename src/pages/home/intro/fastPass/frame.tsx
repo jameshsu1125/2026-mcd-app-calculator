@@ -24,7 +24,7 @@ const Frame = memo(() => {
           duration: 2000,
           easing: Bezier.inOutQuart,
           onEnd: () => {
-            setState({ step: IntroStepType.frameDidFadeIn });
+            setState((S) => ({ ...S, step: IntroStepType.frameDidFadeIn }));
           },
         }}
         tweenQueue={[...new Array(30).keys()].map((i) => ({
@@ -35,7 +35,7 @@ const Frame = memo(() => {
           duration: 50,
           easing: Bezier.linear,
           onEnd: () => {
-            setState({ step: IntroStepType.frameDidBlanking });
+            setState((S) => ({ ...S, step: IntroStepType.frameDidBlanking }));
           },
         }}
       />
