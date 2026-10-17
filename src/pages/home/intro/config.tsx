@@ -4,6 +4,7 @@ export enum IntroStepType {
   unset,
   loading,
   fadeIn,
+  frameDidBlanking,
   frameDidFadeIn,
   zoomIn,
   ending,
