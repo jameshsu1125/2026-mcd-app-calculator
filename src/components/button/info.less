@@ -1,0 +1,39 @@
+@import url('@/settings/global.css');
+
+button {
+  & > .info {
+    gap: 2px;
+
+    @apply h-10 w-10 rounded-full border-2 border-white bg-cover bg-center;
+    @apply relative flex flex-col items-center justify-center duration-150;
+
+    &::before {
+      width: 6px;
+      height: 6px;
+      content: '';
+      transform-origin: center 13px;
+      @apply rounded-full bg-white duration-150;
+    }
+
+    &::after {
+      width: 6px;
+      height: 15px;
+      content: '';
+      @apply bg-white duration-150;
+    }
+  }
+
+  &:active {
+    & > .info {
+      @apply bg-tertiary scale-120 border-3;
+
+      &::before {
+        transform: rotate(360deg);
+      }
+
+      &::after {
+        height: 18px;
+      }
+    }
+  }
+}

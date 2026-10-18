@@ -1,0 +1,28 @@
+@import url('@/settings/global.css');
+
+button {
+  .keyboard {
+    background-color: #fcf2e5;
+    background-image: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.65),
+      rgba(255, 255, 255, 0) 45%
+    );
+    box-shadow:
+      inset 0px 8px 5px rgba(255, 255, 255, 0.9),
+      inset 0px -8px 6px rgba(223, 169, 0, 0.9);
+    filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.3));
+
+    @apply absolute inset-0 flex items-center justify-center rounded-full;
+  }
+
+  &:active {
+    .keyboard {
+      box-shadow:
+        inset 0px 4px 5px rgba(255, 255, 255, 0.55),
+        inset 0px -4px 6px rgba(223, 169, 0, 0.75);
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+      transform: translateY(2px);
+    }
+  }
+}

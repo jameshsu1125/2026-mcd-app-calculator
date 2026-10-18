@@ -11,9 +11,9 @@ export enum HomePage {
   result,
 }
 
-export type HomeState = { step: HomeStepType; page: HomePage };
+export type THomeState = { step: HomeStepType; page: HomePage };
 
-export type HomeContext = [HomeState, Dispatch<SetStateAction<HomeState>>];
+export type HomeContext = [THomeState, Dispatch<SetStateAction<THomeState>>];
 
-export const HomeState = { step: HomeStepType.unset, page: HomePage.intro };
+export const HomeState = { step: HomeStepType.unset, page: HomePage.calculator };
 export const HomeContext = createContext<HomeContext>([HomeState, () => {}]);

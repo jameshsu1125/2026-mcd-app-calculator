@@ -1,0 +1,33 @@
+@import url('@/settings/global.css');
+
+.Calculator {
+  @apply bg-primary flex h-full w-full justify-center;
+
+  & > .contain {
+    @apply flex h-full w-full max-w-md flex-col items-center justify-start gap-5 py-10;
+
+    & > .blockquote {
+      @apply flex w-full flex-row px-5;
+
+      & > .logo {
+        width: (unit(image-width(@img))) / 768 * 100%;
+        filter: drop-shadow(0 7px 8px rgba(0, 0, 0, 0.4));
+
+        @img: '../img/logo-flag.svg';
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      & > .input {
+        background-color: #fef1d2;
+        @apply h-full w-full rounded-2xl;
+      }
+    }
+  }
+}

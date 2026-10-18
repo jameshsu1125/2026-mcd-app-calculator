@@ -46,14 +46,34 @@ const CheckBox = memo(() => {
 });
 
 const Glass = memo(() => {
-  const [{ shouldEndFadeIn }] = useContext(IntroContext);
+  const [{ shouldEndFadeIn, step }] = useContext(IntroContext);
+
+  const [looking, setLooking] = useState(false);
 
   return (
     <TweenerProvider
-      initialStyle={{ y: -20 }}
+      initialStyle={{ x: 0, y: -20 }}
       tweenTo={{ y: 0 }}
       shouldFadeIn={shouldEndFadeIn}
-      options={{ duration: 300, delay: 950, easing: Bezier.outBack }}
+      options={{ duration: 300, delay: 700, easing: Bezier.outBack, onEnd: () => setLooking(true) }}
+
+      tweenQueue={[
+        { x: -5, y: 0 },
+        { x: 5, y: 0 },
+        { x: -5, y: 0 },
+        { x: 5, y: 0 },
+        { x: -5, y: 0 },
+        { x: 5, y: 0 },
+      ]}
+      shouldUseTweenQueue={looking}
+      tweenQueueOptions={{ duration: 400, delay: 50 }}
+
+      fadeOutStyle={{ x: -10, y: 50 }}
+      shouldFadeOut={step === IntroStepType.patternDidFadeIn}
+      optionsFadeOut={{
+        duration: 300,
+        easing: Bezier.inBack,
+      }}
     />
   );
 });
