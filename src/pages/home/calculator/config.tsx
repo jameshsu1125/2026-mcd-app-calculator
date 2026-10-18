@@ -5,6 +5,7 @@ type TimePeriod = 'breakfast' | 'allDay';
 export enum CalculatorStepType {
   unset,
   fadeIn,
+  keyboardDidFadeIn,
 }
 
 export type TCalculatorState = {

@@ -8,10 +8,10 @@ const Info = memo(() => {
   const [{ step }] = useContext(CalculatorContext);
   return (
     <TweenerProvider
-      initialStyle={{ opacity: 0, scale: 0 }}
-      tweenTo={{ opacity: 1, scale: 1 }}
-      options={{ duration: 500, easing: Bezier.outBack }}
-      // shouldFadeIn={step === CalculatorStepType.unset}
+      initialStyle={{ opacity: 0, y: -50 }}
+      tweenTo={{ opacity: 1, y: 0 }}
+      options={{ duration: 300, easing: Bezier.outBack }}
+      shouldFadeIn={step === CalculatorStepType.keyboardDidFadeIn}
     >
       <Button id='info'>
         <Button.Info />

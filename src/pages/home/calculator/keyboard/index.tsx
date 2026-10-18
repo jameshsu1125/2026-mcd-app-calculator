@@ -1,6 +1,31 @@
 import Button from '@/components/button';
+import TweenerProvider from '@/components/tweenerProvider';
 import { memo, useContext, useMemo } from 'react';
-import { CalculatorContext, Keyboards } from '../config';
+import { CalculatorContext, CalculatorStepType, Keyboards } from '../config';
+
+const KeyButton = memo(({ className, index }: { className: string; index: number }) => {
+  const [{ step }, setState] = useContext(CalculatorContext);
+  return (
+    <TweenerProvider
+      initialStyle={{ opacity: 0, y: 30 }}
+      tweenTo={{ opacity: 1, y: 0 }}
+      shouldFadeIn={step === CalculatorStepType.fadeIn}
+      options={{
+        duration: 100,
+        delay: 300 + index * 20,
+        onEnd: () => {
+          if (index >= 19) {
+            setState((prev) => ({ ...prev, step: CalculatorStepType.keyboardDidFadeIn }));
+          }
+        },
+      }}
+    >
+      <Button className='relative w-full pb-[100%]'>
+        <Button.Keyboard className={className} />
+      </Button>
+    </TweenerProvider>
+  );
+});
 
 const Keyboard = memo(() => {
   const [{ time }] = useContext(CalculatorContext);
@@ -14,9 +39,11 @@ const Keyboard = memo(() => {
     <div className='w-full shrink-0 px-5'>
       <div className='grid w-full grid-cols-4 gap-5'>
         {keyboard.map((data, index) => (
-          <Button key={`keyboard-${data.className}-${index}`} className='relative w-full pb-[100%]'>
-            <Button.Keyboard className={data.className} />
-          </Button>
+          <KeyButton
+            key={`keyboard-${data.className}-${index}`}
+            className={data.className}
+            index={index}
+          />
         ))}
       </div>
     </div>
