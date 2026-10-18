@@ -6,7 +6,7 @@ import { CalculatorContext, CalculatorStepType } from '../config';
 const Screen = memo(() => {
   const [{ step }] = useContext(CalculatorContext);
   return (
-    <div className='blockquote min-h-36 flex-1 items-stretch justify-between'>
+    <div className='blockquote min-h-12 flex-1 items-stretch justify-between'>
       <TweenerProvider
         className='input'
         initialStyle={{ opacity: 0, y: 100 }}

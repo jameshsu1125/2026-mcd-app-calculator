@@ -20,7 +20,7 @@ const KeyButton = memo(({ className, index }: { className: string; index: number
         },
       }}
     >
-      <Button className='relative w-full pb-[100%]'>
+      <Button className='relative block w-full pb-[100%]'>
         <Button.Keyboard className={className} />
       </Button>
     </TweenerProvider>
@@ -37,7 +37,7 @@ const Keyboard = memo(() => {
 
   return (
     <div className='w-full shrink-0 px-5'>
-      <div className='grid w-full grid-cols-4 gap-[3%]'>
+      <div className='grid w-full grid-cols-4 gap-3'>
         {keyboard.map((data, index) => (
           <KeyButton
             key={`keyboard-${data.className}-${index}`}
