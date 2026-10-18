@@ -3,10 +3,14 @@ import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
 import OnloadProvider from 'lesca-react-onload';
 import { memo, useContext, useEffect } from 'react';
+import { Keyboards } from './config';
 import './index.less';
 
 const Calculator = memo(() => {
   const [, setContext] = useContext(Context);
+
+  const timePeriod = 'breakfast'; // new Date().getHours() < 11 ? 'breakfast' : 'allDay';
+  const keyboards = timePeriod === 'breakfast' ? Keyboards.breakfast : Keyboards.allDay;
 
   useEffect(() => {
     setContext({ type: ActionType.LoadingProcess, state: { enabled: true } });
@@ -32,9 +36,12 @@ const Calculator = memo(() => {
           </div>
           <div className='w-full shrink-0 px-5'>
             <div className='grid w-full grid-cols-4 gap-5'>
-              {[...new Array(20).keys()].map((key) => (
-                <Button key={key} className='relative w-full pb-[100%]'>
-                  <Button.Keyboard>{key}</Button.Keyboard>
+              {keyboards.map((data, index) => (
+                <Button
+                  key={`keyboard-${data.className}-${index}`}
+                  className='relative w-full pb-[100%]'
+                >
+                  <Button.Keyboard className={data.className} />
                 </Button>
               ))}
             </div>

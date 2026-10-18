@@ -14,6 +14,143 @@ button {
     filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.3));
 
     @apply absolute inset-0 flex items-center justify-center rounded-full;
+
+    & > div {
+      background-repeat: no-repeat;
+
+      mask-repeat: no-repeat;
+      @apply h-full w-full;
+    }
+
+    .del {
+      mask-image: url('./img/keyboard-del.svg');
+      mask-position: 43% 48%;
+      mask-size: 40%;
+
+      @apply bg-secondary;
+    }
+
+    .mcd {
+      mask-image: url('./img/keyboard-logo.svg');
+      mask-position: center 46%;
+      mask-size: 40%;
+
+      @apply bg-primary;
+    }
+
+    .bird {
+      mask-image: url('./img/keyboard-bird.svg');
+      mask-position: 58% 46%;
+      mask-size: 70%;
+
+      @apply bg-secondary;
+    }
+
+    .script {
+      mask-image: url('./img/keyboard-script.svg');
+      mask-position: 50% 46%;
+      mask-size: 65%;
+
+      @apply bg-secondary;
+    }
+
+    .mcb {
+      background-image: url('./img/keyboard-0-breakfast.svg');
+      background-position: 50% 46%;
+      background-size: 65%;
+    }
+
+    .mpf {
+      background-image: url('./img/keyboard-1-breakfast.svg');
+      background-position: 50% 46%;
+      background-size: 75%;
+    }
+
+    .mbg {
+      background-image: url('./img/keyboard-2-breakfast.svg');
+      background-position: 50% 46%;
+      background-size: 85%;
+    }
+
+    .meb {
+      background-image: url('./img/keyboard-3-breakfast.svg');
+      background-position: 50% 46%;
+      background-size: 60%;
+    }
+
+    .mcn {
+      background-image: url('./img/keyboard-4.svg');
+      background-position: 50% 46%;
+      background-size: 68%;
+    }
+
+    .mcc {
+      background-image: url('./img/keyboard-5-breakfast-1-all-day.svg');
+      background-position: 50% 46%;
+      background-size: 75%;
+    }
+
+    .mcf {
+      background-image: url('./img/keyboard-6-breakfast-2-all-day.svg');
+      background-position: 50% 35%;
+      background-size: 75%;
+    }
+
+    .mhash {
+      background-image: url('./img/keyboard-7-breakfast.svg');
+      background-position: 50% 30%;
+      background-size: 50%;
+    }
+
+    .msoda {
+      background-image: url('./img/keyboard-8.svg');
+      background-position: 50% 40%;
+      background-size: 38%;
+    }
+
+    .mccafe {
+      background-image: url('./img/keyboard-9.svg');
+      background-position: 50% 40%;
+      background-size: 50%;
+    }
+
+    .mtea {
+      background-image: url('./img/keyboard-10.svg');
+      background-position: 50% 45%;
+      background-size: 52%;
+    }
+
+    .mcs {
+      background-image: url('./img/keyboard-11.svg');
+      background-position: 50% 45%;
+      background-size: 58%;
+    }
+
+    .switch {
+      background-image: url('./img/keyboard-switch.svg');
+      background-position: 45% 45%;
+      background-size: 50%;
+    }
+
+    .mice {
+      background-image: url('./img/keyboard-13.svg');
+      background-position: 50% 40%;
+      background-size: 33%;
+    }
+
+    .mbf {
+      background-image: url('./img/keyboard-14.svg');
+      background-position: 50% 30%;
+      background-size: 40%;
+    }
+
+    .enter {
+      mask-image: url('./img/keyboard-enter.svg');
+      mask-position: 50% 48%;
+      mask-size: 38%;
+
+      @apply bg-secondary;
+    }
   }
 
   &:active {
@@ -23,6 +160,26 @@ button {
         inset 0px -4px 6px rgba(223, 169, 0, 0.75);
       filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
       transform: translateY(2px);
+
+      .del {
+        @apply bg-tertiary;
+      }
+
+      .mcd {
+        @apply bg-tertiary;
+      }
+
+      .bird {
+        @apply bg-tertiary;
+      }
+
+      .script {
+        @apply bg-tertiary;
+      }
+
+      .enter {
+        @apply bg-tertiary;
+      }
     }
   }
 }

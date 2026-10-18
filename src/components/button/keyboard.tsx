@@ -1,9 +1,12 @@
 import { memo, useEffect } from 'react';
 import './keyboard.less';
-import { IReactProps } from '@/settings/type';
 
-const Keyboard = memo(({ children }: IReactProps) => {
+const Keyboard = memo(({ className }: { className?: string }) => {
   useEffect(() => {}, []);
-  return <div className='keyboard'>{children}</div>;
+  return (
+    <div className='keyboard'>
+      <div className={className} />
+    </div>
+  );
 });
 export default Keyboard;
