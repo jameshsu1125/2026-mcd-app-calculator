@@ -1,6 +1,6 @@
 import Button from '@/components/button';
 import { memo, useContext, useMemo } from 'react';
-import { CalculatorContext, Keyboards } from './config';
+import { CalculatorContext, Keyboards } from '../config';
 
 const Keyboard = memo(() => {
   const [{ time }] = useContext(CalculatorContext);

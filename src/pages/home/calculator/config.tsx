@@ -2,11 +2,22 @@ import { createContext, Dispatch, SetStateAction } from 'react';
 
 type TimePeriod = 'breakfast' | 'allDay';
 
-export type TCalculatorState = { time: TimePeriod };
+export enum CalculatorStepType {
+  unset,
+  fadeIn,
+}
+
+export type TCalculatorState = {
+  time: TimePeriod;
+  step: CalculatorStepType;
+  instructionState: { step: number; enabled: boolean };
+};
 export type TCalculatorContext = [TCalculatorState, Dispatch<SetStateAction<TCalculatorState>>];
 
 export const CalculatorState: TCalculatorState = {
   time: new Date().getHours() < 11 ? 'breakfast' : 'allDay',
+  step: CalculatorStepType.unset,
+  instructionState: { step: 0, enabled: false },
 };
 
 export const CalculatorContext = createContext<TCalculatorContext>([CalculatorState, () => {}]);

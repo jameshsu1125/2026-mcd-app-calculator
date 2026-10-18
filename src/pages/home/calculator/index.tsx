@@ -1,44 +1,44 @@
-import Button from '@/components/button';
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
 import OnloadProvider from 'lesca-react-onload';
 import { memo, useContext, useEffect, useState } from 'react';
-import { CalculatorContext, CalculatorState } from './config';
+import { CalculatorContext, CalculatorState, CalculatorStepType } from './config';
 import './index.less';
-import InstructionsForUse from './instructionsForUse';
+import Info from './info';
+import Instructions from './instructions';
 import Keyboard from './keyboard';
+import Logo from './logo';
 import Screen from './screen';
 
 const Calculator = memo(() => {
   const [, setContext] = useContext(Context);
-  const value = useState(CalculatorState);
+  const [state, setState] = useState(CalculatorState);
 
   useEffect(() => {
     setContext({ type: ActionType.LoadingProcess, state: { enabled: true } });
   }, []);
 
   return (
-    <CalculatorContext.Provider value={value}>
+    <CalculatorContext.Provider value={[state, setState]}>
       <OnloadProvider
         onload={() => {
           setContext({ type: ActionType.LoadingProcess, state: { enabled: false } });
+          setState((prev) => ({ ...prev, step: CalculatorStepType.fadeIn }));
         }}
       >
         <div className='Calculator'>
           <div className='inner'>
             <div className='contain'>
               <div className='blockquote items-start justify-between'>
-                <Button>
-                  <Button.Info />
-                </Button>
-                <div className='logo' />
+                <Info />
+                <Logo />
                 <div className='opacity-0' />
               </div>
               <Screen />
               <Keyboard />
             </div>
           </div>
-          <InstructionsForUse />
+          {state.instructionState.enabled && <Instructions />}
         </div>
       </OnloadProvider>
     </CalculatorContext.Provider>
