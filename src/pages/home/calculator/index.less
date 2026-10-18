@@ -6,10 +6,13 @@
   & > .inner {
     @apply flex h-full w-full justify-center;
     & > .contain {
-      @apply flex h-full w-full max-w-md flex-col items-center justify-start gap-5 py-10;
+      gap: 3%;
+      padding-block: 5%;
+      @apply flex h-full w-full max-w-md flex-col items-center justify-start;
 
       & > .blockquote {
-        @apply flex w-full flex-row px-5;
+        padding-inline: 5%;
+        @apply flex w-full flex-row;
 
         & > .logo {
           width: (unit(image-width(@img))) / 768 * 100%;
