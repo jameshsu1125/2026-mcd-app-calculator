@@ -1,5 +1,6 @@
 import { memo, useLayoutEffect, useState } from 'react';
 import './instructionsForUse.less';
+import Toast from '@/components/toast';
 
 const Switch = memo(() => {
   const [bounds, setBounds] = useState<DOMRect | null>(null);
@@ -31,7 +32,9 @@ const Switch = memo(() => {
         height: bounds.height,
       }}
       className='switch'
-    />
+    >
+      <Toast number={5}>切換早餐時段／午晚餐時段</Toast>
+    </div>
   );
 });
 

@@ -1,0 +1,78 @@
+@import url('@/settings/global.css');
+.Toast {
+  top: -39%;
+  left: 61%;
+  padding: 10%;
+  filter: drop-shadow(0 10px 5px rgba(0, 0, 0, 0.5));
+  @apply absolute flex w-auto flex-row items-center justify-center gap-3 rounded-l-full rounded-r-full bg-white whitespace-nowrap text-black;
+
+  &::before {
+    top: 28px;
+    left: -12px;
+    background-image: url('./img/needle.svg');
+    content: '';
+    @apply absolute -z-10 h-8 w-8 bg-contain bg-center bg-no-repeat;
+  }
+
+  .number-1 {
+    &::after {
+      background-image: url('./img/1.svg');
+      background-size: 19%;
+    }
+  }
+
+  .number-2 {
+    &::after {
+      background-image: url('./img/2.svg');
+      background-size: 25%;
+    }
+  }
+
+  .number-3 {
+    &::after {
+      background-image: url('./img/3.svg');
+      background-size: 28%;
+    }
+  }
+
+  .number-4 {
+    &::after {
+      background-image: url('./img/4.svg');
+      background-size: 28%;
+    }
+  }
+
+  .number-5 {
+    &::after {
+      background-image: url('./img/5.svg');
+      background-size: 25%;
+    }
+  }
+
+  & > div {
+    gap: 8%;
+    @apply bg-primary flex h-10 w-10 flex-col items-center justify-center rounded-full;
+
+    &::before {
+      height: 55%;
+      background-image: url('./img/step.svg');
+      background-position: center bottom;
+      background-size: 55%;
+      background-repeat: no-repeat;
+      content: '';
+      @apply w-full;
+    }
+
+    &::after {
+      height: 60%;
+      background-position: calc(~'50% - 1px') top;
+      background-repeat: no-repeat;
+      content: '';
+      @apply w-full;
+    }
+  }
+
+  & > span {
+    @apply pr-2 font-black tracking-wide;
+  }
+}
