@@ -27,7 +27,7 @@ const Calculator = memo(() => {
             <div className='logo' />
             <div className='opacity-0' />
           </div>
-          <div className='blockquote min-h-24 flex-1 items-stretch justify-between'>
+          <div className='blockquote min-h-36 flex-1 items-stretch justify-between'>
             <div className='input' />
           </div>
           <div className='w-full shrink-0 px-5'>
