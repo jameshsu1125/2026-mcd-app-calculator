@@ -1,3 +1,16 @@
+import { createContext, Dispatch, SetStateAction } from 'react';
+
+type TimePeriod = 'breakfast' | 'allDay';
+
+export type TCalculatorState = { time: TimePeriod };
+export type TCalculatorContext = [TCalculatorState, Dispatch<SetStateAction<TCalculatorState>>];
+
+export const CalculatorState: TCalculatorState = {
+  time: new Date().getHours() < 11 ? 'breakfast' : 'allDay',
+};
+
+export const CalculatorContext = createContext<TCalculatorContext>([CalculatorState, () => {}]);
+
 export const Keyboards = {
   breakfast: [
     {

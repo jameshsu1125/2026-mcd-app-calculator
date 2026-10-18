@@ -1,0 +1,13 @@
+@import url('@/settings/global.css');
+
+.InstructionsForUse {
+  @apply absolute top-0 h-full w-full;
+
+  & > .bg {
+    @apply bg-backgroundColor/60 absolute h-full w-full;
+  }
+
+  .switch {
+    @apply pointer-events-none fixed rounded-full border-2;
+  }
+}

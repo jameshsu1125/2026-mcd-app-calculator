@@ -151,6 +151,50 @@ button {
 
       @apply bg-secondary;
     }
+
+    .hungry {
+      mask-image: url('./img/keyboard-hungry.svg');
+      mask-position: 50% 43%;
+      mask-size: 54%;
+
+      @apply bg-secondary;
+    }
+
+    .beef {
+      background-image: url('./img/keyboard-0-all-day.svg');
+      background-position: 50% 43%;
+      background-size: 71%;
+    }
+
+    .chicken {
+      background-image: url('./img/keyboard-5-breakfast-1-all-day.svg');
+      background-position: 50% 46%;
+      background-size: 75%;
+    }
+
+    .mct {
+      background-image: url('./img/keyboard-3-all-day.svg');
+      background-position: 50% 38%;
+      background-size: 80%;
+    }
+
+    .mspicy {
+      background-image: url('./img/keyboard-5-all-day.svg');
+      background-position: 50% 38%;
+      background-size: 83%;
+    }
+
+    .mfries {
+      background-image: url('./img/keyboard-6-all-day.svg');
+      background-position: 50% 38%;
+      background-size: 60%;
+    }
+
+    .mapple {
+      background-image: url('./img/keyboard-7-all-day.svg');
+      background-position: 50% 43%;
+      background-size: 85%;
+    }
   }
 
   &:active {
@@ -178,6 +222,10 @@ button {
       }
 
       .enter {
+        @apply bg-tertiary;
+      }
+
+      .hungry {
         @apply bg-tertiary;
       }
     }
