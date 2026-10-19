@@ -37,8 +37,6 @@ const Calculator = memo(() => {
     return () => observer.disconnect();
   }, []);
 
-  // TODO: overflow 狀態之後可寫入 CalculatorContext（例如 state.overflow），讓 Keyboard、Instructions 等子元件使用
-
   return (
     <CalculatorContext.Provider value={[state, setState]}>
       <OnloadProvider
