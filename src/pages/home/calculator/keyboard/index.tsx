@@ -1,9 +1,14 @@
 import Button from '@/components/button';
 import TweenerDivProvider from '@/components/tweenerProvider';
 import { memo, useContext, useMemo } from 'react';
-import { CalculatorContext, CalculatorStepType, Keyboards } from '../config';
+import { CalculatorContext, CalculatorStepType, InputOtherActionType, Keyboards } from '../config';
 
-const KeyButton = memo(({ className, index }: { className: string; index: number }) => {
+type TKeyButtonProps = {
+  className: (typeof Keyboards)['breakfast' | 'allDay'][number]['className'];
+  index: number;
+};
+
+const KeyButton = memo(({ className, index }: TKeyButtonProps) => {
   const [{ step }, setState] = useContext(CalculatorContext);
   return (
     <TweenerDivProvider
@@ -20,7 +25,26 @@ const KeyButton = memo(({ className, index }: { className: string; index: number
         },
       }}
     >
-      <Button className='relative block w-full pb-[100%]'>
+      <Button
+        className='relative block w-full pb-[100%]'
+        onClick={() => {
+          if (Object.keys(InputOtherActionType).includes(className)) {
+            switch (className) {
+              case 'del':
+                setState((prev) => ({
+                  ...prev,
+                  userInput: prev.userInput.slice(0, -1),
+                }));
+                break;
+            }
+          } else {
+            setState((prev) => ({
+              ...prev,
+              userInput: [...prev.userInput, className],
+            }));
+          }
+        }}
+      >
         <Button.Keyboard className={className} />
       </Button>
     </TweenerDivProvider>

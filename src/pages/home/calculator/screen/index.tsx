@@ -1,10 +1,16 @@
 import TweenerDivProvider from '@/components/tweenerProvider';
 import { Bezier } from 'lesca-use-tween';
-import { memo, useContext } from 'react';
+import { memo, useContext, useMemo } from 'react';
 import { CalculatorContext, CalculatorStepType } from '../config';
 
 const Screen = memo(() => {
-  const [{ step }] = useContext(CalculatorContext);
+  const [{ step, userInput }] = useContext(CalculatorContext);
+
+  const input = useMemo(() => {
+    console.log(userInput);
+    return userInput;
+  }, [userInput]);
+
   return (
     <div className='blockquote min-h-24 flex-1 items-stretch justify-between'>
       <TweenerDivProvider

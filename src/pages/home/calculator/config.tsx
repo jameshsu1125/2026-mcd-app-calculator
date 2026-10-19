@@ -1,6 +1,17 @@
 import { createContext, Dispatch, SetStateAction } from 'react';
 
 type TimePeriod = 'breakfast' | 'allDay';
+export type InputType = (typeof Keyboards)['breakfast' | 'allDay'][number]['className'];
+export enum InputOtherActionType {
+  del = 'del',
+  enter = 'enter',
+  switch = 'switch',
+  mcd = 'mcd',
+  bird = 'bird',
+  script = 'script',
+}
+
+export type InputInsertType = Exclude<InputType, keyof typeof InputOtherActionType>;
 
 export enum CalculatorStepType {
   unset,
@@ -15,6 +26,7 @@ export type TCalculatorState = {
   time: TimePeriod;
   step: CalculatorStepType;
   instructionState: { step: number; enabled: boolean };
+  userInput: (typeof Keyboards)['breakfast' | 'allDay'][number]['className'][];
 };
 export type TCalculatorContext = [TCalculatorState, Dispatch<SetStateAction<TCalculatorState>>];
 
@@ -22,6 +34,7 @@ export const CalculatorState: TCalculatorState = {
   time: new Date().getHours() < 11 ? 'breakfast' : 'allDay',
   step: CalculatorStepType.unset,
   instructionState: { step: 0, enabled: true },
+  userInput: [],
 };
 
 export const CalculatorContext = createContext<TCalculatorContext>([CalculatorState, () => {}]);
@@ -191,4 +204,4 @@ export const Keyboards = {
       className: 'enter',
     },
   ],
-};
+} as const;
