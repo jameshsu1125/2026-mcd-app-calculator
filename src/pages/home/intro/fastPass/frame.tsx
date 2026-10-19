@@ -1,9 +1,9 @@
 import TweenerDivProvider from '@/components/tweenerProvider';
-import { memo, useContext, useEffect } from 'react';
+import { Bezier } from 'lesca-use-tween';
+import { memo, useContext } from 'react';
+import { twMerge } from 'tailwind-merge';
 import { IntroContext, IntroStepType } from '../config';
 import './index.less';
-import { Bezier } from 'lesca-use-tween';
-import { twMerge } from 'tailwind-merge';
 
 const Frame = memo(() => {
   const [{ step }, setState] = useContext(IntroContext);

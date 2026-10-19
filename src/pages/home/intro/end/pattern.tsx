@@ -1,8 +1,8 @@
 import TweenerDivProvider from '@/components/tweenerProvider';
 import { Bezier } from 'lesca-use-tween';
 import { memo, useContext, useState } from 'react';
+import { HomeContext, HomePage } from '../../config';
 import { END_STAY_DURATION, IntroContext, IntroStepType } from '../config';
-import { HomeContext, HomeStepType, HomePage } from '../../config';
 
 const CheckBox = memo(() => {
   const [{ shouldEndFadeIn, shouldCheckFadeIn }, setState] = useContext(IntroContext);

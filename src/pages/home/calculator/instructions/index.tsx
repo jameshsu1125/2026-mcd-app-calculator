@@ -1,13 +1,12 @@
+import Button from '@/components/button';
+import TweenerDivProvider from '@/components/tweenerProvider';
+import Click from 'lesca-click';
+import { Bezier } from 'lesca-use-tween';
 import { memo, useContext, useEffect, useId } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { CalculatorContext, CalculatorStepType } from '../config';
 import Focus from './focus';
 import './index.less';
-import TweenerDivProvider from '@/components/tweenerProvider';
-import Click from 'lesca-click';
-import Skip from '../../../../components/button/skip';
-import Button from '@/components/button';
-import { Bezier } from 'lesca-use-tween';
 
 const Instructions = memo(() => {
   const id = useId();

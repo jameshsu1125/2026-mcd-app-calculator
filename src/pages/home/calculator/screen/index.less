@@ -1,0 +1,259 @@
+@import url('@/settings/global.css');
+
+.Calculator {
+  & > .inner {
+    & > .contain {
+      & > .blockquote {
+        & > .input {
+          padding: 3%;
+          background-color: #fef1d2;
+
+          gap: 3%;
+
+          @apply flex w-full flex-row flex-wrap items-end justify-end self-stretch rounded-2xl;
+
+          .item {
+            @apply flex w-16 flex-col justify-center gap-1;
+
+            &::before {
+              content: '';
+              @apply inline-block w-full bg-contain;
+            }
+
+            & > span {
+              @apply text-secondary text-center text-xs font-black select-none;
+            }
+          }
+
+          .mcb {
+            // 滿福堡系列
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
+
+              @img: '../../../../components/button/img/keyboard-0-breakfast.svg';
+            }
+          }
+
+          .mpf {
+            // 鬆餅系列
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
+
+              @img: '../../../../components/button/img/keyboard-1-breakfast.svg';
+            }
+          }
+
+          .mbg {
+            // 焙果系列
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
+
+              @img: '../../../../components/button/img/keyboard-2-breakfast.svg';
+            }
+          }
+
+          .meb {
+            // 蛋堡系列
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
+
+              @img: '../../../../components/button/img/keyboard-3-breakfast.svg';
+            }
+          }
+
+          .mcn {
+            // 麥克鷄塊
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
+
+              @img: '../../../../components/button/img/keyboard-4.svg';
+            }
+          }
+
+          .mcc {
+            // 麥香鷄
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
+
+              @img: '../../../../components/button/img/keyboard-5-breakfast-1-all-day.svg';
+            }
+          }
+
+          .mcf {
+            // 麥香魚
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
+
+              @img: '../../../../components/button/img/keyboard-6-breakfast-2-all-day.svg';
+            }
+          }
+
+          .mhash {
+            @apply w-10;
+            // 薯餅
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
+
+              @img: '../../../../components/button/img/keyboard-7-breakfast.svg';
+            }
+          }
+
+          .msoda {
+            @apply w-9;
+            // 汽水
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
+
+              @img: '../../../../components/button/img/keyboard-8.svg';
+            }
+          }
+
+          .mccafe {
+            @apply w-11;
+            // McCafe
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
+
+              @img: '../../../../components/button/img/keyboard-9.svg';
+            }
+          }
+
+          .mtea {
+            @apply w-11;
+            // 茶飲
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
+
+              @img: '../../../../components/button/img/keyboard-10.svg';
+            }
+          }
+
+          .mcs {
+            @apply w-11;
+            // 玉米湯
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
+
+              @img: '../../../../components/button/img/keyboard-11.svg';
+            }
+          }
+
+          .mice {
+            @apply w-15;
+            // 蛋捲冰淇淋
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 60%);
+              background-image: url(@img);
+
+              @img: '../../../../components/button/img/keyboard-13.svg';
+
+              @apply bg-center bg-no-repeat;
+            }
+          }
+
+          .mbf {
+            @apply w-9;
+            // 冰炫風
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
+
+              @img: '../../../../components/button/img/keyboard-14.svg';
+            }
+          }
+
+          .beef {
+            // 牛肉堡系列
+            @apply w-15;
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
+
+              @img: '../../../../components/button/img/keyboard-0-all-day.svg';
+            }
+          }
+
+          .chicken {
+            // @apply w-9;
+            // 鷄肉類漢堡
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
+
+              @img: '../../../../components/button/img/keyboard-5-breakfast-1-all-day.svg';
+            }
+          }
+
+          .mct {
+            // @apply w-9;
+            // 麥脆鷄腿
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
+
+              @img: '../../../../components/button/img/keyboard-3-all-day.svg';
+            }
+          }
+
+          .mspicy {
+            // @apply w-9;
+            // 勁辣香鷄翅
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
+
+              @img: '../../../../components/button/img/keyboard-5-all-day.svg';
+            }
+          }
+
+          .mfries {
+            @apply w-11;
+            // 薯條
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
+
+              @img: '../../../../components/button/img/keyboard-6-all-day.svg';
+            }
+          }
+
+          .mapple {
+            @apply w-18;
+            // 薯條
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
+
+              @img: '../../../../components/button/img/keyboard-7-all-day.svg';
+            }
+          }
+
+          .plus {
+            @img: './img/+.svg';
+            @apply relative w-6;
+
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
+              content: '';
+
+              @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -10,15 +10,17 @@ type TRegularProps = IReactProps & {
   className?: string;
   style?: React.CSSProperties;
   onClick?: () => void;
+  dataset?: string;
 };
 
-const Button = ({ id, children, className, style, onClick }: TRegularProps) => {
+const Button = ({ id, children, className, style, onClick, dataset }: TRegularProps) => {
   return (
     <button
       id={id}
       className={twMerge('cursor-pointer bg-transparent', className)}
       style={style}
       onClick={onClick}
+      data-dataset={dataset}
     >
       {children}
     </button>

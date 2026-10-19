@@ -9,6 +9,7 @@ export enum InputOtherActionType {
   mcd = 'mcd',
   bird = 'bird',
   script = 'script',
+  hungry = 'hungry',
 }
 
 export type InputInsertType = Exclude<InputType, keyof typeof InputOtherActionType>;
@@ -26,7 +27,10 @@ export type TCalculatorState = {
   time: TimePeriod;
   step: CalculatorStepType;
   instructionState: { step: number; enabled: boolean };
-  userInput: (typeof Keyboards)['breakfast' | 'allDay'][number]['className'][];
+  userInput: {
+    className: (typeof Keyboards)['breakfast' | 'allDay'][number]['className'];
+    dataset: string;
+  }[];
 };
 export type TCalculatorContext = [TCalculatorState, Dispatch<SetStateAction<TCalculatorState>>];
 
@@ -38,6 +42,8 @@ export const CalculatorState: TCalculatorState = {
 };
 
 export const CalculatorContext = createContext<TCalculatorContext>([CalculatorState, () => {}]);
+
+export const MAX_INPUT_LENGTH = 6;
 
 export const Keyboards = {
   breakfast: [
