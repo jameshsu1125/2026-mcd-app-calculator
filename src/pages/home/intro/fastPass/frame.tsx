@@ -1,4 +1,4 @@
-import TweenerProvider from '@/components/tweenerProvider';
+import TweenerDivProvider from '@/components/tweenerProvider';
 import { memo, useContext, useEffect } from 'react';
 import { IntroContext, IntroStepType } from '../config';
 import './index.less';
@@ -15,7 +15,7 @@ const Frame = memo(() => {
         step === IntroStepType.frameDidFadeIn && 'animate-blank',
       )}
     >
-      <TweenerProvider
+      <TweenerDivProvider
         className='frame'
         initialStyle={{ opacity: 0 }}
         tweenTo={{ opacity: 1 }}

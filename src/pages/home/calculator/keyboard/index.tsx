@@ -1,12 +1,12 @@
 import Button from '@/components/button';
-import TweenerProvider from '@/components/tweenerProvider';
+import TweenerDivProvider from '@/components/tweenerProvider';
 import { memo, useContext, useMemo } from 'react';
 import { CalculatorContext, CalculatorStepType, Keyboards } from '../config';
 
 const KeyButton = memo(({ className, index }: { className: string; index: number }) => {
   const [{ step }, setState] = useContext(CalculatorContext);
   return (
-    <TweenerProvider
+    <TweenerDivProvider
       initialStyle={{ opacity: 0, y: 30 }}
       tweenTo={{ opacity: 1, y: 0 }}
       shouldFadeIn={step === CalculatorStepType.fadeIn}
@@ -23,7 +23,7 @@ const KeyButton = memo(({ className, index }: { className: string; index: number
       <Button className='relative block w-full pb-[100%]'>
         <Button.Keyboard className={className} />
       </Button>
-    </TweenerProvider>
+    </TweenerDivProvider>
   );
 });
 

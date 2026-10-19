@@ -2,7 +2,7 @@ import { memo, useContext } from 'react';
 import Frame from './frame';
 import './index.less';
 import UpperText from './upperText';
-import TweenerProvider from '@/components/tweenerProvider';
+import TweenerDivProvider from '@/components/tweenerProvider';
 import { IntroContext, IntroStepType } from '../config';
 import { Bezier } from 'lesca-use-tween';
 
@@ -11,7 +11,7 @@ const FastPass = memo(() => {
 
   return (
     <div className='FastPass'>
-      <TweenerProvider
+      <TweenerDivProvider
         className='inner'
         initialStyle={{ scale: 0.72 }}
         tweenTo={{ scale: 30 }}
@@ -30,7 +30,7 @@ const FastPass = memo(() => {
       >
         <Frame />
         <UpperText />
-      </TweenerProvider>
+      </TweenerDivProvider>
     </div>
   );
 });

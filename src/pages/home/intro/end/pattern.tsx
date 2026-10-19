@@ -1,4 +1,4 @@
-import TweenerProvider from '@/components/tweenerProvider';
+import TweenerDivProvider from '@/components/tweenerProvider';
 import { Bezier } from 'lesca-use-tween';
 import { memo, useContext, useState } from 'react';
 import { END_STAY_DURATION, IntroContext, IntroStepType } from '../config';
@@ -10,7 +10,7 @@ const CheckBox = memo(() => {
   const [resume, setResume] = useState(false);
 
   return (
-    <TweenerProvider
+    <TweenerDivProvider
       initialStyle={{ scaleX: 1, scaleY: 1 }}
       tweenTo={{ scaleX: 1.5, scaleY: 0.5 }}
       shouldFadeIn={shouldEndFadeIn}
@@ -51,7 +51,7 @@ const Glass = memo(() => {
   const [looking, setLooking] = useState(false);
 
   return (
-    <TweenerProvider
+    <TweenerDivProvider
       initialStyle={{ x: 0, y: -20 }}
       tweenTo={{ y: 0 }}
       shouldFadeIn={shouldEndFadeIn}
@@ -81,7 +81,7 @@ const Glass = memo(() => {
 const Check = memo(() => {
   const [{ shouldCheckFadeIn }] = useContext(IntroContext);
   return (
-    <TweenerProvider
+    <TweenerDivProvider
       initialStyle={{ opacity: 0, scale: 0 }}
       tweenTo={{ opacity: 1, scale: 1 }}
       shouldFadeIn={shouldCheckFadeIn}
@@ -94,7 +94,7 @@ const Pattern = memo(() => {
   const [{ shouldEndFadeIn, step }] = useContext(IntroContext);
   const [, setState] = useContext(HomeContext);
   return (
-    <TweenerProvider
+    <TweenerDivProvider
       className='pattern'
       initialStyle={{ opacity: 0, y: 200, scaleX: 1, scaleY: 1 }}
       tweenTo={{ opacity: 1, y: 0 }}
@@ -116,7 +116,7 @@ const Pattern = memo(() => {
       <Glass />
       <CheckBox />
       <Check />
-    </TweenerProvider>
+    </TweenerDivProvider>
   );
 });
 export default Pattern;

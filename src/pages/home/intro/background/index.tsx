@@ -1,4 +1,4 @@
-import TweenerProvider from '@/components/tweenerProvider';
+import TweenerDivProvider from '@/components/tweenerProvider';
 import { Bezier } from 'lesca-use-tween';
 import { memo, useContext, useRef, useState } from 'react';
 import { IntroContext, IntroStepType } from '../config';
@@ -8,7 +8,7 @@ const Color = memo(() => {
   const [state] = useContext(IntroContext);
 
   return (
-    <TweenerProvider
+    <TweenerDivProvider
       className='absolute top-0 h-full w-full bg-black'
       initialStyle={{ backgroundColor: '#000' }}
       tweenTo={{ backgroundColor: '#ffbc0d' }}
@@ -25,7 +25,7 @@ const Glow = memo(() => {
   const [shouldFadeOut, setShouldFadeOut] = useState(false);
 
   return (
-    <TweenerProvider
+    <TweenerDivProvider
       className='glow mix-blend-lighten'
       initialStyle={{ opacity: 0, scale: 1, y: 0, x: 0 }}
       tweenTo={{ opacity: 1, scale: 2 }}

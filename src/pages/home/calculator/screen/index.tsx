@@ -1,4 +1,4 @@
-import TweenerProvider from '@/components/tweenerProvider';
+import TweenerDivProvider from '@/components/tweenerProvider';
 import { Bezier } from 'lesca-use-tween';
 import { memo, useContext } from 'react';
 import { CalculatorContext, CalculatorStepType } from '../config';
@@ -7,7 +7,7 @@ const Screen = memo(() => {
   const [{ step }] = useContext(CalculatorContext);
   return (
     <div className='blockquote min-h-24 flex-1 items-stretch justify-between'>
-      <TweenerProvider
+      <TweenerDivProvider
         className='input'
         initialStyle={{ opacity: 0, y: 100 }}
         tweenTo={{ opacity: 1, y: 0 }}
@@ -17,7 +17,7 @@ const Screen = memo(() => {
         {/**
          *
          */}
-      </TweenerProvider>
+      </TweenerDivProvider>
     </div>
   );
 });

@@ -6,6 +6,9 @@ export enum CalculatorStepType {
   unset,
   fadeIn,
   keyboardDidFadeIn,
+  infoDidFadeIn,
+  instructionDidFadeIn,
+  startCalculator,
 }
 
 export type TCalculatorState = {
@@ -18,7 +21,7 @@ export type TCalculatorContext = [TCalculatorState, Dispatch<SetStateAction<TCal
 export const CalculatorState: TCalculatorState = {
   time: new Date().getHours() < 11 ? 'breakfast' : 'allDay',
   step: CalculatorStepType.unset,
-  instructionState: { step: 0, enabled: false },
+  instructionState: { step: 0, enabled: true },
 };
 
 export const CalculatorContext = createContext<TCalculatorContext>([CalculatorState, () => {}]);

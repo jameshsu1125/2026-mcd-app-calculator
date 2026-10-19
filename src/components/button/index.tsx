@@ -3,6 +3,7 @@ import Regular from './regular';
 import Info from './info';
 import { twMerge } from 'tailwind-merge';
 import Keyboard from './keyboard';
+import Skip from './skip';
 
 type TRegularProps = IReactProps & {
   id?: string;
@@ -27,5 +28,6 @@ const Button = ({ id, children, className, style, onClick }: TRegularProps) => {
 Button.regular = Regular;
 Button.Info = Info;
 Button.Keyboard = Keyboard;
+Button.Skip = Skip;
 
 export default Button;

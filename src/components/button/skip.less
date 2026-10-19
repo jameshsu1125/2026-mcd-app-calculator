@@ -1,0 +1,16 @@
+@import url('@/settings/global.css');
+
+button {
+  & > .skip {
+    @img: './img/skip.svg';
+    @apply relative w-full p-1;
+
+    &::before {
+      padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+      background-image: url(@img);
+      content: '';
+
+      @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+    }
+  }
+}

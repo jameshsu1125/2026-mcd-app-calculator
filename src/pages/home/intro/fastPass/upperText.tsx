@@ -1,4 +1,4 @@
-import TweenerProvider from '@/components/tweenerProvider';
+import TweenerDivProvider from '@/components/tweenerProvider';
 import { memo, useContext } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { IntroContext, IntroStepType } from '../config';
@@ -8,7 +8,7 @@ import { Bezier } from 'lesca-use-tween';
 const UpperText = memo(() => {
   const [{ step }] = useContext(IntroContext);
   return (
-    <TweenerProvider
+    <TweenerDivProvider
       className='UpperText'
       initialStyle={{ opacity: 0 }}
       tweenTo={{ opacity: 1 }}
@@ -24,7 +24,7 @@ const UpperText = memo(() => {
           <div />
         </div>
       ))}
-    </TweenerProvider>
+    </TweenerDivProvider>
   );
 });
 export default UpperText;

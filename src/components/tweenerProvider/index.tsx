@@ -26,7 +26,9 @@ export type Options = {
 };
 
 type TTweenerProvider = IReactProps & {
+  id?: string;
   className?: string;
+  style?: CSSProperties;
   initialStyle: CSS;
   tweenTo?: CSS;
   fadeOutStyle?: CSS;
@@ -44,8 +46,8 @@ type TTweenerProvider = IReactProps & {
 
 // 這個組件是管理動畫的組件
 /** 動畫緩動 Provider，封裝 lesca-use-tween，依 from/to 狀態自動觸發 CSS 屬性過場動畫 */
-const TweenerProvider = memo((props: TTweenerProvider) => {
-  const { children, initialStyle, tweenTo, options, shouldFadeIn } = props;
+const TweenerDivProvider = memo((props: TTweenerProvider) => {
+  const { children, initialStyle, tweenTo, options, shouldFadeIn, style: propStyle } = props;
   const { fadeOutStyle, optionsFadeOut, shouldFadeOut } = props;
   const [style, setStyle, destroy] = useTween(initialStyle);
   const destroyRef = useRef(destroy);
@@ -90,9 +92,9 @@ const TweenerProvider = memo((props: TTweenerProvider) => {
   }, [shouldFadeOut]);
 
   return (
-    <div className={props.className} style={style}>
+    <div id={props.id} className={props.className} style={{ ...propStyle, ...style }}>
       {children}
     </div>
   );
 });
-export default TweenerProvider;
+export default TweenerDivProvider;
