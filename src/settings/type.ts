@@ -42,6 +42,9 @@ export type TModalState = {
 };
 
 export type TUserResultState = {
+  // 使用者按 Enter 當下鍵盤的時段。麥香魚、汽水等按鍵兩個時段都有，
+  // 同一組 id 在早餐和午晚餐算出來的結果不同，所以一定要跟著 input 存。
+  time: 'breakfast' | 'allDay';
   input: { className: string; dataset: { id: string; name: string } }[];
 };
 

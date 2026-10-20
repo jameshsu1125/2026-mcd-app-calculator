@@ -1,4 +1,4 @@
-export { useMcdDeal } from './useMcdDeal'
+export { solveMcdDeal, useMcdDeal } from './useMcdDeal'
 export type {
   McdBreakdown, McdBreakdownItem, McdButton, McdDeal, McdResult, MealSavingsBasis,
   Objective, TimeSlot,

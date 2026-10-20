@@ -71,7 +71,10 @@ const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
                       state: { enabled: true, body: MESSAGE_KEYBOARD_INPUT_MIN },
                     });
                   } else {
-                    setContext({ type: ActionType.UserResult, state: { input: userInput } });
+                    setContext({
+                      type: ActionType.UserResult,
+                      state: { time: prev.time, input: prev.userInput },
+                    });
                     setHomeState((prev) => ({ ...prev, page: HomePageType.result }));
                   }
                   return prev;

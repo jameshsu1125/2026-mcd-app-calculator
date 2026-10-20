@@ -27,11 +27,13 @@ export const ModalState: TModalState = {
   ),
 };
 
+// 開發用的預設值（直接進結果頁時用）。id 要跟 useMcdDeal 的按鍵 id 一樣。
 export const UserResultState: TUserResultState = {
+  time: 'allDay',
   input: [
-    { className: 'chicken', dataset: { name: '鷄肉類漢堡', id: 'chicken' } },
-    { className: 'mspicy', dataset: { name: '勁辣香鷄翅', id: 'mspicy' } },
-    { className: 'mfries', dataset: { name: '薯條', id: 'mfries' } },
+    { className: 'chicken', dataset: { name: '鷄肉類漢堡', id: 'chicken_burger' } },
+    { className: 'mspicy', dataset: { name: '勁辣香鷄翅', id: 'spicy_wings' } },
+    { className: 'mfries', dataset: { name: '薯條', id: 'fries' } },
   ],
 };
 
