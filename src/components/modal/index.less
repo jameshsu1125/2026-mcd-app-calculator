@@ -1,0 +1,22 @@
+@import url('@/settings/global.css');
+
+.Modal {
+  @apply fixed top-0 h-full w-full;
+
+  & > .bg {
+    @apply absolute h-full w-full bg-black/60;
+  }
+
+  & > .inner {
+    @apply relative flex h-full w-full items-center justify-center;
+
+    .dialog {
+      border-radius: 4rem;
+      background-color: #fef1d2;
+      color: #333;
+      filter: drop-shadow(0 0 1.4rem rgba(255, 188, 13, 1));
+
+      @apply border-primary flex min-w-2xs items-center justify-center border-6 px-10 py-30 text-center text-xl font-black tracking-wide;
+    }
+  }
+}

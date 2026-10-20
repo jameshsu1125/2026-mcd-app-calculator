@@ -7,6 +7,7 @@ import {
   LoadingProcessType,
   TContext,
   TLoadingProcessState,
+  TModalState,
 } from './type';
 
 export const LoadingProcessState: TLoadingProcessState = {
@@ -15,9 +16,20 @@ export const LoadingProcessState: TLoadingProcessState = {
   body: 'LOADING...',
 };
 
+export const ModalState: TModalState = {
+  enabled: true,
+  body: (
+    <>
+      親愛的麥粉 <br />
+      已達輸入上限啦😅
+    </>
+  ),
+};
+
 export const InitialState: IState = {
   [ActionType.Page]: PAGE.home,
   [ActionType.LoadingProcess]: LoadingProcessState,
+  [ActionType.Modal]: ModalState,
 };
 
 export const Context = createContext<TContext>([InitialState, () => {}]);

@@ -57,7 +57,9 @@ const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
             }
           } else {
             setState((prev) => {
-              if (prev.userInput.length >= MAX_INPUT_LENGTH) return prev;
+              if (prev.userInput.length >= MAX_INPUT_LENGTH) {
+                return prev;
+              }
               return {
                 ...prev,
                 userInput: [...prev.userInput, { className, dataset }],

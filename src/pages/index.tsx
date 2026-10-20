@@ -1,5 +1,6 @@
 import Container from '@/components/container';
 import LoadingProcess from '@/components/loadingProcess';
+import Modal from '@/components/modal';
 import { PAGE } from '@/settings/config';
 import { Context, InitialState, Reducer } from '@/settings/constant';
 import '@/settings/global.css';
@@ -53,6 +54,7 @@ const App = () => {
           <Pages />
         </Container>
         {state[ActionType.LoadingProcess]?.enabled && <LoadingProcess />}
+        {state[ActionType.Modal]?.enabled && <Modal />}
       </Context.Provider>
     </div>
   );
