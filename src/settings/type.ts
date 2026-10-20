@@ -1,4 +1,5 @@
 import { Dispatch, ReactNode } from 'react';
+import { Keyboards } from '../pages/home/calculator/config';
 
 export enum ActionType {
   Page = 'page',
@@ -41,7 +42,7 @@ export type TModalState = {
 };
 
 export type TUserResultState = {
-  input: { className: string; dataset: string }[];
+  input: { className: string; dataset: { id: string; name: string } }[];
 };
 
 export interface IState {

@@ -16,7 +16,7 @@ import {
 
 type TKeyButtonProps = {
   className: (typeof Keyboards)['breakfast' | 'allDay'][number]['className'];
-  dataset: string;
+  dataset: { id: string; name: string };
   index: number;
 };
 
@@ -115,7 +115,7 @@ const Keyboard = memo(() => {
           <KeyButton
             key={`keyboard-${data.className}-${index}`}
             className={data.className}
-            dataset={data.name}
+            dataset={{ id: data.id ?? '', name: data.name ?? '' }}
             index={index}
           />
         ))}

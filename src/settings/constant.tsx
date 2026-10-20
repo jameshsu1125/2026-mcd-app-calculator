@@ -29,9 +29,9 @@ export const ModalState: TModalState = {
 
 export const UserResultState: TUserResultState = {
   input: [
-    { className: 'chicken', dataset: '鷄肉類漢堡' },
-    { className: 'mspicy', dataset: '勁辣香鷄翅' },
-    { className: 'mfries', dataset: '薯條' },
+    { className: 'chicken', dataset: { name: '鷄肉類漢堡', id: 'chicken' } },
+    { className: 'mspicy', dataset: { name: '勁辣香鷄翅', id: 'mspicy' } },
+    { className: 'mfries', dataset: { name: '薯條', id: 'mfries' } },
   ],
 };
 

@@ -11,14 +11,14 @@ const Screen = memo(() => {
   const input = useMemo(() => {
     const element = userInput.map((item, index) => (
       <TweenerDivProvider
-        key={`input-${item}-${index}`}
+        key={`input-${item.className}-${index}`}
         className={twMerge('item', item.className)}
         initialStyle={{ opacity: 0, scale: 0 }}
         tweenTo={{ opacity: 1, scale: 1 }}
         options={{ duration: 150, easing: Bezier.outBack, delay: index === 0 ? 0 : 150 }}
         shouldFadeIn={true}
       >
-        <span>{item.dataset}</span>
+        <span>{item.dataset.name}</span>
       </TweenerDivProvider>
     ));
 
