@@ -10,13 +10,32 @@ const Screen = memo(() => {
 
   const input = useMemo(() => {
     const element = userInput.map((item, index) => (
-      <div key={`input-${item}-${index}`} className={twMerge('item', item.className)}>
+      <TweenerDivProvider
+        key={`input-${item}-${index}`}
+        className={twMerge('item', item.className)}
+        initialStyle={{ opacity: 0, scale: 0 }}
+        tweenTo={{ opacity: 1, scale: 1 }}
+        options={{ duration: 150, easing: Bezier.outBack, delay: index === 0 ? 0 : 150 }}
+        shouldFadeIn={true}
+      >
         <span>{item.dataset}</span>
-      </div>
+      </TweenerDivProvider>
     ));
 
     const elementAddPlus = element.flatMap((item, index) =>
-      index < element.length - 1 ? [item, <div key={`plus-${index}`} className='plus' />] : [item],
+      index < element.length - 1
+        ? [
+            item,
+            <TweenerDivProvider
+              initialStyle={{ opacity: 0, scale: 0 }}
+              tweenTo={{ opacity: 1, scale: 1 }}
+              options={{ duration: 150, easing: Bezier.outBack }}
+              shouldFadeIn={true}
+              key={`plus-${index}`}
+              className='plus'
+            />,
+          ]
+        : [item],
     );
 
     return elementAddPlus;

@@ -12,7 +12,7 @@ const Color = memo(() => {
       className='absolute top-0 h-full w-full bg-black'
       initialStyle={{ backgroundColor: '#000' }}
       tweenTo={{ backgroundColor: '#ffbc0d' }}
-      options={{ duration: 15000, easing: Bezier.inQuart, onEnd: () => {} }}
+      options={{ duration: 15000, easing: Bezier.inCirc, onEnd: () => {} }}
       shouldFadeIn={state.step === IntroStepType.fadeIn}
     />
   );

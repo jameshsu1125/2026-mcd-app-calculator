@@ -69,7 +69,7 @@ const Instructions = memo(() => {
         <Focus
           target='.Calculator .contain .enter'
           number={4}
-          text='改變心意，可刪除'
+          text='點此計算適用優惠'
           directionX='RIGHT'
         />
 
