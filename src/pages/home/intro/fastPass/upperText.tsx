@@ -35,8 +35,6 @@ const UpperText = memo(() => {
     return () => window.removeEventListener('resize', update);
   }, []);
 
-  console.log(shouldEndFadeIn);
-
   return (
     <TweenerDivProvider
       innerRef={parentRef}
