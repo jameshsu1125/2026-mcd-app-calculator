@@ -1,7 +1,7 @@
 import TweenerDivProvider from '@/components/tweenerProvider';
 import { Bezier } from 'lesca-use-tween';
 import { memo, useContext, useState } from 'react';
-import { HomeContext, HomePage } from '../../config';
+import { HomeContext, HomePageType } from '../../config';
 import { END_STAY_DURATION, IntroContext, IntroStepType } from '../config';
 
 const CheckBox = memo(() => {
@@ -108,7 +108,7 @@ const Pattern = memo(() => {
         easing: Bezier.inBack,
         delay: 100,
         onEnd: () => {
-          setState((prev) => ({ ...prev, page: HomePage.calculator }));
+          setState((prev) => ({ ...prev, page: HomePageType.calculator }));
         },
       }}
     >

@@ -1,6 +1,10 @@
 import Button from '@/components/button';
 import TweenerDivProvider from '@/components/tweenerProvider';
+import { MESSAGE_KEYBOARD_INPUT_MAX, MESSAGE_KEYBOARD_INPUT_MIN } from '@/settings/config';
+import { Context } from '@/settings/constant';
+import { ActionType } from '@/settings/type';
 import { memo, useContext, useMemo } from 'react';
+import { HomeContext, HomePageType } from '../../config';
 import {
   CalculatorContext,
   CalculatorStepType,
@@ -9,9 +13,6 @@ import {
   MAX_INPUT_LENGTH,
   MIN_INPUT_LENGTH,
 } from '../config';
-import { Context } from '@/settings/constant';
-import { ActionType } from '@/settings/type';
-import { MESSAGE_KEYBOARD_INPUT_MAX, MESSAGE_KEYBOARD_INPUT_MIN } from '@/settings/config';
 
 type TKeyButtonProps = {
   className: (typeof Keyboards)['breakfast' | 'allDay'][number]['className'];
@@ -22,6 +23,7 @@ type TKeyButtonProps = {
 const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
   const [, setContext] = useContext(Context);
   const [{ step, userInput }, setState] = useContext(CalculatorContext);
+  const [, setHomeState] = useContext(HomeContext);
   return (
     <TweenerDivProvider
       initialStyle={{
@@ -70,8 +72,8 @@ const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
                     });
                   } else {
                     setContext({ type: ActionType.UserResult, state: { input: userInput } });
+                    setHomeState((prev) => ({ ...prev, page: HomePageType.result }));
                   }
-
                   return prev;
                 });
             }

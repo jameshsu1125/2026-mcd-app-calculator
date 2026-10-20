@@ -1,8 +1,9 @@
 import { memo, useMemo, useState } from 'react';
-import { HomeContext, THomeState, HomeState } from './config';
+import Calculator from './calculator';
+import { HomeContext, HomeState, THomeState } from './config';
 import './index.less';
 import Intro from './intro';
-import Calculator from './calculator';
+import Result from './result';
 
 const Home = memo(() => {
   const [state, setState] = useState<THomeState>(HomeState);
@@ -15,7 +16,7 @@ const Home = memo(() => {
       case 1:
         return <Calculator />;
       case 2:
-        return <div>Result Page</div>;
+        return <Result />;
     }
   }, [state.page]);
 

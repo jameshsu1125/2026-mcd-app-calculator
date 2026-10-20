@@ -28,7 +28,11 @@ export const ModalState: TModalState = {
 };
 
 export const UserResultState: TUserResultState = {
-  input: [],
+  input: [
+    { className: 'chicken', dataset: '鷄肉類漢堡' },
+    { className: 'mspicy', dataset: '勁辣香鷄翅' },
+    { className: 'mfries', dataset: '薯條' },
+  ],
 };
 
 export const InitialState: IState = {
