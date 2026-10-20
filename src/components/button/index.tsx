@@ -9,16 +9,18 @@ import Skip from './skip';
 type TRegularProps = IReactProps & {
   id?: string;
   className?: string;
+  disabled?: boolean;
   style?: React.CSSProperties;
   onClick?: () => void;
   dataset?: string;
 };
 
-const Button = ({ id, children, className, style, onClick, dataset }: TRegularProps) => {
+const Button = ({ id, children, className, style, onClick, dataset, disabled }: TRegularProps) => {
   return (
     <button
       id={id}
       className={twMerge('cursor-pointer bg-transparent', className)}
+      disabled={disabled}
       style={style}
       onClick={onClick}
       data-dataset={dataset}

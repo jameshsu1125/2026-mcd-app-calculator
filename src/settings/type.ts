@@ -4,6 +4,7 @@ export enum ActionType {
   Page = 'page',
   LoadingProcess = 'loadingProcess',
   Modal = 'modal',
+  UserResult = 'userResult',
 }
 
 export enum LoadingProcessType {
@@ -39,10 +40,15 @@ export type TModalState = {
   body?: ReactNode;
 };
 
+export type TUserResultState = {
+  input: { className: string; dataset: string }[];
+};
+
 export interface IState {
   [ActionType.Page]?: string;
   [ActionType.LoadingProcess]?: TLoadingProcessState;
   [ActionType.Modal]?: TModalState;
+  [ActionType.UserResult]?: TUserResultState;
 }
 
 export interface IAction {

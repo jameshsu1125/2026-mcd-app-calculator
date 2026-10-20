@@ -7,10 +7,11 @@ import {
   InputOtherActionType,
   Keyboards,
   MAX_INPUT_LENGTH,
+  MIN_INPUT_LENGTH,
 } from '../config';
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
-import { MESSAGE_KEYBOARD_INPUT_MAX } from '@/settings/config';
+import { MESSAGE_KEYBOARD_INPUT_MAX, MESSAGE_KEYBOARD_INPUT_MIN } from '@/settings/config';
 
 type TKeyButtonProps = {
   className: (typeof Keyboards)['breakfast' | 'allDay'][number]['className'];
@@ -20,7 +21,7 @@ type TKeyButtonProps = {
 
 const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
   const [, setContext] = useContext(Context);
-  const [{ step }, setState] = useContext(CalculatorContext);
+  const [{ step, userInput }, setState] = useContext(CalculatorContext);
   return (
     <TweenerDivProvider
       initialStyle={{
@@ -40,6 +41,7 @@ const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
       }}
     >
       <Button
+        disabled={userInput.some((input) => input.className === className)}
         className='relative block w-full pb-[100%]'
         onClick={() => {
           if (Object.keys(InputOtherActionType).includes(className)) {
@@ -60,7 +62,18 @@ const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
                 break;
 
               case 'enter':
-                setState((prev) => ({ ...prev }));
+                setState((prev) => {
+                  if (prev.userInput.length < MIN_INPUT_LENGTH) {
+                    setContext({
+                      type: ActionType.Modal,
+                      state: { enabled: true, body: MESSAGE_KEYBOARD_INPUT_MIN },
+                    });
+                  } else {
+                    setContext({ type: ActionType.UserResult, state: { input: userInput } });
+                  }
+
+                  return prev;
+                });
             }
           } else {
             setState((prev) => {

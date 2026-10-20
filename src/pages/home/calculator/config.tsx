@@ -44,6 +44,7 @@ export const CalculatorState: TCalculatorState = {
 export const CalculatorContext = createContext<TCalculatorContext>([CalculatorState, () => {}]);
 
 export const MAX_INPUT_LENGTH = 6;
+export const MIN_INPUT_LENGTH = 2;
 
 export const Keyboards = {
   breakfast: [

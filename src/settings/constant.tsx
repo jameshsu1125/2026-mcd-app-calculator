@@ -8,6 +8,7 @@ import {
   TContext,
   TLoadingProcessState,
   TModalState,
+  TUserResultState,
 } from './type';
 
 export const LoadingProcessState: TLoadingProcessState = {
@@ -26,10 +27,15 @@ export const ModalState: TModalState = {
   ),
 };
 
+export const UserResultState: TUserResultState = {
+  input: [],
+};
+
 export const InitialState: IState = {
   [ActionType.Page]: PAGE.home,
   [ActionType.LoadingProcess]: LoadingProcessState,
   [ActionType.Modal]: ModalState,
+  [ActionType.UserResult]: UserResultState,
 };
 
 export const Context = createContext<TContext>([InitialState, () => {}]);

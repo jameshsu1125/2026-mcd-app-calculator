@@ -12,7 +12,7 @@ const Color = memo(() => {
       className='absolute top-0 h-full w-full bg-black'
       initialStyle={{ backgroundColor: '#000' }}
       tweenTo={{ backgroundColor: '#ffbc0d' }}
-      options={{ duration: 15000, easing: Bezier.inCirc, onEnd: () => {} }}
+      options={{ duration: 11000, easing: Bezier.inCirc }}
       shouldFadeIn={state.step === IntroStepType.fadeIn}
     />
   );
@@ -38,7 +38,7 @@ const Glow = memo(() => {
         onUpdate: () => {
           const now = new Date().getTime();
           const delta = now - timeRef.current;
-          if (delta < 14000) return;
+          if (delta < 11000) return;
           setShouldFadeOut(true);
         },
       }}

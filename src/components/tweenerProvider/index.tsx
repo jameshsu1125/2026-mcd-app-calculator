@@ -1,6 +1,6 @@
 import { IReactProps } from '@/settings/type';
 import useTween from 'lesca-use-tween';
-import { CSSProperties, memo, useEffect, useRef } from 'react';
+import { CSSProperties, memo, Ref, useEffect, useRef } from 'react';
 
 interface CSS extends Omit<CSSProperties, 'rotate'> {
   x?: string | number;
@@ -27,6 +27,7 @@ export type Options = {
 
 type TTweenerProvider = IReactProps & {
   id?: string;
+  innerRef?: Ref<HTMLDivElement>;
   className?: string;
   style?: CSSProperties;
   initialStyle: CSS;
@@ -92,7 +93,7 @@ const TweenerDivProvider = memo((props: TTweenerProvider) => {
   }, [shouldFadeOut]);
 
   return (
-    <div id={props.id} className={props.className} style={{ ...propStyle, ...style }}>
+    <div ref={props.innerRef} id={props.id} className={props.className} style={{ ...propStyle, ...style }}>
       {children}
     </div>
   );
