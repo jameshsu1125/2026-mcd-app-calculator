@@ -17,6 +17,6 @@ const Result = memo(() => {
     console.log(userResult, result);
   }, [userResult, result]);
 
-  return <div className='Result'>Result</div>;
+  return <div className='Result'>result</div>;
 });
 export default Result;
