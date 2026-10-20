@@ -87,21 +87,21 @@ const Result = memo(() => {
         <h5 className='text-heading mb-3 text-2xl leading-8 font-semibold tracking-tight'>
           所選商品
         </h5>
-        <p className='text-body'>
+        <div className='text-body'>
           {view?.selected.map((item) => item.name).join('、') || '尚未選擇商品'}
-        </p>
+        </div>
       </div>
       <div className='bg-neutral-primary-soft border-default bg-secondary hover:bg-neutral-secondary-medium block max-w-sm rounded-xl border p-6 shadow-xs'>
         <h5 className='text-heading mb-3 text-2xl leading-8 font-semibold tracking-tight'>多享</h5>
-        <p className='text-body'>
+        <div className='text-body'>
           {view?.extras.map((item) => item.name).join('、') || '尚未選擇商品'}
-        </p>
+        </div>
       </div>
       <div className='bg-neutral-primary-soft border-default bg-secondary hover:bg-neutral-secondary-medium block max-w-sm rounded-xl border p-6 shadow-xs'>
         <h5 className='text-heading mb-3 text-2xl leading-8 font-semibold tracking-tight'>
           攻略摘要
         </h5>
-        <p className='text-body'>
+        <div className='text-body'>
           {view?.summary ? (
             <>
               <div>有機會省最多錢: {view.summary.savings}</div>
@@ -111,11 +111,11 @@ const Result = memo(() => {
           ) : (
             '尚未選擇商品'
           )}
-        </p>
+        </div>
       </div>
       <div className='bg-neutral-primary-soft border-default bg-secondary hover:bg-neutral-secondary-medium block max-w-sm rounded-xl border p-6 shadow-xs'>
         <h5 className='text-heading mb-3 text-2xl leading-8 font-semibold tracking-tight'>攻略</h5>
-        <p className='text-body'>
+        <div className='text-body'>
           {view && view.coupons.length > 0
             ? view.coupons.map((coupon, index) => (
                 <div key={`${coupon.title}-${index}`}>
@@ -124,7 +124,7 @@ const Result = memo(() => {
                 </div>
               ))
             : '尚未選擇商品'}
-        </p>
+        </div>
       </div>
     </div>
   );

@@ -22,7 +22,7 @@ type TKeyButtonProps = {
 
 const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
   const [, setContext] = useContext(Context);
-  const [{ step, userInput }, setState] = useContext(CalculatorContext);
+  const [{ step, userInput, time }, setState] = useContext(CalculatorContext);
   const [, setHomeState] = useContext(HomeContext);
   return (
     <TweenerDivProvider
@@ -64,36 +64,32 @@ const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
                 break;
 
               case 'enter':
-                setState((prev) => {
-                  if (prev.userInput.length < MIN_INPUT_LENGTH) {
-                    setContext({
-                      type: ActionType.Modal,
-                      state: { enabled: true, body: MESSAGE_KEYBOARD_INPUT_MIN },
-                    });
-                  } else {
-                    setContext({
-                      type: ActionType.UserResult,
-                      state: { time: prev.time, input: prev.userInput },
-                    });
-                    setHomeState((prev) => ({ ...prev, page: HomePageType.result }));
-                  }
-                  return prev;
-                });
+                if (userInput.length < MIN_INPUT_LENGTH) {
+                  setContext({
+                    type: ActionType.Modal,
+                    state: { enabled: true, body: MESSAGE_KEYBOARD_INPUT_MIN },
+                  });
+                } else {
+                  setContext({
+                    type: ActionType.UserResult,
+                    state: { time, input: userInput },
+                  });
+                  setHomeState((prev) => ({ ...prev, page: HomePageType.result }));
+                }
+                break;
             }
           } else {
-            setState((prev) => {
-              if (prev.userInput.length >= MAX_INPUT_LENGTH) {
-                setContext({
-                  type: ActionType.Modal,
-                  state: { enabled: true, body: MESSAGE_KEYBOARD_INPUT_MAX },
-                });
-                return prev;
-              }
-              return {
-                ...prev,
-                userInput: [...prev.userInput, { className, dataset }],
-              };
-            });
+            if (userInput.length >= MAX_INPUT_LENGTH) {
+              setContext({
+                type: ActionType.Modal,
+                state: { enabled: true, body: MESSAGE_KEYBOARD_INPUT_MAX },
+              });
+              return;
+            }
+            setState((prev) => ({
+              ...prev,
+              userInput: [...prev.userInput, { className, dataset }],
+            }));
           }
         }}
       >
