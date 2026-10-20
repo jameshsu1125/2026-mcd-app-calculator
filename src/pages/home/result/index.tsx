@@ -118,7 +118,7 @@ const Result = memo(() => {
         <p className='text-body'>
           {view && view.coupons.length > 0
             ? view.coupons.map((coupon, index) => (
-                <div key={coupon.title}>
+                <div key={`${coupon.title}-${index}`}>
                   <div>{`攻略 ${index + 1}:`}</div>
                   <div>{coupon.title}</div>
                 </div>
