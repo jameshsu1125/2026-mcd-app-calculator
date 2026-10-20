@@ -17,7 +17,7 @@ export const LoadingProcessState: TLoadingProcessState = {
 };
 
 export const ModalState: TModalState = {
-  enabled: true,
+  enabled: false,
   body: (
     <>
       親愛的麥粉 <br />

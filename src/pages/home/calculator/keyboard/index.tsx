@@ -8,6 +8,9 @@ import {
   Keyboards,
   MAX_INPUT_LENGTH,
 } from '../config';
+import { Context } from '@/settings/constant';
+import { ActionType } from '@/settings/type';
+import { MESSAGE_KEYBOARD_INPUT_MAX } from '@/settings/config';
 
 type TKeyButtonProps = {
   className: (typeof Keyboards)['breakfast' | 'allDay'][number]['className'];
@@ -16,6 +19,7 @@ type TKeyButtonProps = {
 };
 
 const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
+  const [, setContext] = useContext(Context);
   const [{ step }, setState] = useContext(CalculatorContext);
   return (
     <TweenerDivProvider
@@ -54,10 +58,17 @@ const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
                   userInput: [],
                 }));
                 break;
+
+              case 'enter':
+                setState((prev) => ({ ...prev }));
             }
           } else {
             setState((prev) => {
               if (prev.userInput.length >= MAX_INPUT_LENGTH) {
+                setContext({
+                  type: ActionType.Modal,
+                  state: { enabled: true, body: MESSAGE_KEYBOARD_INPUT_MAX },
+                });
                 return prev;
               }
               return {

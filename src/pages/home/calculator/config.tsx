@@ -37,7 +37,7 @@ export type TCalculatorContext = [TCalculatorState, Dispatch<SetStateAction<TCal
 export const CalculatorState: TCalculatorState = {
   time: new Date().getHours() < 11 ? 'breakfast' : 'allDay',
   step: CalculatorStepType.unset,
-  instructionState: { step: 0, enabled: true },
+  instructionState: { step: 0, enabled: false },
   userInput: [],
 };
 

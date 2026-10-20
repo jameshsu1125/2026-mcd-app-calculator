@@ -1,8 +1,9 @@
 import { IReactProps } from '@/settings/type';
-import Regular from './regular';
-import Info from './info';
 import { twMerge } from 'tailwind-merge';
+import Close from './close';
+import Info from './info';
 import Keyboard from './keyboard';
+import Regular from './regular';
 import Skip from './skip';
 
 type TRegularProps = IReactProps & {
@@ -31,5 +32,6 @@ Button.regular = Regular;
 Button.Info = Info;
 Button.Keyboard = Keyboard;
 Button.Skip = Skip;
+Button.Close = Close;
 
 export default Button;
