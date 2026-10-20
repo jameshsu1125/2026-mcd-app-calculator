@@ -12,7 +12,7 @@
 ## 目錄
 
 1. [安裝：要複製哪些檔案](#1-安裝要複製哪些檔案)
-2. [最小可用範例](#2-最小可用範例)
+2. [最小可用範例](#2-最小可用範例)（含不用 hook 的 `solveMcdDeal`）
 3. [鍵盤：每個按鍵要傳什麼](#3-鍵盤每個按鍵要傳什麼)
 4. [hook 的輸入：`useMcdDeal(options)`](#4-hook-的輸入usemcddealoptions)
 5. [hook 的輸出：`UseMcdDeal`](#5-hook-的輸出usemcddeal)
@@ -104,6 +104,33 @@ export default function Calculator() {
 ```
 
 > `result` 只要選取的按鍵一變就會重新計算，「按 Enter 才顯示」是畫面自己的事。上面的例子用 `submitted` 控制顯示，所以每次改選取都要把它重設成 `false`，不然畫面會直接顯示新的結果。
+
+### 2.1 不用 hook：`solveMcdDeal(timeSlot, ids, objective?)`
+
+如果鍵盤狀態由你自己的程式管理（例如按 Enter 時把整組按鍵存進 context，再到結果頁一次算），用這個純函式比較直接，不用一個一個 `toggle`：
+
+```ts
+import { solveMcdDeal } from './hooks'
+
+const result = solveMcdDeal('regular', ['beef_burger', 'fries', 'soda'], 'max_savings')
+// result 的型別就是 McdResult | null，跟 hook 的 d.result 完全一樣
+```
+
+| 參數 | 型別 | 說明 |
+|---|---|---|
+| `timeSlot` | `'breakfast' \| 'regular'` | 時段。如果你的鍵盤用 `'allDay'` 表示午晚餐，要自己轉成 `'regular'` |
+| `ids` | `string[]` | 按鍵 id（見 §3），順序不影響結果 |
+| `objective` | `Objective`（可省略） | 排序，預設跟 hook 一樣讀 `data.json` 的 `defaultObjective` |
+
+它跟 hook 的規則完全一樣（hook 內部就是呼叫它），差別在對輸入的處理：
+
+| 情況 | `solveMcdDeal` | hook 的 `toggle` |
+|---|---|---|
+| 不同的 id 不到 2 個或超過 6 個 | 回傳 `null` | 第 7 個按不進去；不到 2 個時 `result` 是 `null` |
+| 同一個 id 傳兩次 | 只算一次 | 第二次是取消 |
+| id 不在這個時段的鍵盤上（打錯字、早餐傳 `'fries'`） | **直接 throw**，錯誤訊息會列出是哪些 id | 默默忽略 |
+
+會直接 throw 是故意的：一次傳一整組時，默默少算一個按鍵會讓結果看起來正常但其實是錯的，比報錯更難查。
 
 ---
 
@@ -563,7 +590,7 @@ d.result
 ## 12. 常見陷阱
 
 1. **`deals` 不要去重，也不要拿 `deal.id` 當 React key。** 同一張券可能出現兩次以上，去重之後畫面上的省額加總會跟 `savingsFrom` 對不上，用 id 當 key 也會撞。請用陣列 index：`deals.map((d, i) => <li key={i}>…)`。
-2. **`toggle` 傳的是 `id`（`'muffin'`），不是 `label`（`'滿福堡系列'`）。** 傳錯不會報錯，只會沒反應。
+2. **`toggle` 傳的是 `id`（`'muffin'`），不是 `label`（`'滿福堡系列'`）。** 傳錯不會報錯，只會沒反應（`solveMcdDeal` 則會直接 throw）。
 3. **切換時段會清空選取**。如果畫面有「已送出」的狀態，記得一起重設。
 4. **`result` 在選取改變時會立刻重算**，「按 Enter 才顯示」要自己控制（見 §2）。
 5. **`priceFrom` 不包含 `uncovered` 的按鍵**。如果要顯示「總共要付多少」，記得提醒使用者那些按鍵要另外原價買。
