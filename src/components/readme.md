@@ -77,6 +77,7 @@ const Pages = () => (
 
 | Properties          |             description             | default |
 | :------------------ | :---------------------------------: | ------: |
+| **scroll**:_boolean_ | 內容超出高度時是否可垂直捲動 |   false |
 | **style**:_object_  | 會被合併，但 `height` 一律被覆蓋 |      {} |
 | **...rest**:_props_ |      其餘屬性直接傳給 `div`      |       - |
 

@@ -1,0 +1,19 @@
+@import url('@/settings/global.css');
+
+.Strategy {
+  @apply flex h-auto w-full items-center justify-center;
+
+  .h0 {
+    width: 227 / 635 * 100%;
+
+    @img: './img/t0.svg';
+
+    &::before {
+      padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+      background-image: url(@img);
+      content: '';
+
+      @apply block w-full bg-contain bg-center bg-no-repeat;
+    }
+  }
+}

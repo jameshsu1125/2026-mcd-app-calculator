@@ -42,6 +42,7 @@ export const InitialState: IState = {
   [ActionType.LoadingProcess]: LoadingProcessState,
   [ActionType.Modal]: ModalState,
   [ActionType.UserResult]: UserResultState,
+  [ActionType.Scroll]: { enabled: false },
 };
 
 export const Context = createContext<TContext>([InitialState, () => {}]);

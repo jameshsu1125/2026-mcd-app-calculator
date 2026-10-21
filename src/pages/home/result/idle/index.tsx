@@ -1,17 +1,15 @@
-import { memo, useEffect } from 'react';
-import './index.less';
-import Contain from '@/components/contain';
 import Blockquote from '@/components/blockquote';
+import { memo } from 'react';
+import { twMerge } from 'tailwind-merge';
 import Info from '../../info';
 import Logo from '../../logo';
-import { twMerge } from 'tailwind-merge';
+import './index.less';
 
-const Idle = memo(() => {
-  useEffect(() => {}, []);
-  return (
-    <div className='Idle'>
-      <div className='w-full pt-[5%]'>
-        <Contain maxWidth='max-w-md'>
+const Idle = memo(() => (
+  <div className='Idle'>
+    <div className='w-full pt-[5%]'>
+      <div className='relative flex w-full items-start justify-center overflow-y-hidden'>
+        <div className='relative w-full max-w-md'>
           <Blockquote className='items-start justify-between'>
             <Info shouldFadeIn isReverse />
             <Logo shouldFadeIn className='mt-6' />
@@ -29,9 +27,9 @@ const Idle = memo(() => {
             </Blockquote>
             <div className='fast-pass' />
           </div>
-        </Contain>
+        </div>
       </div>
     </div>
-  );
-});
+  </div>
+));
 export default Idle;

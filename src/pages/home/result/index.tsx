@@ -1,4 +1,3 @@
-import useResult from '@/hooks/useResult';
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
 import OnloadProvider from 'lesca-react-onload';
@@ -7,15 +6,17 @@ import { ResultContext, ResultState, ResultStepType } from './config';
 import Idle from './idle';
 import './index.less';
 import ItemList from './itemList';
+import Strategy from './strategy';
 
 const Result = memo(() => {
   const [, setContext] = useContext(Context);
   const [state, setState] = useState(ResultState);
 
-  const view = useResult();
+  // const view = useResult();
 
   useEffect(() => {
     setContext({ type: ActionType.LoadingProcess, state: { enabled: true } });
+    setContext({ type: ActionType.Scroll, state: { enabled: true } });
   }, []);
 
   return (
@@ -29,6 +30,7 @@ const Result = memo(() => {
         <div className='Result'>
           <Idle />
           <ItemList />
+          <Strategy />
         </div>
       </OnloadProvider>
     </ResultContext.Provider>

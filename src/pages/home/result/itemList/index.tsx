@@ -6,7 +6,7 @@ const ItemList = memo(() => {
   useEffect(() => {}, []);
   return (
     <div className='ItemList'>
-      <div className='flex w-full flex-col items-center justify-center gap-3 py-5'>
+      <div className='flex w-full flex-col items-center justify-center gap-3 pt-6 pb-10'>
         <div className='flex w-full max-w-lg flex-col justify-start gap-2'>
           <div className='h0' />
           <div className='flex w-full flex-row flex-wrap items-start justify-start gap-3'>

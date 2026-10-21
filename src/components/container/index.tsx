@@ -6,9 +6,14 @@ export { use100vh, measureHeight } from './use100vh';
 
 let warned = false;
 
+type ContainerProps = HTMLAttributes<HTMLDivElement> & {
+  /** true：內容超出時可垂直捲動；false（預設）：不可捲動 */
+  scroll?: boolean;
+};
+
 /** 高度等於真實可視高度的 div，解決手機瀏覽器 100vh 被網址列蓋住的問題 */
-const Container = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  ({ style, children, ...other }, ref) => {
+const Container = forwardRef<HTMLDivElement, ContainerProps>(
+  ({ style, children, scroll = false, ...other }, ref) => {
     const height = use100vh();
 
     if (import.meta.env.DEV && !warned && style?.height) {
@@ -19,10 +24,15 @@ const Container = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
     return (
       <div
         ref={ref}
-        style={{ ...style, height: height ? `${height}px` : '100vh', overflow: 'hidden' }}
+        style={{
+          ...style,
+          height: height ? `${height}px` : '100vh',
+          overflowX: 'hidden',
+          overflowY: scroll ? 'auto' : 'hidden',
+        }}
         {...other}
       >
-        <div className='flex h-full w-full justify-center'>
+        <div className='flex min-h-full w-full justify-center'>
           <div className='relative w-full max-w-xl'>{children}</div>
         </div>
       </div>

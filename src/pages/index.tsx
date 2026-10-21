@@ -50,7 +50,7 @@ const App = () => {
   return (
     <div className='App'>
       <Context.Provider {...{ value }}>
-        <Container>
+        <Container scroll={state[ActionType.Scroll]?.enabled}>
           <Pages />
         </Container>
         {state[ActionType.LoadingProcess]?.enabled && <LoadingProcess />}
