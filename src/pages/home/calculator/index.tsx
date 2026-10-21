@@ -10,6 +10,7 @@ import Instructions from './instructions';
 import Keyboard from './keyboard';
 import Logo from './logo';
 import Screen from './screen';
+import Blockquote from '@/components/blockquote';
 
 const Calculator = memo(() => {
   const [, setContext] = useContext(Context);
@@ -29,11 +30,16 @@ const Calculator = memo(() => {
       >
         <div className='Calculator'>
           <Contain>
-            <div className='blockquote items-start justify-between'>
-              <Info />
+            <Blockquote className='blockquote items-start justify-between'>
+              <Info
+                shouldFadeIn={state.step === CalculatorStepType.keyboardDidFadeIn}
+                onEnd={() => {
+                  setState((prev) => ({ ...prev, step: CalculatorStepType.infoDidFadeIn }));
+                }}
+              />
               <Logo />
               <div className='opacity-0' />
-            </div>
+            </Blockquote>
             <Screen />
             <Keyboard />
           </Contain>
