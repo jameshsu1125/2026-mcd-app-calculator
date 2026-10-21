@@ -42,7 +42,7 @@ const Modal = memo(() => {
                 setContext({ type: ActionType.Modal, state: { enabled: false } });
               }}
             >
-              <Button.Close />
+              <Button.Close size='large' />
             </Button>
           </div>
         </TweenerDivProvider>

@@ -6,6 +6,7 @@ import { memo, useContext, useEffect, useState } from 'react';
 import { ResultContext, ResultState, ResultStepType } from './config';
 import Idle from './idle';
 import './index.less';
+import ItemList from './itemList';
 
 const Result = memo(() => {
   const [, setContext] = useContext(Context);
@@ -27,6 +28,7 @@ const Result = memo(() => {
       >
         <div className='Result'>
           <Idle />
+          <ItemList />
         </div>
       </OnloadProvider>
     </ResultContext.Provider>

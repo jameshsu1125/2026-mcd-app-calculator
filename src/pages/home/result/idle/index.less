@@ -3,6 +3,24 @@
 .Idle {
   @apply bg-base-100 h-auto w-full;
 
+  .fast-pass {
+    top: 30%;
+    right: 0%;
+    width: 15%;
+
+    @img: './img/result-fast-pass.svg';
+    @apply absolute;
+
+    &::before {
+      padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+      content: '';
+
+      mask-image: url(@img);
+
+      @apply bg-tertiary inline-block w-full mask-contain mask-center mask-no-repeat;
+    }
+  }
+
   .headline {
     @apply w-full;
     &::before {
@@ -36,6 +54,23 @@
     &::before {
       padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
       background-image: url(@img);
+    }
+  }
+
+  .idle {
+    &::before {
+      content: '';
+      @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+    }
+  }
+
+  .idle-0 {
+    @img: './img/idle-0.png';
+    @apply mt-10 w-11/12;
+    &::before {
+      padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+      background-image: url(@img);
+      transform: translateX(-5%);
     }
   }
 }

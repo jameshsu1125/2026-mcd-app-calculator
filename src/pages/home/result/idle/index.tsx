@@ -18,12 +18,16 @@ const Idle = memo(() => {
             <div className='opacity-0' />
           </Blockquote>
           <div className='flex w-full flex-col items-center justify-center gap-2'>
-            <Blockquote className='items-start justify-center'>
+            <Blockquote>
               <div className={twMerge('headline', 'headline-0')} />
             </Blockquote>
-            <Blockquote className='items-start justify-center'>
+            <Blockquote className='justify-center'>
               <div className={twMerge('subline', 'subline-0')} />
             </Blockquote>
+            <Blockquote className='-mb-2 justify-center pt-8'>
+              <div className={twMerge('idle', 'idle-0')} />
+            </Blockquote>
+            <div className='fast-pass' />
           </div>
         </Contain>
       </div>

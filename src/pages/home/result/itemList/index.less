@@ -1,0 +1,33 @@
+@import url('@/settings/global.css');
+.ItemList {
+  @apply bg-base-200 w-full;
+
+  .h0 {
+    width: (220 / 706) * 100%;
+
+    @img: './img/item-list-text-0.svg';
+
+    &::before {
+      padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+      background-image: url(@img);
+      content: '';
+
+      @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+    }
+  }
+
+  .h1 {
+    width: (50 / 706) * 100%;
+
+    @img: './img/item-list-text-1.svg';
+    @apply inset-0 p-0;
+
+    &::before {
+      padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+      background-image: url(@img);
+      content: '';
+
+      @apply inset-0 block w-full bg-contain bg-center bg-no-repeat;
+    }
+  }
+}
