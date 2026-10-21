@@ -8,7 +8,6 @@ const Info = memo(() => {
   const [{ step }, setState] = useContext(CalculatorContext);
   return (
     <TweenerDivProvider
-      className='absolute top-0 left-0 px-[5%]'
       initialStyle={{ opacity: 1, y: 0 }}
       tweenTo={{ opacity: 1, y: 0 }}
       options={{
