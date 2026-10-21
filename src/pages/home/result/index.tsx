@@ -12,10 +12,21 @@ const COUPON_TYPE: Record<McdDeal['source'], string> = {
   spend: '滿額送',
 };
 
-// 按鍵 id → 中文名稱（兩個時段的鍵盤合在一起查）
-const BUTTON_NAME = new Map<string, string>(
-  [...Keyboards.breakfast, ...Keyboards.allDay].map((key) => [key.id, key.name]),
+type TProduct = { id: string; name: string; className: string };
+
+// 按鍵 id → 商品名稱與 className（兩個時段的鍵盤合在一起查；同一個 id 在
+// 兩個時段的 className 相同）
+const PRODUCTS = new Map<string, TProduct>(
+  [...Keyboards.breakfast, ...Keyboards.allDay].map((key) => [
+    key.id,
+    { id: key.id, name: key.name, className: key.className },
+  ]),
 );
+
+const toProduct = (id: string): TProduct => {
+  const product = PRODUCTS.get(id);
+  return { id, name: product?.name ?? id, className: product?.className ?? '' };
+};
 
 const Result = memo(() => {
   const [{ userResult }] = useContext(Context);
@@ -33,20 +44,19 @@ const Result = memo(() => {
     const selectedIds = new Set(userResult.input.map((input) => input.dataset.id));
 
     // 1. 使用者所選的商品
-    const selected = userResult.input.map((input) => input.dataset);
+    const selected = userResult.input.map((input) => toProduct(input.dataset.id));
 
-    // 2. 券帶出來、但使用者沒按的商品（同一張券用兩次就算兩份）
+    // 2. 券帶出來、但使用者沒按的商品（一份算一個，例如沒按薯條但套餐配
+    //    中薯又送中薯，就是薯條 ×2；沒有按鍵的四季沙拉不列）
     const extraCount = new Map<string, number>();
     result.deals.forEach((deal) =>
-      deal.covers
-        .filter((id) => !selectedIds.has(id))
-        .forEach((id) => extraCount.set(id, (extraCount.get(id) ?? 0) + 1)),
+      deal.products
+        .filter((product) => product.button && !selectedIds.has(product.button))
+        .forEach((product) =>
+          extraCount.set(product.button!, (extraCount.get(product.button!) ?? 0) + 1),
+        ),
     );
-    const extras = [...extraCount].map(([id, count]) => ({
-      id,
-      name: BUTTON_NAME.get(id) ?? id,
-      count,
-    }));
+    const extras = [...extraCount].map(([id, count]) => ({ ...toProduct(id), count }));
 
     // 3. 攻略摘要
     const summary = {
@@ -61,6 +71,22 @@ const Result = memo(() => {
       return {
         type: COUPON_TYPE[deal.source],
         title: deal.title,
+        // 這張券拿到的每一份商品（一份一筆，例如買一送一就是兩筆）
+        //   role：主餐／配餐／飲料／贈品、紅區／白區、A區／B區（送）、買／送
+        //   name：實際品項（例如「雙層牛肉吉事堡」）
+        //   buttonName / className：所屬按鍵的名稱與 className
+        //   category：分類（肉類／炸物／湯／甜點／飲料／咖啡／茶／none）
+        //   isSelected：是不是使用者按的按鍵；false 就是券多帶出來的
+        // 只有 B清爽配餐的四季沙拉沒有按鍵，className 是空字串
+        products: deal.products.map((product) => ({
+          role: product.role,
+          name: product.name,
+          id: product.button,
+          buttonName: product.button ? toProduct(product.button).name : null,
+          className: product.button ? toProduct(product.button).className : '',
+          category: product.category,
+          isSelected: product.button ? selectedIds.has(product.button) : false,
+        })),
         items,
         original: items.reduce((sum, item) => sum + item.price, 0),
         paid: deal.breakdown?.paid ?? 0,

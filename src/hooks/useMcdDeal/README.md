@@ -188,6 +188,20 @@ const result = solveMcdDeal('regular', ['beef_burger', 'fries', 'soda'], 'max_sa
 
 > 建議不要把上面的表格寫死在程式裡，直接拿 `d.buttons` 來排鍵盤。這樣客戶改鍵盤或價格時，換掉 `data.json` 就好。
 
+### 3.1.1 按鍵分類 `category`
+
+每個按鍵都有一個分類，按鍵底下的每個品項都沿用同一個分類（設定在 `v2/config.json` 的 `button_categories`）：
+
+| `category` | 按鍵 |
+|---|---|
+| `肉類` | 牛肉類漢堡、鷄肉類漢堡、麥香鷄、滿福堡系列、麥香魚 |
+| `炸物` | 麥脆鷄腿、勁辣香鷄翅、麥克鷄塊、薯條、薯餅 |
+| `湯／甜點／飲料` | 玉米湯、蘋果派、蛋捲冰淇淋、冰炫風、汽水 |
+| `咖啡／茶` | McCafe、茶飲 |
+| `none` | 蛋堡系列、焙果系列、鬆餅系列（還沒分類） |
+
+`d.buttons` 的每個按鍵、`deal.products` 的每份商品都有 `category` 欄位。
+
 ### 3.2 功能鍵
 
 | 鍵盤上的按鍵 | 要呼叫 | 說明 |
@@ -262,6 +276,7 @@ interface UseMcdDeal {
 interface McdButton {
   id: string        // 'muffin'，傳給 toggle 用的
   label: string     // '滿福堡系列'，畫面顯示用
+  category: McdCategory  // '肉類' | '炸物' | '湯／甜點／飲料' | '咖啡／茶' | 'none'，見 §3.1.1
   priceMin: number  // 這個按鍵底下最便宜的單點價（目前時段）
   priceMax: number  // 這個按鍵底下最貴的單點價（目前時段）
 }
@@ -313,6 +328,7 @@ interface McdDeal {
   savingsMin: number     // 這張券最少省多少（保守值）
   itemCount: number      // 這張券拿到幾樣商品
   breakdown: McdBreakdown | null   // savingsMin 的明細；只有 source = 'spend' 時是 null
+  products: McdDealProduct[]       // 這張券拿到的每一份商品，見 §7.3
 }
 ```
 
@@ -334,6 +350,41 @@ interface McdDeal {
 一個按鍵代表一整類商品（例如「牛肉類漢堡」有 13 種），所以同一張券點不同品項，要付的錢不一樣。`priceMin` / `priceMax` 就是這個範圍，畫面上可以顯示成「這張券實付 $142~202」。
 
 ---
+
+### 7.3 `products`：這張券拿到的每一份商品
+
+```ts
+interface McdDealProduct {
+  role: string           // 這份商品在券裡的角色
+  name: string           // 實際品項名稱，例如 '雙層牛肉吉事堡'、'薯條(中)'
+  button: string | null  // 屬於哪個按鍵 id（見 §3），畫面可以拿它去查圖示 / className
+  category: McdCategory  // 所屬按鍵的分類（見 §3.1.1）；沒有按鍵的四季沙拉是 'none'
+}
+```
+
+**一份商品一筆**，所以 `products.length === itemCount`。例如：
+
+| 券 | `products` |
+|---|---|
+| 買超值全餐送中薯（A經典配餐＋汽水），主餐牛肉類漢堡 | 主餐 `beef_burger`、配餐 `fries`、飲料 `soda`、贈品 `fries` |
+| 單點勁辣香鷄翅(一份兩塊)買一送一 | 買 `spicy_wings`、送 `spicy_wings` |
+| 買汽水送McCafe | A區 `soda`、B區（送） `mccafe` |
+
+| `source` | `role` 依序是 |
+|---|---|
+| `star` | `紅區`、`白區` |
+| `sweetheart` | `A區`、`B區（送）` |
+| `bogo` | `買`、`送` |
+| `meal_gift` | `主餐`、`配餐`（0～2 個）、`飲料`（早餐 C美式咖啡配餐沒有）、`贈品` |
+
+跟 `breakdown` 的差別：`breakdown` 是算省額用的明細，`set_meal` 底下套餐會併成一行「套餐」；`products` 則是一份一份拆開，而且每份都標出屬於哪個按鍵。
+
+注意：
+
+- 同一個按鍵可能出現好幾次（例如 A經典配餐的中薯加上送的中薯，就是兩筆 `fries`）。
+- `products` 裡所有非 null 的 `button`，剛好就是 `covers`。
+- **`button` 只有一種情況是 `null`**：午晚餐「B清爽配餐」的四季沙拉，因為沙拉按鍵已經移除了。
+- `name` 跟 `breakdown` 取同一組點法（`set_meal` 是最便宜的那組），所以主餐、飲料的名稱跟明細對得上。
 
 ## 8. 券的明細：`McdBreakdown`
 
@@ -626,6 +677,7 @@ cd web && npx vitest run
 | `white_zone_prices` | 1+1 星級點白區小杯飲料的單點價（workbook 沒有，大部分是推估） |
 | `external_prices` | 麥脆鷄腿(一塊) 的單點價（workbook 沒有） |
 | `product_button_overrides` | 用品項名稱指定按鍵（例如三個蛋堡 → 蛋堡系列） |
+| `button_categories` | 每個按鍵的分類（見 §3.1.1），每個按鍵都要剛好出現一次 |
 | `meal_savings.basis` | 「買套餐送X」用套餐價還是單品加總算省額，見 §10.2 |
 | `default_objective` | `useMcdDeal` 沒傳 `objective` 時的預設排序 |
 
