@@ -8,21 +8,6 @@
       & > .blockquote {
         padding-inline: 5%;
         @apply flex w-full flex-row;
-
-        & > .logo {
-          width: (unit(image-width(@img))) / 768 * 100%;
-          filter: drop-shadow(0 7px 8px rgba(0, 0, 0, 0.4));
-
-          @img: '../img/logo-flag.svg';
-
-          &::before {
-            padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-            background-image: url(@img);
-            content: '';
-
-            @apply inline-block w-full bg-contain bg-center bg-no-repeat;
-          }
-        }
       }
     }
   }

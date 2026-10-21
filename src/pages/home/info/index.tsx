@@ -3,7 +3,13 @@ import TweenerDivProvider from '@/components/tweenerProvider';
 import { Bezier } from 'lesca-use-tween';
 import { memo } from 'react';
 
-const Info = memo(({ shouldFadeIn, onEnd }: { shouldFadeIn: boolean; onEnd?: () => void }) => (
+type InfoProps = {
+  shouldFadeIn: boolean;
+  onEnd?: () => void;
+  isReverse?: boolean;
+};
+
+const Info = memo(({ shouldFadeIn, onEnd, isReverse }: InfoProps) => (
   <TweenerDivProvider
     initialStyle={{ opacity: 0, y: -50 }}
     tweenTo={{ opacity: 1, y: 0 }}
@@ -17,7 +23,7 @@ const Info = memo(({ shouldFadeIn, onEnd }: { shouldFadeIn: boolean; onEnd?: () 
     shouldFadeIn={shouldFadeIn}
   >
     <Button id='info'>
-      <Button.Info />
+      <Button.Info isReverse={isReverse} />
     </Button>
   </TweenerDivProvider>
 ));

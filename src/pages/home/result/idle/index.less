@@ -1,0 +1,41 @@
+@import url('@/settings/global.css');
+
+.Idle {
+  @apply bg-base-100 h-auto w-full;
+
+  .headline {
+    @apply w-full;
+    &::before {
+      content: '';
+      @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+    }
+  }
+
+  .headline-0 {
+    @img: './img/result-headline-0.svg';
+
+    &::before {
+      padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+      background-image: url(@img);
+    }
+  }
+
+  .subline {
+    @apply w-10/12;
+
+    &::before {
+      content: '';
+
+      @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+    }
+  }
+
+  .subline-0 {
+    @img: './img/result-subline-0.svg';
+
+    &::before {
+      padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+      background-image: url(@img);
+    }
+  }
+}

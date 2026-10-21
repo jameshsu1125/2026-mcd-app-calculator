@@ -8,7 +8,7 @@ import './index.less';
 import Info from '../info';
 import Instructions from './instructions';
 import Keyboard from './keyboard';
-import Logo from './logo';
+import Logo from '../logo';
 import Screen from './screen';
 import Blockquote from '@/components/blockquote';
 
@@ -29,7 +29,7 @@ const Calculator = memo(() => {
         }}
       >
         <div className='Calculator'>
-          <Contain>
+          <Contain paddingBlock='5%' allowScroll>
             <Blockquote className='blockquote items-start justify-between'>
               <Info
                 shouldFadeIn={state.step === CalculatorStepType.keyboardDidFadeIn}
@@ -37,7 +37,7 @@ const Calculator = memo(() => {
                   setState((prev) => ({ ...prev, step: CalculatorStepType.infoDidFadeIn }));
                 }}
               />
-              <Logo />
+              <Logo shouldFadeIn={state.step === CalculatorStepType.fadeIn} shouldShadow />
               <div className='opacity-0' />
             </Blockquote>
             <Screen />

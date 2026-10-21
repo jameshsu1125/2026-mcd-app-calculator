@@ -13,17 +13,19 @@
     }
   }
 
-  & > .contain {
-    padding-block: 5%;
-    @apply relative flex min-h-full w-full max-w-md flex-col items-center justify-start;
-
-    & > * {
-      @apply shrink-0;
-    }
-
+  & > .allow-scroll {
     // 垂直 gap 的 % 以容器高度計算，.contain 高度不固定時會變 0，改用 margin（以寬度計算）
     & > * + *:not(.absolute) {
       margin-top: 5%;
+    }
+  }
+
+  & > .contain {
+    // padding-block: 5%;
+    @apply relative flex min-h-full w-full flex-col items-center justify-start;
+
+    & > * {
+      @apply shrink-0;
     }
   }
 }

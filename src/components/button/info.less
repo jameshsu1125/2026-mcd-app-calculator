@@ -35,5 +35,21 @@ button {
         height: 18px;
       }
     }
+
+    & > .info-reverse {
+      @apply bg-base-200;
+    }
+  }
+
+  & > .info-reverse {
+    @apply border-primary;
+
+    &::before {
+      @apply bg-primary;
+    }
+
+    &::after {
+      @apply bg-primary;
+    }
   }
 }
