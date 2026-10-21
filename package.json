@@ -14,6 +14,7 @@
   "dependencies": {
     "@faker-js/faker": "^10.6.0",
     "@react-icons/all-files": "^4.1.0",
+    "html-to-image": "1.11.11",
     "lesca-click": "^5.0.1",
     "lesca-fetcher": "^3.0.1",
     "lesca-react-onload": "^3.0.0",
