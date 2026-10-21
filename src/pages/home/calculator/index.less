@@ -4,31 +4,7 @@
   @apply bg-primary h-full w-full;
 
   & > .inner {
-    @apply flex h-full w-full items-start justify-center overflow-y-hidden;
-
-    // 內容超過螢幕高度時才出現 Scroll（隱藏捲軸外觀）
-    &.scrollable {
-      scrollbar-width: none;
-      @apply overflow-y-auto;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
-    }
-
     & > .contain {
-      padding-block: 5%;
-      @apply flex min-h-full w-full max-w-md flex-col items-center justify-start;
-
-      & > * {
-        @apply shrink-0;
-      }
-
-      // 垂直 gap 的 % 以容器高度計算，.contain 高度不固定時會變 0，改用 margin（以寬度計算）
-      & > * + * {
-        margin-top: 5%;
-      }
-
       & > .blockquote {
         padding-inline: 5%;
         @apply flex w-full flex-row;
