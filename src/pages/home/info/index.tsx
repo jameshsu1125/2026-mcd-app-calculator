@@ -1,14 +1,15 @@
 import Button from '@/components/button';
 import TweenerDivProvider from '@/components/tweenerProvider';
 import { memo, useContext } from 'react';
-import { CalculatorContext, CalculatorStepType } from '../config';
+import { CalculatorContext, CalculatorStepType } from '../calculator/config';
 import { Bezier } from 'lesca-use-tween';
 
 const Info = memo(() => {
   const [{ step }, setState] = useContext(CalculatorContext);
   return (
     <TweenerDivProvider
-      initialStyle={{ opacity: 0, y: -50 }}
+      className='absolute top-0 left-0 px-[5%]'
+      initialStyle={{ opacity: 1, y: 0 }}
       tweenTo={{ opacity: 1, y: 0 }}
       options={{
         duration: 300,

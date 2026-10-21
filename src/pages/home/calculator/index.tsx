@@ -4,7 +4,7 @@ import OnloadProvider from 'lesca-react-onload';
 import { memo, useContext, useEffect, useRef, useState } from 'react';
 import { CalculatorContext, CalculatorState, CalculatorStepType } from './config';
 import './index.less';
-import Info from './info';
+import Info from '../info';
 import Instructions from './instructions';
 import Keyboard from './keyboard';
 import Logo from './logo';
@@ -48,10 +48,8 @@ const Calculator = memo(() => {
         <div className='Calculator'>
           <div ref={innerRef} className={`inner${overflow ? ' scrollable' : ''}`}>
             <div ref={containRef} className='contain'>
-              <div className='blockquote items-start justify-between'>
-                <Info />
+              <div className='blockquote items-start justify-center'>
                 <Logo />
-                <div className='opacity-0' />
               </div>
               <Screen />
               <Keyboard />

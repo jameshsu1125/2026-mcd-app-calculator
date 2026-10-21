@@ -4,6 +4,7 @@ import { HomeContext, HomeState, THomeState } from './config';
 import './index.less';
 import Intro from './intro';
 import Result from './result';
+import Info from './info';
 
 const Home = memo(() => {
   const [state, setState] = useState<THomeState>(HomeState);
@@ -23,6 +24,7 @@ const Home = memo(() => {
   return (
     <div className='Home'>
       <HomeContext.Provider value={[state, setState]}>{page}</HomeContext.Provider>
+      <Info />
     </div>
   );
 });
