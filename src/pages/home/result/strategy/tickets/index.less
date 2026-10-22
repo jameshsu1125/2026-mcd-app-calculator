@@ -1,0 +1,119 @@
+@import url('@/settings/global.css');
+
+.Tickets {
+  @apply flex w-full flex-col items-center justify-center gap-5 p-5;
+
+  .ticket {
+    @apply relative flex w-full flex-row items-center justify-center;
+
+    .left {
+      width: 10.8732 / 48.8455 * 100%;
+
+      @img: './img/ticket-left.svg';
+      @apply relative;
+
+      &::before {
+        padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+        background-image: url(@img);
+        content: '';
+
+        @apply block w-full bg-contain bg-center bg-no-repeat;
+      }
+
+      & > .inner {
+        @apply absolute top-0 left-0 flex h-full w-full flex-col items-start justify-between px-4 py-1;
+
+        & > div:nth-child(1) {
+          width: 80 / 128 * 100%;
+
+          @img: './img/ticket.svg';
+
+          &::before {
+            padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+            background-image: url(@img);
+            content: '';
+
+            @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+          }
+        }
+
+        & > div:nth-child(2) {
+          @apply font-speedee flex w-full flex-1 flex-row items-center justify-start gap-2;
+
+          & > div:nth-child(1) {
+            width: 63 / 97 * 100%;
+
+            @img: './img/strategy.svg';
+
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
+              content: '';
+
+              @apply block w-full bg-contain bg-center bg-no-repeat;
+            }
+          }
+
+          & > div:nth-child(2) {
+            @apply text-3xl font-black text-black;
+          }
+        }
+
+        & > div:nth-child(3) {
+          width: 128 / 128 * 100%;
+
+          @img: './img/barcode.svg';
+
+          &::before {
+            padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+            background-image: url(@img);
+            content: '';
+
+            @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+          }
+        }
+      }
+    }
+
+    .right {
+      width: 37.9723 / 48.8455 * 100%;
+
+      @img: './img/ticket-right.svg';
+      @apply relative;
+
+      &::before {
+        padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+        background-image: url(@img);
+        content: '';
+
+        @apply block w-full bg-contain bg-center bg-no-repeat;
+      }
+    }
+
+    .line {
+      top: 50%;
+      left: 10.8732 / 48.8455 * 100%;
+      height: 90%;
+      transform: translateY(-50%);
+
+      @apply absolute w-0 border-l border-dashed border-black;
+
+      & > div {
+        bottom: -5%;
+        left: 50%;
+        transform: translateX(-50%);
+
+        @img: './img/scissors.svg';
+        @apply absolute w-5;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+@font-face {
+  font-family: 'speedee';
+  src:
+    url('@/settings/fonts/subset-535f58cd386e48e41c662745ec5c3ef4.woff2') format('woff2'),
+    url('@/settings/fonts/subset-535f58cd386e48e41c662745ec5c3ef4.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}

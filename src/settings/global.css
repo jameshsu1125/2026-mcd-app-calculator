@@ -1,5 +1,6 @@
 @import url('../../tailwind.config.css');
 @import url('./animate.less');
+@import url('./fonts/stylesheet.css');
 
 body {
   margin: 0;

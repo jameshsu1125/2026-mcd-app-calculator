@@ -15,4 +15,6 @@
 
   --animate-blank: Blank 2s ease-in-out infinite;
   --animate-blanking-start: BlankingStart ease-in-out forwards;
+
+  --font-speedee: 'speedee', sans-serif;
 }
