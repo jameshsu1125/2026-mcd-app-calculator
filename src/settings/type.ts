@@ -70,3 +70,5 @@ export type TContext = [IState, Dispatch<IAction>];
 export interface IReactProps {
   readonly children?: ReactNode;
 }
+
+export type DealType = 'full meal' | 'swear heart' | 'star 1 + 1';

@@ -79,14 +79,148 @@
       width: 37.9723 / 48.8455 * 100%;
 
       @img: './img/ticket-right.svg';
-      @apply relative;
+      @apply relative overflow-hidden;
 
       &::before {
         padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-        background-image: url(@img);
+        // background-image: url(@img);
         content: '';
 
-        @apply block w-full bg-contain bg-center bg-no-repeat;
+        @apply block w-full;
+      }
+
+      & > .logo-full-meal {
+        &::before {
+          width: image-width(@img) * @scale;
+          height: image-height(@img) * @scale;
+          background-image: url(@img);
+          content: '';
+
+          @img: '../../../logo/img/logo-flag.svg';
+          @scale: 0.25;
+          @apply absolute top-3 left-3 bg-cover;
+        }
+      }
+
+      & > .logo-swear-heart {
+        &::before {
+          width: image-width(@img) * @scale;
+          height: image-height(@img) * @scale;
+          background-image: url(@img);
+          content: '';
+
+          @img: '../../../img/sweat-heart.svg';
+          @scale: 0.15;
+          @apply absolute top-3 left-3 bg-cover;
+        }
+      }
+
+      & > .logo-swear-heart {
+        &::before {
+          width: image-width(@img) * @scale;
+          height: image-height(@img) * @scale;
+          background-image: url(@img);
+          content: '';
+
+          @img: '../../../img/sweat-heart.svg';
+          @scale: 0.15;
+          @apply absolute top-3 left-3 bg-cover;
+        }
+      }
+
+      & > .logo-star-1-1 {
+        &::before {
+          width: image-width(@img) * @scale;
+          height: image-height(@img) * @scale;
+          background-image: url(@img);
+          content: '';
+
+          @img: '../../../img/star-1+1.svg';
+          @scale: 0.12;
+          @apply absolute top-3 left-3 bg-cover;
+        }
+      }
+
+      & > .bg {
+        padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+
+        @img: './img/ticket-right.svg';
+        @apply absolute top-0 left-0 w-full;
+
+        &::after {
+          top: -32%;
+          right: -11%;
+          width: image-width(@img) * @scale;
+          height: image-height(@img) * @scale;
+          background-image: url(@img);
+          content: '';
+
+          @img: '../../../intro/background/img/glow-s.png';
+          @scale: 0.5;
+          @apply absolute bg-cover opacity-50;
+        }
+      }
+
+      & > .inner {
+        @scale: 450;
+        @apply absolute top-0 flex h-full w-full flex-row flex-nowrap items-center justify-between p-2 pt-12;
+
+        .name-a {
+          @apply text-xl font-black tracking-tighter text-black;
+        }
+
+        .picture-a {
+          margin-right: -11.3%;
+          width: (unit(image-width(@img))) / @scale * 100%;
+
+          @img: './img/pic-0.png';
+          @apply relative;
+
+          &::before {
+            padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+            background-image: url(@img);
+            content: '';
+
+            @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+          }
+        }
+
+        .symbol {
+          @img: './img/symbol-give.svg';
+          @apply flex h-11 w-11 items-center justify-center rounded-full bg-white;
+
+          & > div {
+            @apply w-8/12;
+
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
+              content: '';
+
+              @apply block w-full bg-contain bg-center bg-no-repeat;
+            }
+          }
+        }
+
+        .name-b {
+          @apply text-xl font-black tracking-tighter text-black;
+        }
+
+        .picture-b {
+          margin-right: -5.3%;
+          width: (unit(image-width(@img))) / @scale * 100%;
+
+          @img: './img/pic-1.png';
+          @apply relative;
+
+          &::before {
+            padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+            background-image: url(@img);
+            content: '';
+
+            @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+          }
+        }
       }
     }
 
