@@ -28,6 +28,18 @@ const Ticket = ({ number, type }: { number: number; type: DealType }) => {
     }
   }, [type]);
 
+  const symbolClass = useMemo(() => {
+    switch (type) {
+      default:
+      case 'full meal':
+      case 'swear heart':
+        return 'symbol-give';
+
+      case 'star 1 + 1':
+        return 'symbol-plus';
+    }
+  }, [type]);
+
   return (
     <div className='ticket'>
       <div className='left'>
@@ -61,7 +73,7 @@ const Ticket = ({ number, type }: { number: number; type: DealType }) => {
           <div className='name-a'>買超值全餐</div>
           <div className='picture-a' />
           <div className='symbol'>
-            <div />
+            <div className={symbolClass} />
           </div>
           <div className='name-b'>中薯</div>
           <div className='picture-b' />

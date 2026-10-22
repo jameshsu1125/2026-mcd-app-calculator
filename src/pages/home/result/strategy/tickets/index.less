@@ -186,18 +186,31 @@
         }
 
         .symbol {
-          @img: './img/symbol-give.svg';
           @apply flex h-11 w-11 items-center justify-center rounded-full bg-white;
 
           & > div {
-            @apply w-8/12;
-
             &::before {
-              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-              background-image: url(@img);
               content: '';
 
               @apply block w-full bg-contain bg-center bg-no-repeat;
+            }
+          }
+
+          & > .symbol-give {
+            @img: './img/symbol-give.svg';
+            @apply w-8/12;
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
+            }
+          }
+
+          & > .symbol-plus {
+            @img: './img/symbol-plus.svg';
+            @apply w-5/12;
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
             }
           }
         }
