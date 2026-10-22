@@ -1,7 +1,7 @@
 import { Keyboards } from '@/pages/home/calculator/config';
 import { Context } from '@/settings/constant';
 import { useContext, useMemo } from 'react';
-import { McdDeal, solveMcdDeal } from './useMcdDeal';
+import { McdCategory, McdDeal, solveMcdDeal } from './useMcdDeal';
 
 const COUPON_TYPE: Record<McdDeal['source'], string> = {
   star: '1+1 星級點',
@@ -57,10 +57,24 @@ const useResult = () => {
     const extras = [...extraCount].map(([id, count]) => ({ ...toProduct(id), count }));
 
     // 3. 攻略摘要
+    // (d) 所有券拿到的商品（買的、送的都算，一份算一個）各分類幾個。
+    //     每個分類都會有 key（沒有就是 0），加總等於 itemCount。
+    const categoryCount: Record<McdCategory, number> = {
+      肉類: 0,
+      炸物: 0,
+      '湯／甜點／飲料': 0,
+      '咖啡／茶': 0,
+      none: 0,
+    };
+    result.deals.forEach((deal) =>
+      deal.products.forEach((product) => (categoryCount[product.category] += 1)),
+    );
+
     const summary = {
       savings: result.savingsFrom, // (a) 有機會省最多錢
       itemCount: result.itemCount, // (b) 總共獲得的品項數目
       couponCount: result.deals.length, // (c) 一共幾張券（重複使用的也算）
+      categoryCount, // (d) 各分類的商品數
     };
 
     // 4. 每張券的詳細資料

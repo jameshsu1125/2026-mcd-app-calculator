@@ -7,13 +7,10 @@ import Idle from './idle';
 import './index.less';
 import ItemList from './itemList';
 import Strategy from './strategy';
-import Group from './strategy/group';
 
 const Result = memo(() => {
   const [, setContext] = useContext(Context);
   const [state, setState] = useState(ResultState);
-
-  // const view = useResult();
 
   useEffect(() => {
     setContext({ type: ActionType.LoadingProcess, state: { enabled: true } });
