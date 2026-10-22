@@ -30,7 +30,7 @@ const Button = ({ id, children, className, style, onClick, dataset, disabled }: 
   );
 };
 
-Button.regular = Regular;
+Button.Regular = Regular;
 Button.Info = Info;
 Button.Keyboard = Keyboard;
 Button.Skip = Skip;

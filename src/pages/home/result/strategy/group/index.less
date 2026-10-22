@@ -1,0 +1,47 @@
+@import url('@/settings/global.css');
+
+.Group {
+  @apply flex h-auto w-full justify-center px-20 py-5;
+
+  .open-app {
+    width: 95%;
+
+    @img: './img/open-app.svg';
+
+    &::before {
+      padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+      background-image: url(@img);
+      content: '';
+
+      @apply block w-full bg-contain bg-center bg-no-repeat;
+    }
+  }
+
+  .download {
+    width: 68%;
+
+    @img: './img/download.svg';
+
+    &::before {
+      padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+      background-image: url(@img);
+      content: '';
+
+      @apply block w-full bg-contain bg-center bg-no-repeat;
+    }
+  }
+
+  .play-again {
+    width: 36%;
+
+    @img: './img/play-again.svg';
+
+    &::before {
+      padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+      background-image: url(@img);
+      content: '';
+
+      @apply block w-full bg-contain bg-center bg-no-repeat;
+    }
+  }
+}

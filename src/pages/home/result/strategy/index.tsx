@@ -2,6 +2,7 @@ import { memo, useEffect } from 'react';
 import './index.less';
 import Stat from './stat';
 import Tickets from './tickets';
+import Group from './group';
 
 const Strategy = memo(() => {
   useEffect(() => {}, []);
@@ -12,6 +13,7 @@ const Strategy = memo(() => {
           <div className='h0' />
           <Stat />
           <Tickets />
+          <Group />
         </div>
       </div>
     </div>
