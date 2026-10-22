@@ -1,14 +1,29 @@
 import Blockquote from '@/components/blockquote';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { twMerge } from 'tailwind-merge';
 import Info from '../../info';
 import Logo from '../../logo';
 import './index.less';
 import useResult from '@/hooks/useResult';
 
+const CATEGORY_TYPE_TO_CLASS = {
+  肉類: 'meat',
+  炸物: 'fried',
+  '湯／甜點／飲料': 'soup-dessert-drink',
+  '咖啡／茶': 'coffee-tea',
+  none: 'none',
+} as const;
+
 const Idle = memo(() => {
   const view = useResult();
-  console.log(view);
+  const IdleType = useMemo(() => {
+    if (!view) return 'loading';
+    const { categoryCount } = view.summary;
+    const topCategoryType = (Object.entries(categoryCount).sort((a, b) => b[1] - a[1])[0]?.[0] ??
+      'none') as keyof typeof CATEGORY_TYPE_TO_CLASS;
+    return 'fried';
+    return CATEGORY_TYPE_TO_CLASS[topCategoryType];
+  }, [view]);
 
   return (
     <div className='Idle'>
@@ -28,7 +43,7 @@ const Idle = memo(() => {
                 <div className={twMerge('subline', 'subline-0')} />
               </Blockquote>
               <Blockquote className='-mb-2 justify-center pt-8'>
-                <div className={twMerge('idle', 'idle-0')} />
+                <div className={twMerge('idle', `idle-${IdleType}`)} />
               </Blockquote>
               <div className='fast-pass' />
             </div>

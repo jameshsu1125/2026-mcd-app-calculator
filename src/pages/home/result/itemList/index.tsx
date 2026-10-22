@@ -1,35 +1,37 @@
-import { memo, useEffect } from 'react';
-import './index.less';
 import Badge from '@/components/badge';
+import useResult from '@/hooks/useResult';
+import { memo, useMemo } from 'react';
+import './index.less';
 
 const ItemList = memo(() => {
-  useEffect(() => {}, []);
+  const view = useResult();
+
+  const { selected, extras } = useMemo(() => {
+    if (!view) return { selected: [], extras: [] };
+    const { selected, extras } = view;
+    return { selected, extras };
+  }, [view]);
+
   return (
     <div className='ItemList'>
       <div className='flex w-full flex-col items-center justify-center gap-3 px-5 pt-6 pb-10 lg:px-0'>
         <div className='flex w-full max-w-lg flex-col justify-start gap-2'>
           <div className='h0' />
           <div className='flex w-full flex-row flex-wrap items-start justify-start gap-3'>
-            <Badge size='large' canClose>
-              麥克鷄塊
-            </Badge>
-            <Badge size='large' canClose>
-              玉米湯
-            </Badge>
-            <Badge size='large' canClose>
-              薯條
-            </Badge>
-            <Badge size='large' canClose>
-              汽水
-            </Badge>
+            {selected.map((item) => (
+              <Badge key={item.id} size='large' canClose>
+                {item.name}
+              </Badge>
+            ))}
           </div>
         </div>
         <div className='mt-2 flex w-full max-w-lg flex-row flex-wrap items-center justify-start gap-2'>
           <div className='h1' />
-          <Badge size='small'>麥香鷄</Badge>
-          <Badge size='small'>中薯</Badge>
-          <Badge size='small'>冰美式</Badge>
-          <Badge size='small'>可口可樂 (中) </Badge>
+          {extras.map((item) => (
+            <Badge key={item.id} size='small'>
+              {item.name}
+            </Badge>
+          ))}
         </div>
       </div>
     </div>

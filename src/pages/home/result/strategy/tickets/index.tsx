@@ -1,17 +1,24 @@
-import { memo, useEffect, useMemo } from 'react';
-import { DealType } from '@/settings/type';
-import './index.less';
+import useResult, { Coupons } from '@/hooks/useResult';
+import { memo, useMemo } from 'react';
 import { twMerge } from 'tailwind-merge';
+import './index.less';
 
-const Ticket = ({ number, type }: { number: number; type: DealType }) => {
+type TicketProps = {
+  number: number;
+  type: string;
+  data: Coupons[number];
+};
+
+const Ticket = ({ number, type, data }: TicketProps) => {
   const color = useMemo(() => {
     switch (type) {
       default:
-      case 'full meal':
+      case '買套餐送贈品':
+      case '買一送一':
         return '#ffd9b3';
-      case 'swear heart':
+      case '數位甜心卡':
         return '#ffb4b4';
-      case 'star 1 + 1':
+      case '1+1 星級點':
         return '#b1b1b1';
     }
   }, [type]);
@@ -19,11 +26,11 @@ const Ticket = ({ number, type }: { number: number; type: DealType }) => {
   const logoClass = useMemo(() => {
     switch (type) {
       default:
-      case 'full meal':
+      case '買套餐送贈品':
         return 'logo-full-meal';
-      case 'swear heart':
+      case '數位甜心卡':
         return 'logo-swear-heart';
-      case 'star 1 + 1':
+      case '1+1 星級點':
         return 'logo-star-1-1';
     }
   }, [type]);
@@ -31,14 +38,82 @@ const Ticket = ({ number, type }: { number: number; type: DealType }) => {
   const symbolClass = useMemo(() => {
     switch (type) {
       default:
-      case 'full meal':
-      case 'swear heart':
         return 'symbol-give';
 
-      case 'star 1 + 1':
+      case '1+1 星級點':
         return 'symbol-plus';
     }
   }, [type]);
+
+  const nameA = useMemo(() => {
+    switch (type) {
+      case '數位甜心卡':
+        return (
+          <>
+            買{data.products[0].role}
+            <br />
+            <span className='text-base'>{data.products[0].name}</span>
+          </>
+        );
+      case '1+1 星級點':
+        return (
+          <>
+            買紅區
+            <br />
+          </>
+        );
+      case '買一送一':
+        return (
+          <>
+            {data.products[0].role}
+            <br />
+            <span className='text-base'>{data.products[0].name}</span>
+          </>
+        );
+      case '買套餐送贈品':
+        return '買超值全餐';
+
+      case '滿額送':
+        return '';
+
+      default:
+    }
+  }, [type, data]);
+
+  const nameB = useMemo(() => {
+    switch (type) {
+      case '數位甜心卡':
+        return (
+          <>
+            B區
+            <br />
+            <span className='text-base'>{data.products[1].name}</span>
+          </>
+        );
+      case '1+1 星級點':
+        return (
+          <>
+            買紅區
+            <br />
+          </>
+        );
+      case '買一送一':
+        return (
+          <>
+            {data.products[1].role}
+            <br />
+            <span className='text-base'>{data.products[1].name}</span>
+          </>
+        );
+      case '買套餐送贈品':
+        return data.products[1].name;
+
+      case '滿額送':
+        return '';
+
+      default:
+    }
+  }, [type, data]);
 
   return (
     <div className='ticket'>
@@ -70,12 +145,12 @@ const Ticket = ({ number, type }: { number: number; type: DealType }) => {
           </svg>
         </div>
         <div className='inner'>
-          <div className='name-a'>買超值全餐</div>
+          <div className='name-a'>{nameA}</div>
           <div className='picture-a' />
           <div className='symbol'>
             <div className={symbolClass} />
           </div>
-          <div className='name-b'>中薯</div>
+          <div className='name-b'>{nameB}</div>
           <div className='picture-b' />
         </div>
       </div>
@@ -87,12 +162,14 @@ const Ticket = ({ number, type }: { number: number; type: DealType }) => {
 };
 
 const Tickets = memo(() => {
-  useEffect(() => {}, []);
+  const view = useResult();
+  const coupons = view?.coupons ?? [];
+
   return (
     <div className='Tickets'>
-      <Ticket number={1} type='full meal' />
-      <Ticket number={2} type='swear heart' />
-      <Ticket number={3} type='star 1 + 1' />
+      {coupons.map((coupon, index) => (
+        <Ticket key={index} number={index + 1} type={coupon.type} data={coupon} />
+      ))}
     </div>
   );
 });

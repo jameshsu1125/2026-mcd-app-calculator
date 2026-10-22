@@ -13,6 +13,17 @@ const COUPON_TYPE: Record<McdDeal['source'], string> = {
 
 type TProduct = { id: string; name: string; className: string };
 
+export type Coupons = {
+  type: string;
+  title: string;
+  products: any[];
+  items: any[];
+  original: number;
+  paid: number;
+  savings: number;
+  itemCount: number;
+}[];
+
 // 按鍵 id → 商品名稱與 className（兩個時段的鍵盤合在一起查；同一個 id 在
 // 兩個時段的 className 相同）
 const PRODUCTS = new Map<string, TProduct>(
@@ -78,7 +89,7 @@ const useResult = () => {
     };
 
     // 4. 每張券的詳細資料
-    const coupons = result.deals.map((deal) => {
+    const coupons: Coupons = result.deals.map((deal) => {
       const items = deal.breakdown?.items ?? [];
       return {
         type: COUPON_TYPE[deal.source],

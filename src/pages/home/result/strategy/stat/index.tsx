@@ -1,21 +1,28 @@
-import { memo, useEffect } from 'react';
+import useResult from '@/hooks/useResult';
+import { memo, useMemo } from 'react';
 import './index.less';
 
 const Stat = memo(() => {
-  useEffect(() => {}, []);
+  const view = useResult();
+
+  const { itemCount, savings, couponCount } = useMemo(() => {
+    if (!view) return { itemCount: 0, savings: 0, couponCount: 0 };
+    return view.summary;
+  }, [view]);
+
   return (
     <div className='Stat'>
       <div>
         <div className='title' />
-        <div className='count'>148</div>
+        <div className='count'>{savings}</div>
       </div>
       <div>
         <div className='title' />
-        <div className='count'>8</div>
+        <div className='count'>{itemCount}</div>
       </div>
       <div>
         <div className='title' />
-        <div className='count'>3</div>
+        <div className='count'>{couponCount}</div>
       </div>
     </div>
   );
