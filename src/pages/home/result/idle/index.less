@@ -5,11 +5,10 @@
 
   .fast-pass {
     top: 30%;
-    right: 0%;
     width: 15%;
 
     @img: './img/result-fast-pass.svg';
-    @apply absolute;
+    @apply absolute right-5 md:right-0;
 
     &::before {
       padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);

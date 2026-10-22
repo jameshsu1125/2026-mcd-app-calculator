@@ -4,7 +4,16 @@ button {
   .regular {
     filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1));
 
-    @apply bg-primary w-full rounded-l-full rounded-r-full px-6 py-4 text-center;
-    @apply flex items-center justify-center border-4 border-white;
+    padding-inline: 6%;
+    padding-block: 6%;
+
+    @apply bg-primary w-full rounded-l-full rounded-r-full text-center;
+    @apply flex items-center justify-center border-4 border-white duration-100;
+  }
+
+  &:active {
+    .regular {
+      @apply bg-tertiary scale-105;
+    }
   }
 }
