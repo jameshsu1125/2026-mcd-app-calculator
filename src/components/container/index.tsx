@@ -1,6 +1,7 @@
 // Ported from react-div-100vh (https://github.com/mvasin/react-div-100vh, MIT)
-import { forwardRef, type HTMLAttributes } from 'react';
+import { forwardRef, useEffect, type HTMLAttributes } from 'react';
 import use100vh from './use100vh';
+import Click from 'lesca-click';
 
 export { use100vh, measureHeight } from './use100vh';
 
@@ -21,12 +22,16 @@ const Container = forwardRef<HTMLDivElement, ContainerProps>(
       console.warn('<Container /> overrides the height property of the style prop');
     }
 
+    useEffect(() => {
+      Click.setEnabled(!scroll);
+    }, [scroll]);
+
     return (
       <div
         ref={ref}
         style={{
           ...style,
-          height: height ? `${height}px` : '100vh',
+          height: scroll ? 'auto' : height ? `${height}px` : '100vh',
           overflowX: 'hidden',
           overflowY: scroll ? 'auto' : 'hidden',
         }}
