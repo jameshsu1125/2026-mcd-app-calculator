@@ -1,0 +1,86 @@
+@import url('@/settings/global.css');
+
+.Stat {
+  @apply grid h-auto w-full grid-cols-3 items-center justify-center rounded-2xl bg-white p-2;
+
+  & > div {
+    @apply flex h-full w-full flex-col items-center justify-center gap-2 px-4 py-2 text-black;
+
+    .title {
+      @apply text-lg font-black;
+    }
+
+    .count {
+      @apply text-5xl font-black;
+    }
+  }
+
+  & > div + div {
+    @apply border-l border-black;
+  }
+
+  & > div:nth-child(1) {
+    .title {
+      width: 100%;
+
+      @img: './img/t0.svg';
+      @apply relative;
+
+      &::before {
+        padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+        background-image: url(@img);
+        content: '';
+
+        @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+      }
+    }
+
+    .count {
+      &::before {
+        content: '$';
+        @apply pr-1 align-super text-2xl;
+      }
+    }
+  }
+
+  & > div:nth-child(2) {
+    .title {
+      width: 114 / 183 * 100%;
+
+      @img: './img/t1.svg';
+      @apply relative;
+
+      &::before {
+        padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+        background-image: url(@img);
+        content: '';
+
+        @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+      }
+    }
+  }
+
+  & > div:nth-child(3) {
+    .title {
+      width: 114 / 183 * 100%;
+
+      @img: './img/t2.svg';
+      @apply relative;
+
+      &::before {
+        padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+        background-image: url(@img);
+        content: '';
+
+        @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+      }
+    }
+
+    .count {
+      &::after {
+        content: '項';
+        @apply pl-1 align-bottom text-xl;
+      }
+    }
+  }
+}
