@@ -1,7 +1,7 @@
 @import url('@/settings/global.css');
 
 .Idle {
-  @apply bg-base-100 h-auto w-full;
+  @apply bg-base-100 relative z-10 h-auto w-full;
 
   .fast-pass {
     top: 16%;
@@ -222,11 +222,12 @@
 
   .idle-5 {
     @img: './img/idle-5.png';
-    @apply relative z-10 mt-0 -mb-9 w-7/12;
+    @apply relative z-10 -mt-5 -mb-9 w-7/12;
 
     &::before {
       padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
       background-image: url(@img);
+      transform: translateX(-5%);
     }
   }
 }

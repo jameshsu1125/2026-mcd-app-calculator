@@ -1,7 +1,6 @@
 import Blockquote from '@/components/blockquote';
 import useResult from '@/hooks/useResult';
 import { MAXIMAL_SAVING_AMOUNT, MINIMAL_SAVING_AMOUNT } from '@/settings/config';
-import { TIdleType } from '@/settings/type';
 import { memo, useMemo } from 'react';
 import { twMerge } from 'tailwind-merge';
 import Info from '../../info';
@@ -22,7 +21,7 @@ const Idle = memo(() => {
   const IdleType = useMemo(() => {
     if (!view) return 'none';
 
-    return '5';
+    // return '5';
 
     if (view.summary.savings <= MINIMAL_SAVING_AMOUNT) return '4';
     if (view.summary.savings >= MAXIMAL_SAVING_AMOUNT) return '3';
@@ -48,7 +47,7 @@ const Idle = memo(() => {
   return (
     <div className='Idle'>
       <div className='w-full pt-[5%]'>
-        <div className='relative flex w-full items-start justify-center overflow-y-hidden'>
+        <div className='relative flex w-full items-start justify-center'>
           <div className='relative flex w-full flex-col items-center justify-center'>
             <Blockquote className='max-w-md items-start justify-between'>
               <Info shouldFadeIn isReverse />
