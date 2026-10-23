@@ -22,7 +22,7 @@ const Idle = memo(() => {
   const IdleType = useMemo(() => {
     if (!view) return 'none';
 
-    return '0';
+    return '5';
 
     if (view.summary.savings <= MINIMAL_SAVING_AMOUNT) return '4';
     if (view.summary.savings >= MAXIMAL_SAVING_AMOUNT) return '3';
@@ -62,7 +62,7 @@ const Idle = memo(() => {
               <Blockquote className='justify-center'>
                 <div className={twMerge('subline', `subline-${IdleType}`)} />
               </Blockquote>
-              <Blockquote className='-mb-2 justify-center pt-8'>
+              <Blockquote className='justify-center pt-8'>
                 <div className={twMerge('idle', `idle-${IdleType}`)} />
               </Blockquote>
               <div className='fast-pass' />
