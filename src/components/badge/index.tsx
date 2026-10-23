@@ -7,14 +7,14 @@ import './index.less';
 type BadgeProps = IReactProps & {
   size: 'small' | 'large';
   canClose?: boolean;
-  onClose?: () => void;
+  onClick?: () => void;
 };
 
-const Badge = memo(({ children, size, canClose, onClose }: BadgeProps) => (
+const Badge = memo(({ children, size, canClose, onClick }: BadgeProps) => (
   <div className={twMerge(`Badge`, size === 'large' ? 'Badge-large' : 'Badge-small')}>
     {children}
     {canClose && (
-      <Button onClick={onClose}>
+      <Button onClick={onClick}>
         <Button.Close size='small' />
       </Button>
     )}
