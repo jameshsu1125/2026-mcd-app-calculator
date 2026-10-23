@@ -9,9 +9,11 @@ export const openUrl = (hostname, url) => {
 };
 
 export const deployToNetlify = (options) => {
+  execSync('netlify deploy --dir=dist', { stdio: 'inherit' });
+
   const output = execSync(`netlify deploy ${options} --json`, {
     encoding: 'utf8',
-    stdio: ['inherit', 'pipe', 'inherit'],
+    stdio: 'inherit',
   });
   const result = JSON.parse(output);
   openUrl(result.site_name || 'Netlify', result.deploy_url || result.ssl_url || result.url);
