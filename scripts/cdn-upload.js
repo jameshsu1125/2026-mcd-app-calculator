@@ -3,9 +3,9 @@ import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { dirname, resolve } from 'path';
 import SftpClient from 'ssh2-sftp-client';
 import { loadEnv } from 'vite';
-import { ROOT, hashFile, listImages, normalizeFolder } from './lib/images.js';
+import { ROOT, hashFile, listAssets, normalizeFolder } from './lib/images.js';
 
-// 用法：npm run cdn:upload            只上傳有變動的圖片
+// 用法：npm run cdn:upload            只上傳有變動的圖片與字型
 //      npm run cdn:upload -- --force  全部重新上傳
 const force = process.argv.includes('--force');
 const MANIFEST = resolve(ROOT, 'scripts/.cdn-manifest.json');
@@ -30,13 +30,13 @@ try {
 }
 
 const manifest = existsSync(MANIFEST) ? JSON.parse(readFileSync(MANIFEST, 'utf8')) : {};
-const images = listImages(folder);
-const pending = images.filter(
+const assets = listAssets(folder);
+const pending = assets.filter(
   ({ localPath, remotePath }) => force || manifest[remotePath] !== hashFile(localPath),
 );
 
 console.log(
-  chalk.cyan(`上傳到 /${folder}/，共 ${images.length} 張圖片，需上傳 ${pending.length} 張`),
+  chalk.cyan(`上傳到 /${folder}/，共 ${assets.length} 個檔案，需上傳 ${pending.length} 個`),
 );
 if (pending.length === 0) process.exit(0);
 
@@ -84,8 +84,8 @@ try {
 }
 
 if (failed.length) {
-  console.log(chalk.red(`\n${failed.length} 張上傳失敗：\n${failed.join('\n')}`));
+  console.log(chalk.red(`\n${failed.length} 個上傳失敗：\n${failed.join('\n')}`));
   process.exitCode = 1;
 } else if (!process.exitCode) {
-  console.log(chalk.green(`\n完成，已上傳 ${pending.length} 張`));
+  console.log(chalk.green(`\n完成，已上傳 ${pending.length} 個`));
 }

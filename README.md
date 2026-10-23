@@ -138,12 +138,13 @@ Moreover, all HTML and CSS should conform to the [Code Guide](https://github.com
 
 Thank customers and some manufacturers for their support.
 
-## 圖片 CDN（Bunny）
+## 圖片與字型 CDN（Bunny）
 
-圖片維持在各元件旁的 `img/` 資料夾與 `public/img/`，Less 原始碼不用改。
+圖片維持在各元件旁的 `img/` 資料夾與 `public/img/`，字型維持在 `src/settings/fonts/`，Less／CSS 原始碼不用改。
+支援的檔案類型：圖片 svg、png、jpg、jpeg、gif、webp、avif、ico；字型 woff2、woff、ttf、otf。
 
 - **開關**：在 `src/pages/.env.local` 設定 `VITE_IMAGE_SOURCE=local`（本機）或 `cdn`（Bunny），`VITE_CDN_URL=https://<zone>.b-cdn.net`，以及存放資料夾 `VITE_CDN_FOLDER=default`（必填，不能是根目錄）。
-  `cdn` 模式下，建置時 `scripts/postcss-cdn-url.js` 會把 CSS 內所有圖片 `url()` 改成 CDN 網址（附 `?v=<hash>`），`index.html` 的 og:image 也一併改用 CDN。
+  `cdn` 模式下，建置時 `scripts/postcss-cdn-url.js` 會把 CSS 內所有圖片與字型的 `url()` 改成 CDN 網址（附 `?v=<hash>`），`index.html` 的 og:image 也一併改用 CDN。
 - **一鍵發布**：`npm run cdn:upload`（只上傳有變動的；`npm run cdn:upload -- --force` 全部重傳）。
   需在 `.env.local` 設定 `BUNNY_STORAGE_ZONE`、`BUNNY_STORAGE_PASSWORD`、`BUNNY_SFTP_HOST`（依 zone 區域，例如 `sg.storage.bunnycdn.com`）。
 - **CDN 路徑**：`src/components/button/img/x.svg` → `<CDN>/<VITE_CDN_FOLDER>/components/button/img/x.svg`；`public/img/a.jpg` → `<CDN>/<VITE_CDN_FOLDER>/img/a.jpg`。
