@@ -1,10 +1,12 @@
 import Blockquote from '@/components/blockquote';
+import useResult from '@/hooks/useResult';
+import { MAXIMAL_SAVING_AMOUNT, MINIMAL_SAVING_AMOUNT } from '@/settings/config';
+import { TIdleType } from '@/settings/type';
 import { memo, useMemo } from 'react';
 import { twMerge } from 'tailwind-merge';
 import Info from '../../info';
 import Logo from '../../logo';
 import './index.less';
-import useResult from '@/hooks/useResult';
 
 const CATEGORY_TYPE_TO_CLASS = {
   肉類: 'meat',
@@ -16,31 +18,49 @@ const CATEGORY_TYPE_TO_CLASS = {
 
 const Idle = memo(() => {
   const view = useResult();
+
   const IdleType = useMemo(() => {
-    if (!view) return 'loading';
+    if (!view) return 'none';
+
+    return '0';
+
+    if (view.summary.savings <= MINIMAL_SAVING_AMOUNT) return '4';
+    if (view.summary.savings >= MAXIMAL_SAVING_AMOUNT) return '3';
+
     const { categoryCount } = view.summary;
+
     const topCategoryType = (Object.entries(categoryCount).sort((a, b) => b[1] - a[1])[0]?.[0] ??
       'none') as keyof typeof CATEGORY_TYPE_TO_CLASS;
-    return 'fried';
-    return CATEGORY_TYPE_TO_CLASS[topCategoryType];
+
+    switch (topCategoryType) {
+      case '肉類':
+        return '0';
+      case '炸物':
+        return '1';
+      case '湯／甜點／飲料':
+        return '2';
+      case '咖啡／茶':
+        return '5';
+    }
+    return 'none';
   }, [view]);
 
   return (
     <div className='Idle'>
       <div className='w-full pt-[5%]'>
         <div className='relative flex w-full items-start justify-center overflow-y-hidden'>
-          <div className='relative w-full max-w-md'>
-            <Blockquote className='items-start justify-between'>
+          <div className='relative flex w-full flex-col items-center justify-center'>
+            <Blockquote className='max-w-md items-start justify-between'>
               <Info shouldFadeIn isReverse />
               <Logo shouldFadeIn className='mt-6' />
               <div className='opacity-0' />
             </Blockquote>
-            <div className='flex w-full flex-col items-center justify-center gap-2'>
-              <Blockquote>
-                <div className={twMerge('headline', 'headline-0')} />
+            <div className='relative flex w-full flex-col items-center justify-center gap-2 px-5'>
+              <Blockquote className='justify-center'>
+                <div className={twMerge('headline', `headline-${IdleType}`)} />
               </Blockquote>
               <Blockquote className='justify-center'>
-                <div className={twMerge('subline', 'subline-0')} />
+                <div className={twMerge('subline', `subline-${IdleType}`)} />
               </Blockquote>
               <Blockquote className='-mb-2 justify-center pt-8'>
                 <div className={twMerge('idle', `idle-${IdleType}`)} />

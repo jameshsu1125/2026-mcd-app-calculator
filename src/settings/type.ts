@@ -70,3 +70,6 @@ export type TContext = [IState, Dispatch<IAction>];
 export interface IReactProps {
   readonly children?: ReactNode;
 }
+
+export type TIdleType =
+  '肌不可失' | '快樂多巴胺' | '好療癒' | '吃澎湃' | '吃得精' | '獨自清醒' | 'none';

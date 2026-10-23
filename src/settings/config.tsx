@@ -20,3 +20,6 @@ export const MESSAGE_KEYBOARD_INPUT_MIN = (
     多按幾個更優惠哦❤️
   </>
 );
+
+export const MINIMAL_SAVING_AMOUNT = 130;
+export const MAXIMAL_SAVING_AMOUNT = 250;

@@ -4,11 +4,11 @@
   @apply bg-base-100 h-auto w-full;
 
   .fast-pass {
-    top: 30%;
+    top: 16%;
     width: 15%;
 
     @img: './img/result-fast-pass.svg';
-    @apply absolute right-5 md:right-0;
+    @apply absolute right-5 md:right-10;
 
     &::before {
       padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
@@ -20,7 +20,6 @@
   }
 
   .headline {
-    @apply w-full;
     &::before {
       content: '';
       @apply inline-block w-full bg-contain bg-center bg-no-repeat;
@@ -28,6 +27,8 @@
   }
 
   .headline-0 {
+    width: 563 / 610 * 100%;
+
     @img: './img/result-headline-0.svg';
 
     &::before {
@@ -37,7 +38,7 @@
   }
 
   .subline {
-    @apply w-10/12;
+    width: 423 / 610 * 100%;
 
     &::before {
       content: '';
@@ -62,13 +63,49 @@
     }
   }
 
-  .idle-fried {
-    @img: './img/idle-fried.png';
+  .idle-0 {
+    @img: './img/idle-0.png';
     @apply mt-10 w-11/12;
     &::before {
       padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
       background-image: url(@img);
       transform: translateX(-5%);
+    }
+  }
+
+  .idle-1 {
+    @img: './img/idle-1.png';
+    @apply mt-10 w-full;
+    &::before {
+      padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+      background-image: url(@img);
+    }
+  }
+
+  .idle-2 {
+    @img: './img/idle-2.png';
+    @apply mt-10 w-11/12;
+    &::before {
+      padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+      background-image: url(@img);
+    }
+  }
+
+  .idle-3 {
+    @img: './img/idle-3.png';
+    @apply mt-10 w-10/12;
+    &::before {
+      padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+      background-image: url(@img);
+    }
+  }
+
+  .idle-4 {
+    @img: './img/idle-4.png';
+    @apply mt-10 w-10/12;
+    &::before {
+      padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+      background-image: url(@img);
     }
   }
 }

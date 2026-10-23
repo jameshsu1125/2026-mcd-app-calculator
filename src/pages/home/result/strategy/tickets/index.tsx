@@ -52,7 +52,7 @@ const Ticket = ({ number, type, data }: TicketProps) => {
           <>
             買{data.products[0].role}
             <br />
-            <span className='text-base'>{data.products[0].name}</span>
+            {data.products[0].name}
           </>
         );
       case '1+1 星級點':
@@ -60,14 +60,14 @@ const Ticket = ({ number, type, data }: TicketProps) => {
           <>
             買紅區
             <br />
+            {data.products[0].name}
           </>
         );
       case '買一送一':
         return (
           <>
             {data.products[0].role}
-            <br />
-            <span className='text-base'>{data.products[0].name}</span>
+            {data.products[0].name}
           </>
         );
       case '買套餐送贈品':
@@ -87,7 +87,7 @@ const Ticket = ({ number, type, data }: TicketProps) => {
           <>
             B區
             <br />
-            <span className='text-base'>{data.products[1].name}</span>
+            {data.products[1].name}
           </>
         );
       case '1+1 星級點':
@@ -98,13 +98,7 @@ const Ticket = ({ number, type, data }: TicketProps) => {
           </>
         );
       case '買一送一':
-        return (
-          <>
-            {data.products[1].role}
-            <br />
-            <span className='text-base'>{data.products[1].name}</span>
-          </>
-        );
+        return data.products[1].name;
       case '買套餐送贈品':
         return data.products[1].name;
 
