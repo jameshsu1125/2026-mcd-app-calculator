@@ -13,7 +13,7 @@ const Intro = memo(() => {
   const [state, setState] = useState(IntroState);
 
   useEffect(() => {
-    setContext({ type: ActionType.LoadingProcess, state: { enabled: true } });
+    setContext({ type: ActionType.LoadingProcess, state: { enabled: true, body: 'Loading' } });
   }, []);
 
   return (

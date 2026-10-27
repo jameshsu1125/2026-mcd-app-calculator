@@ -5,8 +5,8 @@ export enum ResultStepType {
   fadeIn,
 }
 
-export type TResultState = { step: ResultStepType };
+export type TResultState = { step: ResultStepType; target: HTMLDivElement | null };
 export type TResultContext = [TResultState, Dispatch<SetStateAction<TResultState>>];
 
-export const ResultState = { step: ResultStepType.unset };
+export const ResultState: TResultState = { step: ResultStepType.unset, target: null };
 export const ResultContext = createContext<TResultContext>([ResultState, () => {}]);

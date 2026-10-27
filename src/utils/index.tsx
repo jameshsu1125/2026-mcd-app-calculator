@@ -1,3 +1,5 @@
+import { ShareResultType } from '@/settings/type';
+
 declare global {
   interface Window {
     dataLayer: any[];
@@ -10,19 +12,50 @@ declare global {
 declare const gtag: (...args: any[]) => void;
 declare const fbq: (...args: any[]) => void;
 
-export function shareURL({ onError }: { onError?: () => void }) {
+const shareDataWithoutImage = {
+  title: `title`,
+  text: `text`,
+  url: `${window.location.origin}${window.location.pathname}`,
+};
+
+type ShareWithoutImageProps = {
+  onEnd?: (type: ShareResultType) => void;
+};
+
+export const shareWithoutImage = ({ onEnd }: ShareWithoutImageProps) => {
+  navigator
+    .share(shareDataWithoutImage)
+    .then(() => {
+      onEnd?.('success');
+    })
+    .catch(() => {
+      onEnd?.('error');
+    })
+    .finally(() => {});
+};
+
+export function shareURL({ onEnd, blob }: { onEnd?: (type: ShareResultType) => void; blob: Blob }) {
   if (navigator.share) {
+    const file = new File([blob], 'WOW_PRIME.jpg', { type: 'image/jpeg' });
+    const filesArray = [file];
+
     const shareData = {
-      title: '快來挑戰看看！',
-      text: '快來挑戰看看！\n你能打敗我嗎？',
-      url: window.location.href,
+      files: filesArray,
+      ...shareDataWithoutImage,
     };
+
     navigator
       .share(shareData)
-      .then(() => console.log('URL shared successfully'))
-      .catch((error) => console.error('Error sharing URL:', error));
+      .then(() => {
+        // Image shared successfully
+        onEnd?.('success');
+      })
+      .catch(() => {
+        // User cancelled sharing
+        onEnd?.('userCancel');
+      });
   } else {
-    onError?.();
+    onEnd?.('error');
   }
 }
 
