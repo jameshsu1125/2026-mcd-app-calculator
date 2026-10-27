@@ -17,6 +17,10 @@
   --animate-blank-5s: Blank 5s ease-in-out infinite;
   --animate-blanking-start: BlankingStart ease-in-out forwards;
   --animate-swing-r8: swing_r8 5s linear infinite;
+  --animate-swing-r8-reverse: swing_r8 5s linear infinite reverse;
+  --animate-bounce-r20: bounce-r20 2s ease-in-out infinite;
+  --animate-shock: shock 0.15s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  --animate-shake: shake 0.62s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 
   --font-speedee: 'speedee', sans-serif;
 }
