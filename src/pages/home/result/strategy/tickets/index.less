@@ -1,9 +1,21 @@
 @import url('@/settings/global.css');
 
+// 以 ticket 自身寬度為基準，1cqw = 容器寬度的 1%；@u 等於票券最大寬度（472px）時的 1px
+@u: (1cqw / 4.72);
+
 .Tickets {
-  @apply flex w-full flex-col items-center justify-center gap-5 p-5;
+  // 外距用百分比（相對於容器寬度），20px / 512px
+  padding: 3.906%;
+
+  @apply flex w-full flex-col items-center justify-center;
+
+  .ticket + .ticket {
+    margin-top: 3.906%;
+  }
 
   .ticket {
+    container-type: inline-size;
+
     @apply relative flex w-full flex-row items-center justify-center;
 
     .left {
@@ -21,7 +33,9 @@
       }
 
       & > .inner {
-        @apply absolute top-0 left-0 flex h-full w-full flex-col items-start justify-between px-4 py-1;
+        padding: (4 * @u) (16 * @u);
+
+        @apply absolute top-0 left-0 flex h-full w-full flex-col items-start justify-between;
 
         & > div:nth-child(1) {
           width: 80 / 128 * 100%;
@@ -38,7 +52,9 @@
         }
 
         & > div:nth-child(2) {
-          @apply font-speedee flex w-full flex-1 flex-row items-center justify-start gap-2;
+          gap: (8 * @u);
+
+          @apply font-speedee flex w-full flex-1 flex-row items-center justify-start;
 
           & > div:nth-child(1) {
             width: 63 / 97 * 100%;
@@ -55,7 +71,10 @@
           }
 
           & > div:nth-child(2) {
-            @apply text-3xl font-black text-black;
+            font-size: (30 * @u);
+            line-height: 1.2;
+
+            @apply font-black text-black;
           }
         }
 
@@ -91,53 +110,65 @@
 
       & > .logo-full-meal {
         &::before {
-          width: image-width(@img) * @scale;
-          height: image-height(@img) * @scale;
+          width: unit(image-width(@img) * @scale / 4.72, cqw);
+          height: unit(image-height(@img) * @scale / 4.72, cqw);
           background-image: url(@img);
           content: '';
 
           @img: '../../../logo/img/logo-flag.svg';
           @scale: 0.25;
-          @apply absolute top-3 left-3 bg-cover;
+          top: (12 * @u);
+          left: (12 * @u);
+
+          @apply absolute bg-cover;
         }
       }
 
       & > .logo-swear-heart {
         &::before {
-          width: image-width(@img) * @scale;
-          height: image-height(@img) * @scale;
+          width: unit(image-width(@img) * @scale / 4.72, cqw);
+          height: unit(image-height(@img) * @scale / 4.72, cqw);
           background-image: url(@img);
           content: '';
 
           @img: '../../../img/sweat-heart.svg';
           @scale: 0.15;
-          @apply absolute top-3 left-3 bg-cover;
+          top: (12 * @u);
+          left: (12 * @u);
+
+          @apply absolute bg-cover;
         }
       }
 
       & > .logo-swear-heart {
         &::before {
-          width: image-width(@img) * @scale;
-          height: image-height(@img) * @scale;
+          width: unit(image-width(@img) * @scale / 4.72, cqw);
+          height: unit(image-height(@img) * @scale / 4.72, cqw);
           background-image: url(@img);
           content: '';
 
           @img: '../../../img/sweat-heart.svg';
           @scale: 0.15;
-          @apply absolute top-3 left-3 bg-cover;
+          top: (12 * @u);
+          left: (12 * @u);
+
+          @apply absolute bg-cover;
         }
       }
 
       & > .logo-star-1-1 {
         &::before {
-          width: image-width(@img) * @scale;
-          height: image-height(@img) * @scale;
+          width: unit(image-width(@img) * @scale / 4.72, cqw);
+          height: unit(image-height(@img) * @scale / 4.72, cqw);
           background-image: url(@img);
           content: '';
 
           @img: '../../../img/star-1+1.svg';
           @scale: 0.12;
-          @apply absolute top-3 left-3 bg-cover;
+          top: (12 * @u);
+          left: (12 * @u);
+
+          @apply absolute bg-cover;
         }
       }
 
@@ -150,8 +181,8 @@
         &::after {
           top: -32%;
           right: -11%;
-          width: image-width(@img) * @scale;
-          height: image-height(@img) * @scale;
+          width: unit(image-width(@img) * @scale / 4.72, cqw);
+          height: unit(image-height(@img) * @scale / 4.72, cqw);
           background-image: url(@img);
           content: '';
 
@@ -163,10 +194,15 @@
 
       & > .inner {
         @scale: 600;
-        @apply absolute top-0 flex h-full w-full flex-row flex-nowrap items-center justify-between p-2 pt-12;
+        padding: (48 * @u) (8 * @u) (8 * @u);
+
+        @apply absolute top-0 flex h-full w-full flex-row flex-nowrap items-center justify-between;
 
         .name-a {
-          @apply text-xl font-black tracking-tighter text-black;
+          font-size: (20 * @u);
+          line-height: 1.4;
+
+          @apply font-black tracking-tighter text-black;
         }
 
         .picture-a {
@@ -187,7 +223,10 @@
         }
 
         .symbol {
-          @apply flex h-11 w-11 items-center justify-center rounded-full bg-white;
+          width: (44 * @u);
+          height: (44 * @u);
+
+          @apply flex items-center justify-center rounded-full bg-white;
 
           & > div {
             &::before {
@@ -217,7 +256,10 @@
         }
 
         .name-b {
-          @apply text-xl font-black tracking-tighter text-black;
+          font-size: (20 * @u);
+          line-height: 1.4;
+
+          @apply font-black tracking-tighter text-black;
         }
 
         .picture-b {
@@ -253,7 +295,9 @@
         transform: translateX(-50%);
 
         @img: './img/scissors.svg';
-        @apply absolute w-5;
+        width: (20 * @u);
+
+        @apply absolute;
 
         &::before {
           padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
