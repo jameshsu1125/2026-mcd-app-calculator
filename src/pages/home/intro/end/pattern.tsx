@@ -1,6 +1,6 @@
 import TweenerDivProvider from '@/components/tweenerProvider';
 import { Bezier } from 'lesca-use-tween';
-import { memo, useContext, useState } from 'react';
+import { memo, useContext, useEffect, useState } from 'react';
 import { HomeContext, HomePageType } from '../../config';
 import { END_STAY_DURATION, IntroContext, IntroStepType } from '../config';
 
@@ -89,6 +89,17 @@ const Check = memo(() => {
     />
   );
 });
+const Symbol = memo(() => {
+  const [{ shouldCheckFadeIn }] = useContext(IntroContext);
+  return (
+    <TweenerDivProvider
+      initialStyle={{ opacity: 0 }}
+      tweenTo={{ opacity: 1 }}
+      shouldFadeIn={shouldCheckFadeIn}
+      options={{ duration: 150, easing: Bezier.outBack }}
+    />
+  );
+});
 
 const Pattern = memo(() => {
   const [{ shouldEndFadeIn, step }] = useContext(IntroContext);
@@ -116,6 +127,7 @@ const Pattern = memo(() => {
       <Glass />
       <CheckBox />
       <Check />
+      <Symbol />
     </TweenerDivProvider>
   );
 });
