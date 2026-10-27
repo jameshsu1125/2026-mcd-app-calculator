@@ -14,7 +14,9 @@
   --color-base-300: #ffc00d;
 
   --animate-blank: Blank 2s ease-in-out infinite;
+  --animate-blank-5s: Blank 5s ease-in-out infinite;
   --animate-blanking-start: BlankingStart ease-in-out forwards;
+  --animate-swing-r8: swing_r8 5s linear infinite;
 
   --font-speedee: 'speedee', sans-serif;
 }
