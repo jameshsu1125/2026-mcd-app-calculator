@@ -13,7 +13,7 @@ const Result = memo(() => {
   const [state, setState] = useState(ResultState);
 
   useEffect(() => {
-    setContext({ type: ActionType.LoadingProcess, state: { enabled: true } });
+    setContext({ type: ActionType.LoadingProcess, state: { enabled: true, body: '計算中' } });
     setContext({ type: ActionType.Scroll, state: { enabled: true } });
   }, []);
 
@@ -24,7 +24,7 @@ const Result = memo(() => {
           setTimeout(() => {
             setState((prev) => ({ ...prev, step: ResultStepType.fadeIn }));
             setContext({ type: ActionType.LoadingProcess, state: { enabled: false } });
-          }, 1000);
+          }, 1500);
         }}
       >
         <div className='Result'>

@@ -14,7 +14,7 @@ import {
 export const LoadingProcessState: TLoadingProcessState = {
   enabled: false,
   type: LoadingProcessType.BounceSmooth,
-  body: 'LOADING...',
+  body: 'LOADING',
 };
 
 export const ModalState: TModalState = {
