@@ -7,9 +7,11 @@ import { ResultContext } from '../../config';
 import './index.less';
 import { ActionType, ShareResultType } from '@/settings/type';
 import { Context } from '@/settings/constant';
+import { HomeContext, HomePageType, HomeStepType } from '@/pages/home/config';
 
 const Group = memo(() => {
   const [, setContext] = useContext(Context);
+  const [, setHomeState] = useContext(HomeContext);
   const [{ target }] = useContext(ResultContext);
   const { loading, toBlob } = useCaptureImage();
 
@@ -56,7 +58,7 @@ const Group = memo(() => {
             <div className='download' />
           </Button.Regular>
         </Button>
-        <Button className='w-full'>
+        <Button className='w-full' onClick={() => {}}>
           <Button.Regular>
             <div className='play-again' />
           </Button.Regular>
