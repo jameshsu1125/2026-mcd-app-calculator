@@ -7,7 +7,13 @@
   // 外距用百分比（相對於容器寬度），20px / 512px
   padding: 3.906%;
 
+  gap: 3.906%;
+
   @apply flex w-full flex-col items-center justify-center;
+
+  & > div {
+    @apply flex w-full flex-col items-center justify-center;
+  }
 
   .ticket + .ticket {
     margin-top: 3.906%;
@@ -110,6 +116,8 @@
 
       & > .logo-full-meal {
         &::before {
+          top: (12 * @u);
+          left: (12 * @u);
           width: unit(image-width(@img) * @scale / 4.72, cqw);
           height: unit(image-height(@img) * @scale / 4.72, cqw);
           background-image: url(@img);
@@ -117,8 +125,6 @@
 
           @img: '../../../logo/img/logo-flag.svg';
           @scale: 0.25;
-          top: (12 * @u);
-          left: (12 * @u);
 
           @apply absolute bg-cover;
         }
@@ -126,6 +132,8 @@
 
       & > .logo-swear-heart {
         &::before {
+          top: (12 * @u);
+          left: (12 * @u);
           width: unit(image-width(@img) * @scale / 4.72, cqw);
           height: unit(image-height(@img) * @scale / 4.72, cqw);
           background-image: url(@img);
@@ -133,8 +141,6 @@
 
           @img: '../../../img/sweat-heart.svg';
           @scale: 0.15;
-          top: (12 * @u);
-          left: (12 * @u);
 
           @apply absolute bg-cover;
         }
@@ -142,6 +148,8 @@
 
       & > .logo-swear-heart {
         &::before {
+          top: (12 * @u);
+          left: (12 * @u);
           width: unit(image-width(@img) * @scale / 4.72, cqw);
           height: unit(image-height(@img) * @scale / 4.72, cqw);
           background-image: url(@img);
@@ -149,8 +157,6 @@
 
           @img: '../../../img/sweat-heart.svg';
           @scale: 0.15;
-          top: (12 * @u);
-          left: (12 * @u);
 
           @apply absolute bg-cover;
         }
@@ -158,6 +164,8 @@
 
       & > .logo-star-1-1 {
         &::before {
+          top: (12 * @u);
+          left: (12 * @u);
           width: unit(image-width(@img) * @scale / 4.72, cqw);
           height: unit(image-height(@img) * @scale / 4.72, cqw);
           background-image: url(@img);
@@ -165,8 +173,6 @@
 
           @img: '../../../img/star-1+1.svg';
           @scale: 0.12;
-          top: (12 * @u);
-          left: (12 * @u);
 
           @apply absolute bg-cover;
         }
@@ -193,8 +199,9 @@
       }
 
       & > .inner {
-        @scale: 600;
         padding: (48 * @u) (8 * @u) (8 * @u);
+
+        @scale: 600;
 
         @apply absolute top-0 flex h-full w-full flex-row flex-nowrap items-center justify-between;
 
@@ -292,10 +299,10 @@
       & > div {
         bottom: -5%;
         left: 50%;
+        width: (20 * @u);
         transform: translateX(-50%);
 
         @img: './img/scissors.svg';
-        width: (20 * @u);
 
         @apply absolute;
 

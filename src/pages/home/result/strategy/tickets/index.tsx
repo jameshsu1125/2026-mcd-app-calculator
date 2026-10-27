@@ -1,15 +1,18 @@
+import InView from '@/components/inView';
 import useResult, { Coupons } from '@/hooks/useResult';
-import { memo, useMemo } from 'react';
+import { memo, useMemo, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import './index.less';
+import TweenerDivProvider from '@/components/tweenerProvider';
 
 type TicketProps = {
   number: number;
   type: string;
   data: Coupons[number];
+  shouldAnimate?: boolean;
 };
 
-const Ticket = ({ number, type, data }: TicketProps) => {
+const Ticket = ({ number, type, data, shouldAnimate }: TicketProps) => {
   const color = useMemo(() => {
     switch (type) {
       default:
@@ -110,7 +113,13 @@ const Ticket = ({ number, type, data }: TicketProps) => {
   }, [type, data]);
 
   return (
-    <div className='ticket'>
+    <TweenerDivProvider
+      className='ticket'
+      initialStyle={{ opacity: 0, y: 50 }}
+      tweenTo={{ opacity: 1, y: 0 }}
+      options={{ duration: 300 }}
+      shouldFadeIn={shouldAnimate}
+    >
       <div className='left'>
         <div className='inner'>
           <div />
@@ -151,9 +160,24 @@ const Ticket = ({ number, type, data }: TicketProps) => {
       <div className='line'>
         <div></div>
       </div>
-    </div>
+    </TweenerDivProvider>
   );
 };
+
+const InViewTicket = memo(({ number, type, data }: TicketProps) => {
+  const [shouldAnimate, setShouldAnimate] = useState(false);
+  return (
+    <InView
+      threshold={100}
+      onEnter={() => {
+        // TODO: scroll 到 Tickets 且看到 50% 時觸發的事件
+        setShouldAnimate(true);
+      }}
+    >
+      <Ticket number={number} type={type} data={data} shouldAnimate={shouldAnimate} />
+    </InView>
+  );
+});
 
 const Tickets = memo(() => {
   const view = useResult();
@@ -162,7 +186,7 @@ const Tickets = memo(() => {
   return (
     <div className='Tickets'>
       {coupons.map((coupon, index) => (
-        <Ticket key={index} number={index + 1} type={coupon.type} data={coupon} />
+        <InViewTicket key={index} number={index + 1} type={coupon.type} data={coupon} />
       ))}
     </div>
   );

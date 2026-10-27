@@ -9,7 +9,7 @@ import ItemList from './itemList';
 import Strategy from './strategy';
 
 const Result = memo(() => {
-  const [, setContext] = useContext(Context);
+  const [{ userResult }, setContext] = useContext(Context);
   const [state, setState] = useState(ResultState);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const Result = memo(() => {
   }, []);
 
   return (
-    <ResultContext.Provider value={[state, setState]}>
+    <ResultContext.Provider value={[state, setState]} key={JSON.stringify(userResult)}>
       <OnloadProvider
         onload={() => {
           setState((prev) => ({ ...prev, step: ResultStepType.fadeIn }));

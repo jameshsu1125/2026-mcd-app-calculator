@@ -11,10 +11,13 @@
       - [Usage](#usage-1)
       - [Props](#props-1)
       - [use100vh](#use100vh)
+    - [InView](#inview)
+      - [Usage](#usage-2)
+      - [Props](#props-2)
     - [Development](#development)
       - [Methods](#methods)
       - [Properties](#properties)
-      - [Props](#props-2)
+      - [Props](#props-3)
 
 ### LoadingProcess
 
@@ -100,6 +103,34 @@ const Half = ({ children }) => {
 | :------------------------------ | :-----------------------------------: | ------------: |
 | **use100vh**()                  | 真實可視高度，resize 時自動更新 | number \| null |
 | **measureHeight**()             | 單次量測，回傳 `window.innerHeight` | number \| null |
+
+### InView
+
+捲動到內容、且看到指定百分比時觸發事件。root 就是帶 `className` 的 `div`，不會多一層 DOM。
+
+#### Usage
+
+```JSX
+import InView from '@/components/inView';
+
+const Pages = () => (
+  <InView className='Stat' threshold={50} onEnter={() => console.log('看到 50% 了')}>
+    content
+  </InView>
+);
+```
+
+#### Props
+
+繼承 `HTMLAttributes<HTMLDivElement>`。
+
+| Properties              |                    description                    | default |
+| :---------------------- | :-----------------------------------------------: | ------: |
+| **threshold**:_number_  |        看到多少百分比（0 ~ 100）時觸發        |      50 |
+| **once**:_boolean_      | true 只觸發一次；false 每次重新進入都觸發 |    true |
+| **onEnter**:_function_  |                   觸發時呼叫                   |       - |
+
+> 內容比畫面高時（例如很多張票券），可見比例到不了 threshold，所以「可見高度佔畫面高度達 threshold」也視為達標。
 
 ### Development
 

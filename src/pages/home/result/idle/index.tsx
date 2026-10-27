@@ -1,14 +1,15 @@
 import Blockquote from '@/components/blockquote';
+import TweenerDivProvider from '@/components/tweenerProvider';
 import useResult from '@/hooks/useResult';
 import { MAXIMAL_SAVING_AMOUNT, MINIMAL_SAVING_AMOUNT } from '@/settings/config';
-import { memo, useMemo, useState } from 'react';
+import { Bezier } from 'lesca-use-tween';
+import { memo, useContext, useMemo, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import Info from '../../info';
 import Logo from '../../logo';
-import './index.less';
-import TweenerDivProvider from '@/components/tweenerProvider';
-import { Bezier } from 'lesca-use-tween';
 import { Char, Effects, Items } from './config';
+import './index.less';
+import { ResultContext, ResultStepType } from '../config';
 
 const CATEGORY_TYPE_TO_CLASS = {
   肉類: 'meat',
@@ -69,6 +70,7 @@ const Effect = memo(({ index }: { index: number }) => {
 });
 
 const Idle = memo(() => {
+  const [{ step }] = useContext(ResultContext);
   const view = useResult();
 
   const IdleType = useMemo(() => {
@@ -103,8 +105,8 @@ const Idle = memo(() => {
         <div className='relative flex w-full items-start justify-center'>
           <div className='relative flex w-full flex-col items-center justify-center'>
             <Blockquote className='max-w-md items-start justify-between'>
-              <Info shouldFadeIn isReverse />
-              <Logo shouldFadeIn className='mt-6' />
+              <Info shouldFadeIn={step === ResultStepType.fadeIn} isReverse />
+              <Logo shouldFadeIn={step === ResultStepType.fadeIn} className='mt-6' />
               <div className='opacity-0' />
             </Blockquote>
             <div className='relative flex w-full flex-col items-center justify-center gap-2 px-5'>
@@ -113,7 +115,7 @@ const Idle = memo(() => {
                   className={twMerge('headline', `headline-${IdleType}`)}
                   initialStyle={{ opacity: 0, y: 50, scaleX: 0.5, scaleY: 1.5 }}
                   tweenTo={{ opacity: 1, y: 0, scaleX: 1, scaleY: 1 }}
-                  shouldFadeIn={true}
+                  shouldFadeIn={step === ResultStepType.fadeIn}
                   options={{ duration: 250, delay: 200, easing: Bezier.outBack }}
                 />
               </Blockquote>
@@ -122,7 +124,7 @@ const Idle = memo(() => {
                   className={twMerge('subline', `subline-${IdleType}`)}
                   initialStyle={{ opacity: 0, y: 50, scaleX: 0.5, scaleY: 1.5 }}
                   tweenTo={{ opacity: 1, y: 0, scaleX: 1, scaleY: 1 }}
-                  shouldFadeIn={true}
+                  shouldFadeIn={step === ResultStepType.fadeIn}
                   options={{ duration: 250, delay: 300, easing: Bezier.outBack }}
                 />
               </Blockquote>
@@ -132,7 +134,7 @@ const Idle = memo(() => {
                     <TweenerDivProvider
                       initialStyle={Char[IdleType].initialStyle}
                       tweenTo={Char[IdleType].tweenTo}
-                      shouldFadeIn={true}
+                      shouldFadeIn={step === ResultStepType.fadeIn}
                       options={Char[IdleType].options}
                     />
                   ) : (
@@ -146,7 +148,7 @@ const Idle = memo(() => {
                 className='fast-pass'
                 initialStyle={{ opacity: 0, scale: 5 }}
                 tweenTo={{ opacity: 1, scale: 1 }}
-                shouldFadeIn={true}
+                shouldFadeIn={step === ResultStepType.fadeIn}
                 options={{ duration: 250, delay: 1000 }}
               />
             </div>
