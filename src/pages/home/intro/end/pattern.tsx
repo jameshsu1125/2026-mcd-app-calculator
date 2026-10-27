@@ -1,6 +1,6 @@
 import TweenerDivProvider from '@/components/tweenerProvider';
 import { Bezier } from 'lesca-use-tween';
-import { memo, useContext, useEffect, useState } from 'react';
+import { memo, useContext, useState } from 'react';
 import { HomeContext, HomePageType } from '../../config';
 import { END_STAY_DURATION, IntroContext, IntroStepType } from '../config';
 

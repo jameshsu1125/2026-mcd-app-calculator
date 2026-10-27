@@ -83,10 +83,8 @@ const Idle = memo(() => {
     if (view.summary.savings <= MINIMAL_SAVING_AMOUNT) return 4;
     if (view.summary.savings >= MAXIMAL_SAVING_AMOUNT) return 3;
 
-    const { categoryCount } = view.summary;
-
-    const topCategoryType = (Object.entries(categoryCount).sort((a, b) => b[1] - a[1])[0]?.[0] ??
-      'none') as keyof typeof CATEGORY_TYPE_TO_CLASS;
+    // 平手規則在 useResult 的 CATEGORY_TIE_PRIORITY（平手時咖啡／茶優先）
+    const topCategoryType = view.summary.topCategory as keyof typeof CATEGORY_TYPE_TO_CLASS;
 
     switch (topCategoryType) {
       case '肉類':

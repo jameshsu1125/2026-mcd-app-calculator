@@ -38,6 +38,10 @@ const toProduct = (id: string): TProduct => {
   return { id, name: product?.name ?? id, className: product?.className ?? '' };
 };
 
+// 數量最多的分類平手時，照這個順序決定誰優先（James 2026-10-27：平手時
+// 獨自清醒＝咖啡／茶 排第一；其他維持原本的順序）。要調整就改這個陣列。
+const CATEGORY_TIE_PRIORITY: McdCategory[] = ['咖啡／茶', '肉類', '炸物', '湯／甜點／飲料', 'none'];
+
 const useResult = () => {
   const [{ userResult }] = useContext(Context);
   const result = useMemo(() => {
@@ -93,11 +97,17 @@ const useResult = () => {
       (categoriesOf.get(id) ?? []).forEach((category) => (categoryCount[category] += 1)),
     );
 
+    // (e) 數量最多的分類；平手時照 CATEGORY_TIE_PRIORITY 決定
+    const topCategory = CATEGORY_TIE_PRIORITY.reduce((best, category) =>
+      categoryCount[category] > categoryCount[best] ? category : best,
+    );
+
     const summary = {
       savings: result.savingsFrom, // (a) 有機會省最多錢
       itemCount: result.itemCount, // (b) 總共獲得的品項數目
       couponCount: result.deals.length, // (c) 一共幾張券（重複使用的也算）
       categoryCount, // (d) 使用者按的商品各分類幾個
+      topCategory, // (e) 數量最多的分類（平手時咖啡／茶優先）
     };
 
     // 4. 每張券的詳細資料
