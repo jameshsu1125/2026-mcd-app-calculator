@@ -21,8 +21,10 @@ const Result = memo(() => {
     <ResultContext.Provider value={[state, setState]} key={JSON.stringify(userResult)}>
       <OnloadProvider
         onload={() => {
-          setState((prev) => ({ ...prev, step: ResultStepType.fadeIn }));
-          setContext({ type: ActionType.LoadingProcess, state: { enabled: false } });
+          setTimeout(() => {
+            setState((prev) => ({ ...prev, step: ResultStepType.fadeIn }));
+            setContext({ type: ActionType.LoadingProcess, state: { enabled: false } });
+          }, 1000);
         }}
       >
         <div className='Result'>

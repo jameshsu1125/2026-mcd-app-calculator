@@ -20,6 +20,7 @@ const CATEGORY_TYPE_TO_CLASS = {
 } as const;
 
 const Item = memo(({ index }: { index: number }) => {
+  const [{ step }] = useContext(ResultContext);
   const [isSwing, setIsSwing] = useState(false);
   const currentItem = useMemo(() => {
     return Items[index] ?? [];
@@ -33,7 +34,7 @@ const Item = memo(({ index }: { index: number }) => {
             className={twMerge(isSwing ? item.loopClass : '')}
             initialStyle={item.initialStyle}
             tweenTo={item.tweenTo}
-            shouldFadeIn={true}
+            shouldFadeIn={step === ResultStepType.fadeIn}
             options={{
               ...item.options,
               onEnd: () => setIsSwing(true),
@@ -46,6 +47,7 @@ const Item = memo(({ index }: { index: number }) => {
 });
 
 const Effect = memo(({ index }: { index: number }) => {
+  const [{ step }] = useContext(ResultContext);
   const [isSwing, setIsSwing] = useState(false);
   const currentEffect = useMemo(() => {
     return Effects[index] ?? [];
@@ -58,7 +60,7 @@ const Effect = memo(({ index }: { index: number }) => {
           className={twMerge(isSwing ? effect.loopClass : '')}
           initialStyle={effect.initialStyle}
           tweenTo={effect.tweenTo}
-          shouldFadeIn={true}
+          shouldFadeIn={step === ResultStepType.fadeIn}
           options={{
             ...effect.options,
             onEnd: () => setIsSwing(true),
