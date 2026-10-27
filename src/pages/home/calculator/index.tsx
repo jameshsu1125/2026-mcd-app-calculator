@@ -11,6 +11,7 @@ import Keyboard from './keyboard';
 import Logo from '../logo';
 import Screen from './screen';
 import Blockquote from '@/components/blockquote';
+import Click from 'lesca-click';
 
 const Calculator = memo(() => {
   const [, setContext] = useContext(Context);
@@ -18,6 +19,13 @@ const Calculator = memo(() => {
 
   useEffect(() => {
     setContext({ type: ActionType.LoadingProcess, state: { enabled: true } });
+  }, []);
+
+  useEffect(() => {
+    Click.setEnabled(false);
+    return () => {
+      Click.setEnabled(true);
+    };
   }, []);
 
   return (

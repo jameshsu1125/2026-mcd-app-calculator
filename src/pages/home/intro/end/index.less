@@ -95,6 +95,19 @@
           background-image: url(@img);
         }
       }
+
+      & > div:nth-child(5) {
+        top: 31.8%;
+        left: 67.1%;
+        width: (unit(image-width(@img))) / 300 * 100%;
+
+        @img: '../../img/pattern-symbol.svg';
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+        }
+      }
     }
   }
 }

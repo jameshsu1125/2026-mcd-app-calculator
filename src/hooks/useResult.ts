@@ -68,8 +68,20 @@ const useResult = () => {
     const extras = [...extraCount].map(([id, count]) => ({ ...toProduct(id), count }));
 
     // 3. 攻略摘要
-    // (d) 所有券拿到的商品（買的、送的都算，一份算一個）各分類幾個。
-    //     每個分類都會有 key（沒有就是 0），加總等於 itemCount。
+    // (d) 使用者自己按的商品各分類幾個（James 2026-10-24：券多送的不算）。
+    //     每個按下的按鍵算一次，沒有券可用的也算。每個分類都會有 key
+    //     （沒有就是 0）。一個按鍵可以有兩個分類（例如麥克鷄塊是炸物＋
+    //     肉類），兩邊都會 +1，所以加總可能大於按下的按鍵數。
+    //     按鍵的分類從結果裡取：有券的會出現在某張券的 products，沒券的
+    //     在 uncovered，兩邊都帶 categories。
+    const categoriesOf = new Map<string, McdCategory[]>();
+    result.deals.forEach((deal) =>
+      deal.products.forEach((product) => {
+        if (product.button) categoriesOf.set(product.button, product.categories);
+      }),
+    );
+    result.uncovered.forEach((button) => categoriesOf.set(button.id, button.categories));
+
     const categoryCount: Record<McdCategory, number> = {
       肉類: 0,
       炸物: 0,
@@ -77,15 +89,15 @@ const useResult = () => {
       '咖啡／茶': 0,
       none: 0,
     };
-    result.deals.forEach((deal) =>
-      deal.products.forEach((product) => (categoryCount[product.category] += 1)),
+    selectedIds.forEach((id) =>
+      (categoriesOf.get(id) ?? []).forEach((category) => (categoryCount[category] += 1)),
     );
 
     const summary = {
       savings: result.savingsFrom, // (a) 有機會省最多錢
       itemCount: result.itemCount, // (b) 總共獲得的品項數目
       couponCount: result.deals.length, // (c) 一共幾張券（重複使用的也算）
-      categoryCount, // (d) 各分類的商品數
+      categoryCount, // (d) 使用者按的商品各分類幾個
     };
 
     // 4. 每張券的詳細資料
@@ -98,7 +110,8 @@ const useResult = () => {
         //   role：主餐／配餐／飲料／贈品、紅區／白區、A區／B區（送）、買／送
         //   name：實際品項（例如「雙層牛肉吉事堡」）
         //   buttonName / className：所屬按鍵的名稱與 className
-        //   category：分類（肉類／炸物／湯／甜點／飲料／咖啡／茶／none）
+        //   categories：分類陣列（肉類／炸物／湯／甜點／飲料／咖啡／茶），
+        //               例如麥克鷄塊是 ['炸物', '肉類']；四季沙拉是 ['none']
         //   isSelected：是不是使用者按的按鍵；false 就是券多帶出來的
         // 只有 B清爽配餐的四季沙拉沒有按鍵，className 是空字串
         products: deal.products.map((product) => ({
@@ -107,7 +120,7 @@ const useResult = () => {
           id: product.button,
           buttonName: product.button ? toProduct(product.button).name : null,
           className: product.button ? toProduct(product.button).className : '',
-          category: product.category,
+          categories: product.categories,
           isSelected: product.button ? selectedIds.has(product.button) : false,
         })),
         items,
