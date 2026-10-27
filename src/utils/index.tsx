@@ -13,8 +13,8 @@ declare const gtag: (...args: any[]) => void;
 declare const fbq: (...args: any[]) => void;
 
 const shareDataWithoutImage = {
-  title: `title`,
-  text: `text`,
+  title: `這是一段 title 的文字`,
+  text: `這是一段 demo 的文字`,
   url: `${window.location.origin}${window.location.pathname}`,
 };
 

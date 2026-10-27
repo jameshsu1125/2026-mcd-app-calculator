@@ -41,6 +41,9 @@ const Glow = memo(() => {
           if (delta < 11000) return;
           setShouldFadeOut(true);
         },
+        onEnd: () => {
+          setShouldFadeOut(true);
+        },
       }}
       shouldFadeIn={state.step === IntroStepType.fadeIn}
       fadeOutStyle={{ opacity: 1, scale: 2.5, y: -200, x: 100 }}

@@ -34,10 +34,31 @@ export type TCalculatorState = {
 };
 export type TCalculatorContext = [TCalculatorState, Dispatch<SetStateAction<TCalculatorState>>];
 
+// 看過教學後，隱藏教學的時間（毫秒）
+export const INSTRUCTION_HIDE_DURATION = 7 * 24 * 60 * 60 * 1000;
+const INSTRUCTION_STORAGE_KEY = 'mcd-calculator-instruction-seen-at';
+
+export const getInstructionEnabled = () => {
+  try {
+    const seenAt = Number(localStorage.getItem(INSTRUCTION_STORAGE_KEY));
+    return !(seenAt && Date.now() - seenAt < INSTRUCTION_HIDE_DURATION);
+  } catch {
+    return true;
+  }
+};
+
+export const markInstructionSeen = () => {
+  try {
+    localStorage.setItem(INSTRUCTION_STORAGE_KEY, String(Date.now()));
+  } catch {
+    // localStorage unavailable
+  }
+};
+
 export const CalculatorState: TCalculatorState = {
   time: new Date().getHours() < 11 ? 'breakfast' : 'allDay',
   step: CalculatorStepType.unset,
-  instructionState: { step: 0, enabled: true },
+  instructionState: { step: 0, enabled: getInstructionEnabled() },
   userInput: [],
 };
 

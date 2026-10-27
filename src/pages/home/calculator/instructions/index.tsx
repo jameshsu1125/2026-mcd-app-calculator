@@ -4,7 +4,7 @@ import Click from 'lesca-click';
 import { Bezier } from 'lesca-use-tween';
 import { memo, useContext, useEffect, useId } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { CalculatorContext, CalculatorStepType } from '../config';
+import { CalculatorContext, CalculatorStepType, markInstructionSeen } from '../config';
 import Focus from './focus';
 import './index.less';
 
@@ -54,6 +54,7 @@ const Instructions = memo(() => {
         optionsFadeOut={{
           duration: 50,
           onEnd: () => {
+            markInstructionSeen();
             setState((prev) => ({
               ...prev,
               step: CalculatorStepType.startCalculator,

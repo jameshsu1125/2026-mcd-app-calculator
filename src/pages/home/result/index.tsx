@@ -15,7 +15,6 @@ const Result = memo(() => {
   const [state, setState] = useState(ResultState);
 
   useEffect(() => {
-    setContext({ type: ActionType.LoadingProcess, state: { enabled: true, body: '計算中' } });
     setContext({ type: ActionType.Scroll, state: { enabled: true } });
   }, []);
 
@@ -27,10 +26,8 @@ const Result = memo(() => {
     <ResultContext.Provider value={[state, setState]} key={JSON.stringify(userResult)}>
       <OnloadProvider
         onload={() => {
-          setTimeout(() => {
-            setState((prev) => ({ ...prev, step: ResultStepType.fadeIn }));
-            setContext({ type: ActionType.LoadingProcess, state: { enabled: false } });
-          }, 1500);
+          setState((prev) => ({ ...prev, step: ResultStepType.fadeIn }));
+          setContext({ type: ActionType.LoadingProcess, state: { enabled: false } });
         }}
       >
         <div className='Result'>

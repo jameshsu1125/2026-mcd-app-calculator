@@ -74,7 +74,14 @@ const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
                     type: ActionType.UserResult,
                     state: { time, input: userInput },
                   });
-                  setHomeState((prev) => ({ ...prev, page: HomePageType.result }));
+                  setContext({
+                    type: ActionType.LoadingProcess,
+                    state: { enabled: true, body: '計算中' },
+                  });
+
+                  setTimeout(() => {
+                    setHomeState((prev) => ({ ...prev, page: HomePageType.result }));
+                  }, 1500);
                 }
                 break;
             }

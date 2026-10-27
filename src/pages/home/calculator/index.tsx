@@ -21,6 +21,13 @@ const Calculator = memo(() => {
     setContext({ type: ActionType.LoadingProcess, state: { enabled: true } });
   }, []);
 
+  // 教學已被略過時，直接進入計算機
+  useEffect(() => {
+    if (!state.instructionState.enabled && state.step === CalculatorStepType.infoDidFadeIn) {
+      setState((prev) => ({ ...prev, step: CalculatorStepType.startCalculator }));
+    }
+  }, [state.step, state.instructionState.enabled]);
+
   useEffect(() => {
     Click.setEnabled(false);
     return () => {
