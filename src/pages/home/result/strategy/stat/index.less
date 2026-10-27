@@ -1,85 +1,108 @@
 @import url('@/settings/global.css');
 
 .Stat {
-  @apply grid h-auto w-full grid-cols-3 items-center justify-center rounded-2xl bg-white p-2;
+  /* 外殼只負責當容器；內層所有尺寸用 cqw（外殼寬度的 1%）等比縮放，約等於 512px 時的 rem 設計值 */
+  container-type: inline-size;
 
-  & > div {
-    @apply flex h-full w-full flex-col items-center justify-center gap-2 px-4 py-2 text-black;
+  @apply w-full;
 
-    .title {
-      @apply text-lg font-black;
-    }
+  & > .box {
+    padding: 1.5625cqw;
+    border-radius: 3.125cqw;
 
-    .count {
-      @apply text-5xl font-black;
-    }
-  }
+    @apply grid h-auto w-full grid-cols-3 items-center justify-center bg-white;
 
-  & > div + div {
-    @apply border-l border-black;
-  }
+    & > div {
+      gap: 1.5625cqw;
+      padding: 1.5625cqw 3.125cqw;
 
-  & > div:nth-child(1) {
-    .title {
-      width: 100%;
+      @apply flex h-full w-full min-w-0 flex-col items-center justify-center text-black;
 
-      @img: './img/t0.svg';
-      @apply relative;
+      .title {
+        @apply text-lg font-black;
+      }
 
-      &::before {
-        padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-        background-image: url(@img);
-        content: '';
+      .count {
+        font-size: 9.375cqw;
+        line-height: 1;
+        white-space: nowrap;
 
-        @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+        @apply font-black;
       }
     }
 
-    .count {
-      &::before {
-        content: '$';
-        @apply pr-1 align-super text-2xl;
-      }
+    & > div + div {
+      @apply border-l border-black;
     }
-  }
 
-  & > div:nth-child(2) {
-    .title {
-      width: 114 / 183 * 100%;
+    & > div:nth-child(1) {
+      .title {
+        width: 100%;
 
-      @img: './img/t1.svg';
-      @apply relative;
+        @img: './img/t0.svg';
+        @apply relative;
 
-      &::before {
-        padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-        background-image: url(@img);
-        content: '';
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
 
-        @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+          @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+        }
       }
-    }
-  }
 
-  & > div:nth-child(3) {
-    .title {
-      width: 114 / 183 * 100%;
+      .count {
+        &::before {
+          content: '$';
+          padding-right: 0.0833em;
+          font-size: 0.5em;
 
-      @img: './img/t2.svg';
-      @apply relative;
-
-      &::before {
-        padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-        background-image: url(@img);
-        content: '';
-
-        @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+          @apply align-super;
+        }
       }
     }
 
-    .count {
-      &::after {
-        content: '項';
-        @apply pl-1 align-bottom text-xl;
+    & > div:nth-child(2) {
+      .title {
+        width: 114 / 183 * 100%;
+
+        @img: './img/t1.svg';
+        @apply relative;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+    }
+
+    & > div:nth-child(3) {
+      .title {
+        width: 114 / 183 * 100%;
+
+        @img: './img/t2.svg';
+        @apply relative;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .count {
+        &::after {
+          content: '項';
+          padding-left: 0.0833em;
+          font-size: 0.4167em;
+
+          @apply align-bottom;
+        }
       }
     }
   }

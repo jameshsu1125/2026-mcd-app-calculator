@@ -12,17 +12,19 @@ const Stat = memo(() => {
 
   return (
     <div className='Stat'>
-      <div>
-        <div className='title' />
-        <div className='count'>{savings}</div>
-      </div>
-      <div>
-        <div className='title' />
-        <div className='count'>{itemCount}</div>
-      </div>
-      <div>
-        <div className='title' />
-        <div className='count'>{couponCount}</div>
+      <div className='box'>
+        <div>
+          <div className='title' />
+          <div className='count'>{savings}</div>
+        </div>
+        <div>
+          <div className='title' />
+          <div className='count'>{itemCount}</div>
+        </div>
+        <div>
+          <div className='title' />
+          <div className='count'>{couponCount}</div>
+        </div>
       </div>
     </div>
   );
