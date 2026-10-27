@@ -7,16 +7,14 @@
   // 外距用百分比（相對於容器寬度），20px / 512px
   padding: 3.906%;
 
-  gap: 3.906%;
-
   @apply flex w-full flex-col items-center justify-center;
 
   & > div {
     @apply flex w-full flex-col items-center justify-center;
   }
 
-  .ticket + .ticket {
-    margin-top: 3.906%;
+  & > div:not(:last-child) {
+    margin-bottom: 3%;
   }
 
   .ticket {

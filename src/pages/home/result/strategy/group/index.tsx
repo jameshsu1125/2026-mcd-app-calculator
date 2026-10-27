@@ -2,12 +2,13 @@ import Button from '@/components/button';
 import useCaptureImage from '@/hooks/useCaptureImage';
 import { MCD_APP_URL } from '@/settings/config';
 import { shareURL, shareWithoutImage } from '@/utils';
-import { memo, useContext, useEffect } from 'react';
+import { memo, useContext } from 'react';
 import { ResultContext } from '../../config';
 import './index.less';
 import { ActionType, ShareResultType } from '@/settings/type';
 import { Context } from '@/settings/constant';
 import { HomeContext, HomePageType, HomeStepType } from '@/pages/home/config';
+import { CalculatorState } from '@/pages/home/calculator/config';
 
 const Group = memo(() => {
   const [, setContext] = useContext(Context);
@@ -58,7 +59,17 @@ const Group = memo(() => {
             <div className='download' />
           </Button.Regular>
         </Button>
-        <Button className='w-full' onClick={() => {}}>
+        <Button
+          className='w-full'
+          onClick={() => {
+            setContext({
+              type: ActionType.UserResult,
+              state: { time: CalculatorState.time, input: [] },
+            });
+            setContext({ type: ActionType.Scroll, state: { enabled: false } });
+            setHomeState({ step: HomeStepType.unset, page: HomePageType.calculator });
+          }}
+        >
           <Button.Regular>
             <div className='play-again' />
           </Button.Regular>

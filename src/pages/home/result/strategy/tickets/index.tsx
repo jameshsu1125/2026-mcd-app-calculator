@@ -188,6 +188,7 @@ const Tickets = memo(() => {
       {coupons.map((coupon, index) => (
         <InViewTicket key={index} number={index + 1} type={coupon.type} data={coupon} />
       ))}
+      <span className='w-full text-right text-xs'>*詳細計算方式請查看活動頁面說明</span>
     </div>
   );
 });
