@@ -2,11 +2,12 @@
 // 套餐的 jpg 是白底，用 multiply 讓白底融進票券底色
 
 .Tickets .ticket .pic {
-  aspect-ratio: 1 / 1;
   background-position: center bottom;
-  background-repeat: no-repeat;
   background-size: contain;
-  mix-blend-mode: multiply;
+  background-repeat: no-repeat;
+
+  aspect-ratio: 1 / 1;
+  // mix-blend-mode: multiply;
 
   &.pic-bogo-caramel-milk-tea {
     background-image: url('./pic/bogo-caramel-milk-tea.png');

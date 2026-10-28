@@ -188,7 +188,7 @@
       }
 
       & > .inner {
-        padding: (48 * @u) (8 * @u) (8 * @u);
+        padding: (8 * @u) (8 * @u) (8 * @u);
 
         gap: 2%;
         @scale: 600;
@@ -196,6 +196,7 @@
 
         .section-A,
         .section-B {
+          transform: translateY(-5%);
           @apply flex flex-1 flex-col items-center;
         }
 
@@ -233,7 +234,11 @@
         }
 
         .pic {
-          @apply w-7/12 bg-red-500;
+          @apply w-10/12;
+        }
+
+        .name {
+          @apply text-sm font-black text-black select-none;
         }
       }
     }
