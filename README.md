@@ -141,7 +141,10 @@ Thank customers and some manufacturers for their support.
 ## 圖片與字型 CDN（Bunny）
 
 圖片維持在各元件旁的 `img/` 資料夾與 `public/img/`，字型維持在 `src/settings/fonts/`，Less／CSS 原始碼不用改。
-支援的檔案類型：圖片 svg、png、jpg、jpeg、gif、webp、avif、ico；字型 woff2、woff、ttf、otf。
+支援的檔案類型：圖片 svg、png、jpg、jpeg、gif、webp、avif、ico；字型 woff2、woff、ttf、otf；音檔 mp3、wav、ogg、m4a、aac。
+
+- **TS／TSX 匯入的檔案**（例如音檔 `import bgm from './mp3/mp3-bgm.mp3'`）：`cdn` 模式由 `scripts/vite-cdn-assets.js` 換成 CDN 網址，`local` 模式照 Vite 原本打包。
+- **音效**：設定在 `src/components/sounds/config.ts`。使用者第一次點擊畫面時才建立 `Sounds` 並讀取全部音檔（`src/hooks/useSoundsOnFirstTouch.ts`），存在 Context 的 `sounds`：`context[ActionType.Sounds]?.instance?.play('click')`，`loaded` 表示全部讀取完成。
 
 - **開關**：在 `src/pages/.env.local` 設定 `VITE_IMAGE_SOURCE=local`（本機）或 `cdn`（Bunny），`VITE_CDN_URL=https://<zone>.b-cdn.net`，以及存放資料夾 `VITE_CDN_FOLDER=default`（必填，不能是根目錄）。
   `cdn` 模式下，建置時 `scripts/postcss-cdn-url.js` 會把 CSS 內所有圖片與字型的 `url()` 改成 CDN 網址（附 `?v=<hash>`），`index.html` 的 og:image 也一併改用 CDN。

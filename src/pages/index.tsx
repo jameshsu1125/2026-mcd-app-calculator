@@ -1,6 +1,7 @@
 import Container from '@/components/container';
 import LoadingProcess from '@/components/loadingProcess';
 import Modal from '@/components/modal';
+import useSoundsOnFirstTouch from '@/hooks/useSoundsOnFirstTouch';
 import { PAGE } from '@/settings/config';
 import { Context, InitialState, Reducer } from '@/settings/constant';
 import '@/settings/global.css';
@@ -47,6 +48,7 @@ const Pages = memo(() => {
 const App = () => {
   const [state, setState] = useReducer(Reducer, InitialState);
   const value: TContext = useMemo(() => [state, setState], [state]);
+  useSoundsOnFirstTouch(setState);
   return (
     <div className='App'>
       <Context.Provider {...{ value }}>

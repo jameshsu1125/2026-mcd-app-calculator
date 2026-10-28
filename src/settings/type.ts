@@ -1,3 +1,4 @@
+import type Sounds from '@/components/sounds';
 import { Dispatch, ReactNode } from 'react';
 
 export enum ActionType {
@@ -6,6 +7,7 @@ export enum ActionType {
   Modal = 'modal',
   UserResult = 'userResult',
   Scroll = 'scroll',
+  Sounds = 'sounds',
 }
 
 export enum LoadingProcessType {
@@ -45,6 +47,13 @@ export type TScrollState = {
   enabled?: boolean;
 };
 
+export type TSoundsState = {
+  // 使用者第一次點擊畫面時才建立（瀏覽器要求有手勢才能播放聲音），在那之前是 null
+  instance?: Sounds | null;
+  // 全部音檔讀取完成
+  loaded?: boolean;
+};
+
 export type TUserResultState = {
   // 使用者按 Enter 當下鍵盤的時段。麥香魚、汽水等按鍵兩個時段都有，
   // 同一組 id 在早餐和午晚餐算出來的結果不同，所以一定要跟著 input 存。
@@ -58,6 +67,7 @@ export interface IState {
   [ActionType.Modal]?: TModalState;
   [ActionType.UserResult]?: TUserResultState;
   [ActionType.Scroll]?: TScrollState;
+  [ActionType.Sounds]?: TSoundsState;
 }
 
 export interface IAction {

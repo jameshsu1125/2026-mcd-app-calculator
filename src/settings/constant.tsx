@@ -8,6 +8,7 @@ import {
   TContext,
   TLoadingProcessState,
   TModalState,
+  TSoundsState,
   TUserResultState,
 } from './type';
 
@@ -37,12 +38,15 @@ export const UserResultState: TUserResultState = {
   ],
 };
 
+export const SoundsState: TSoundsState = { instance: null, loaded: false };
+
 export const InitialState: IState = {
   [ActionType.Page]: PAGE.home,
   [ActionType.LoadingProcess]: LoadingProcessState,
   [ActionType.Modal]: ModalState,
   [ActionType.UserResult]: UserResultState,
   [ActionType.Scroll]: { enabled: false },
+  [ActionType.Sounds]: SoundsState,
 };
 
 export const Context = createContext<TContext>([InitialState, () => {}]);
