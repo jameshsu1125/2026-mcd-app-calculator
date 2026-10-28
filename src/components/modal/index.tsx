@@ -35,7 +35,7 @@ const Modal = memo(() => {
           tweenTo={{ opacity: 1, y: 0 }}
           options={{ duration: 300, delay: 150 }}
         >
-          <span>{modal?.body}</span>
+          <div>{modal?.body}</div>
           <div className='close'>
             <Button
               onClick={() => {

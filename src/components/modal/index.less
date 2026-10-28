@@ -1,7 +1,7 @@
 @import url('@/settings/global.css');
 
 .Modal {
-  @apply fixed top-0 z-50 h-full w-full;
+  @apply fixed top-0 z-50 flex h-full w-full items-center justify-center;
 
   & > .bg {
     @apply absolute h-full w-full bg-black/60;
@@ -11,12 +11,14 @@
     @apply pointer-events-none relative flex h-full w-full items-center justify-center;
 
     .dialog {
+      max-height: 80vh;
       border-radius: 4rem;
       background-color: #fef1d2;
-      color: #333;
       box-shadow: 0 0 2.4rem rgba(255, 188, 13, 1);
+      color: #333;
 
       @apply border-primary flex min-w-2xs items-center justify-center border-6 px-10 py-30 text-center text-xl font-black tracking-wide;
+      @apply overflow-y-auto;
 
       .close {
         @apply pointer-events-auto absolute top-3 right-3;
