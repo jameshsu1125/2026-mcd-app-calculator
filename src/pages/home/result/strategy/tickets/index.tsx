@@ -96,8 +96,8 @@ const Ticket = ({ number, type, data, shouldAnimate }: TicketProps) => {
       case '1+1 星級點':
         return (
           <>
-            買紅區
-            <br />
+            白區
+            {data.products[1].name}
           </>
         );
       case '買一送一':
