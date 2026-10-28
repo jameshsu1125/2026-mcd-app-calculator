@@ -1,4 +1,4 @@
-import { toBlob, toPng } from 'html-to-image';
+import { toPng } from 'html-to-image';
 import { useCallback, useState } from 'react';
 
 type TCaptureOptions = {
@@ -108,11 +108,31 @@ const prepare = async (element: HTMLElement, options: TCaptureOptions) => {
   };
 };
 
+// iOS 的所有瀏覽器與桌面 Safari 都是 WebKit
+const isWebKit = () => {
+  const { userAgent, maxTouchPoints } = navigator;
+  if (/iP(hone|ad|od)/.test(userAgent)) return true;
+  if (/Macintosh/.test(userAgent) && maxTouchPoints > 1) return true; // iPadOS
+  return /safari/i.test(userAgent) && !/chrome|chromium|android/i.test(userAgent);
+};
+
+// WebKit 畫 SVG foreignObject 時，裡面的圖片是「用到才載入」，第一次截圖會缺圖，
+// 每截一次就多補上幾張，所以重複截到結果不再變化為止（實測約 3 次）
+const MAX_WEBKIT_PASSES = 5;
+
 /** 把 DOM 轉成 PNG 的 data URL */
 export const captureToDataUrl = async (element: HTMLElement, options: TCaptureOptions = {}) => {
   const { restore, config } = await prepare(element, options);
   try {
-    return await toPng(element, config);
+    let result = await toPng(element, config);
+    if (!isWebKit()) return result;
+
+    for (let pass = 1; pass < MAX_WEBKIT_PASSES; pass += 1) {
+      const next = await toPng(element, config);
+      if (next === result) break;
+      result = next;
+    }
+    return result;
   } finally {
     restore();
   }
@@ -120,14 +140,8 @@ export const captureToDataUrl = async (element: HTMLElement, options: TCaptureOp
 
 /** 把 DOM 轉成 PNG 的 Blob（可以拿去上傳或分享） */
 export const captureToBlob = async (element: HTMLElement, options: TCaptureOptions = {}) => {
-  const { restore, config } = await prepare(element, options);
-  try {
-    const blob = await toBlob(element, config);
-    if (!blob) throw new Error('capture failed: empty blob');
-    return blob;
-  } finally {
-    restore();
-  }
+  const dataUrl = await captureToDataUrl(element, options);
+  return (await fetch(dataUrl)).blob();
 };
 
 const useCaptureImage = () => {
