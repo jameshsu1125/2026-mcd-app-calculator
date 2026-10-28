@@ -190,9 +190,54 @@
       & > .inner {
         padding: (48 * @u) (8 * @u) (8 * @u);
 
+        gap: 2%;
         @scale: 600;
-
         @apply absolute top-0 flex h-full w-full flex-row flex-nowrap items-center justify-between;
+
+        .section-A,
+        .section-B {
+          @apply flex flex-1 flex-col items-center bg-red-500;
+        }
+
+        .symbol {
+          width: (44 * @u);
+          height: (44 * @u);
+
+          @apply flex items-center justify-center rounded-full bg-white;
+
+          & > div {
+            &::before {
+              content: '';
+
+              @apply block w-full bg-contain bg-center bg-no-repeat;
+            }
+          }
+
+          & > .symbol-give {
+            @img: './img/symbol-give.svg';
+            @apply w-8/12;
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
+            }
+          }
+
+          & > .symbol-plus {
+            @img: './img/symbol-plus.svg';
+            @apply w-5/12;
+            &::before {
+              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+              background-image: url(@img);
+            }
+          }
+        }
+
+        .pic {
+          @apply w-full;
+        }
+
+        .beef {
+        }
       }
     }
 

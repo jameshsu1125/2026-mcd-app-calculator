@@ -147,7 +147,19 @@ const Ticket = ({ number, type, data, shouldAnimate }: TicketProps) => {
             />
           </svg>
         </div>
-        <div className='inner'></div>
+        <div className='inner'>
+          <div className='section-A'>
+            <div className={twMerge('pic', data.products[0].className || '')}></div>
+            <div className='name'>{nameA}</div>
+          </div>
+          <div className='symbol'>
+            <div className={symbolClass} />
+          </div>
+          <div className='section-B'>
+            <div className={twMerge('pic', data.products[1].className || '')}></div>
+            <div className='name'>{nameB}</div>
+          </div>
+        </div>
       </div>
       <div className='line'>
         <div></div>
