@@ -1,9 +1,10 @@
-import { memo, useEffect } from 'react';
-import './index.less';
+import copy from 'copy-to-clipboard';
+import { memo } from 'react';
 import Button from '../button';
+import './index.less';
+import { MCD_APP_URL } from '@/settings/config';
 
 const HiddenDiscount = memo(() => {
-  useEffect(() => {}, []);
   return (
     <div className='HiddenDiscount'>
       <div className='headline'>
@@ -17,13 +18,24 @@ const HiddenDiscount = memo(() => {
       <div className='input'>
         <div>
           <span>APP週年慶有驚喜</span>
-          <Button>
+          <Button
+            onClick={() => {
+              copy('this is fake code').then(() => {
+                alert('已複製到剪貼簿');
+              });
+            }}
+          >
             <Button.Copy />
           </Button>
         </div>
       </div>
       <div className='flex w-full justify-center py-[14%]'>
-        <Button className='w-7/12'>
+        <Button
+          className='w-7/12'
+          onClick={() => {
+            window.open(MCD_APP_URL, '_blank');
+          }}
+        >
           <Button.Active>前往APP領取</Button.Active>
         </Button>
       </div>
