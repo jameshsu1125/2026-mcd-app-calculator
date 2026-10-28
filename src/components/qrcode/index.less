@@ -1,0 +1,19 @@
+@import url('@/settings/global.css');
+
+.Qrcode {
+  background-size: 100%;
+  box-shadow: 0 0 2.4rem rgba(255, 188, 13, 1);
+  @apply border-primary flex items-center justify-center;
+
+  & > div {
+    width: image-width(@img) * @scale;
+    height: image-height(@img) * @scale;
+    background-color: #fef1d2;
+    background-image: url(@img);
+
+    @scale: 0.7;
+    @img: './img/logo.jpg';
+
+    @apply rounded-l-full rounded-r-full bg-white px-10 py-5;
+  }
+}

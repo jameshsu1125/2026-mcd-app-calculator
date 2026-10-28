@@ -3,6 +3,8 @@ import { createContext, Dispatch, SetStateAction } from 'react';
 export enum IDesktopStepType {
   unset,
   fadeIn,
+  fadeOut,
+  qrcode,
 }
 
 export type TDesktopState = { step: IDesktopStepType; shouldCheckFadeIn: boolean };

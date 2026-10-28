@@ -4,11 +4,10 @@ import { Bezier } from 'lesca-use-tween';
 import { memo, useContext, useState } from 'react';
 import { DesktopContext, DesktopState, IDesktopStepType } from './config';
 import './index.less';
-import Qrcode from 'lesca-react-qrcode';
+import Qrcode from '@/components/qrcode';
 
 const CheckBox = memo(() => {
   const [{ step, shouldCheckFadeIn }, setState] = useContext(DesktopContext);
-
   const [resume, setResume] = useState(false);
 
   return (
@@ -73,7 +72,7 @@ const Glass = memo(() => {
 });
 
 const Check = memo(() => {
-  const [{ step, shouldCheckFadeIn }, setState] = useContext(DesktopContext);
+  const [{ shouldCheckFadeIn }, setState] = useContext(DesktopContext);
   return (
     <TweenerDivProvider
       initialStyle={{ opacity: 0, scale: 0 }}
@@ -82,9 +81,10 @@ const Check = memo(() => {
       options={{
         duration: 150,
         easing: Bezier.outBack,
-
         onEnd: () => {
-          // setState((prev) => ({ ...prev, shouldCheckFadeIn: true }));
+          setTimeout(() => {
+            setState((prev) => ({ ...prev, step: IDesktopStepType.fadeOut }));
+          }, 1000);
         },
       }}
     />
@@ -120,18 +120,26 @@ const Desktop = memo(() => {
             <div className='flex w-full flex-col items-center justify-center gap-10'>
               <TweenerDivProvider
                 className='welcome'
-                initialStyle={{ opacity: 0, y: 200 }}
-                tweenTo={{ opacity: 1, y: 0 }}
+                initialStyle={{ opacity: 0, y: 420 }}
+                tweenTo={{ opacity: 1, y: 220 }}
                 options={{ duration: 800, easing: Bezier.inOutQuart }}
                 shouldFadeIn={state.step === IDesktopStepType.fadeIn}
+
+                fadeOutStyle={{ opacity: 1, y: 0 }}
+                shouldFadeOut={state.step === IDesktopStepType.fadeOut}
+                optionsFadeOut={{ duration: 800, easing: Bezier.inOutQuart }}
               />
-              <div className='flex w-5xl justify-center'>
+              <div className='flex w-4xl justify-center'>
                 <TweenerDivProvider
                   className='pattern'
-                  initialStyle={{ opacity: 0, y: 200, scaleX: 1, scaleY: 1 }}
-                  tweenTo={{ opacity: 1, y: 0 }}
+                  initialStyle={{ opacity: 0, y: 420, scaleX: 1, scaleY: 1 }}
+                  tweenTo={{ opacity: 1, y: 220 }}
                   options={{ duration: 800, delay: 100, easing: Bezier.inOutQuart }}
                   shouldFadeIn={state.step === IDesktopStepType.fadeIn}
+
+                  fadeOutStyle={{ opacity: 1, y: 0 }}
+                  shouldFadeOut={state.step === IDesktopStepType.fadeOut}
+                  optionsFadeOut={{ duration: 800, easing: Bezier.inOutQuart, delay: 50 }}
                 >
                   <div />
                   <Glass />
@@ -144,17 +152,36 @@ const Desktop = memo(() => {
                 className='text-0'
                 initialStyle={{ opacity: 0, y: 200 }}
                 tweenTo={{ opacity: 1, y: 0 }}
-                options={{ duration: 800, easing: Bezier.inOutQuart, delay: 200 }}
-                shouldFadeIn={state.step === IDesktopStepType.fadeIn}
+                options={{ duration: 800, easing: Bezier.inOutQuart, delay: 100 }}
+                shouldFadeIn={state.step === IDesktopStepType.fadeOut}
               />
               <TweenerDivProvider
                 className='text-1'
                 initialStyle={{ opacity: 0, y: 200 }}
                 tweenTo={{ opacity: 1, y: 0 }}
-                options={{ duration: 800, easing: Bezier.inOutQuart, delay: 300 }}
-                shouldFadeIn={state.step === IDesktopStepType.fadeIn}
+                options={{
+                  duration: 800,
+                  easing: Bezier.inOutQuart,
+                  delay: 150,
+                  onEnd: () => {
+                    setState((prev) => ({ ...prev, step: IDesktopStepType.qrcode }));
+                  },
+                }}
+                shouldFadeIn={state.step === IDesktopStepType.fadeOut}
               />
-              <Qrcode content={window.location.href} size={500} />
+              {state.step >= IDesktopStepType.fadeIn ? (
+                <TweenerDivProvider
+                  className='flex w-full justify-center'
+                  initialStyle={{ opacity: 0 }}
+                  tweenTo={{ opacity: 1 }}
+                  options={{ duration: 500 }}
+                  shouldFadeIn={state.step === IDesktopStepType.qrcode}
+                >
+                  <Qrcode content={window.location.href} size={300} />
+                </TweenerDivProvider>
+              ) : (
+                <div className='h-75 w-75' />
+              )}
             </div>
           </div>
         </div>
