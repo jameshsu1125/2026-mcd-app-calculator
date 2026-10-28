@@ -1,0 +1,156 @@
+@import url('@/settings/global.css');
+.Desktop {
+  @apply h-full w-full;
+
+  .bg {
+    background-image: url('./img/bg.png');
+    background-size: 100%;
+    background-repeat: repeat-y;
+    @apply absolute top-0 h-full w-full;
+  }
+
+  .glow {
+    background-image: url('./img/g.png');
+    background-position: center bottom;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    @apply absolute top-0 h-full w-full;
+  }
+
+  .ctx {
+    @apply absolute top-0 flex h-full w-full flex-col items-center justify-center;
+
+    .welcome {
+      width: image-width(@img) * @scale;
+      height: image-height(@img) * @scale;
+      background-image: url(@img);
+      background-size: 100%;
+
+      @scale: 7;
+      @img: './img/welcome.svg';
+
+      @apply relative;
+
+      &::before {
+        bottom: 0%;
+        left: -16%;
+        width: image-width(@img) * @scale;
+        height: image-height(@img) * @scale;
+        background-image: url(@img);
+        background-size: 100%;
+        content: '';
+
+        @scale: 0.8;
+        @img: './img/e-l.png';
+
+        @apply absolute opacity-60;
+      }
+
+      &::after {
+        right: -16%;
+        bottom: 0%;
+        width: image-width(@img) * @scale;
+        height: image-height(@img) * @scale;
+        background-image: url(@img);
+        background-size: 100%;
+        content: '';
+
+        @scale: 0.8;
+        @img: './img/e-r.png';
+
+        @apply absolute opacity-60;
+      }
+    }
+
+    .pattern {
+      width: (unit(image-width(@img))) / 738 * 100%;
+
+      @img: './img/tmp.png';
+      @apply relative;
+
+      &::before {
+        padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+        // background-image: url(@img);
+        content: '';
+        opacity: 0.5;
+
+        @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+      }
+
+      & > div {
+        @apply absolute;
+
+        &::before {
+          content: '';
+
+          @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      & > div:nth-child(1) {
+        top: 0%;
+        left: 0%;
+
+        @img: '../home/img/pattern-text.svg';
+        @apply w-full;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+        }
+      }
+
+      & > div:nth-child(2) {
+        top: 3.7%;
+        left: 8.4%;
+        width: 12.3%;
+
+        @img: '../home/img/pattern-glass.svg';
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+        }
+      }
+
+      & > div:nth-child(3) {
+        top: 60%;
+        left: 40.8%;
+        width: (unit(image-width(@img))) / 300 * 100%;
+
+        @img: '../home/img/pattern-checkBox.svg';
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+        }
+      }
+
+      & > div:nth-child(4) {
+        top: 35.4%;
+        left: 42.3%;
+        width: (unit(image-width(@img))) / 300 * 100%;
+
+        @img: '../home/img/pattern-check.svg';
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+        }
+      }
+
+      & > div:nth-child(5) {
+        top: 31.8%;
+        left: 67.1%;
+        width: (unit(image-width(@img))) / 300 * 100%;
+
+        @img: '../home/img/pattern-symbol.svg';
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+        }
+      }
+    }
+  }
+}

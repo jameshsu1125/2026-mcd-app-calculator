@@ -8,8 +8,12 @@ import '@/settings/global.css';
 import { ActionType, TContext } from '@/settings/type';
 import Click from 'lesca-click';
 import Fetcher, { contentType, formatType } from 'lesca-fetcher';
-import { Suspense, lazy, memo, useContext, useMemo, useReducer } from 'react';
+import QueryString from 'lesca-url-parameters';
+import UserAgent, { UserAgentType } from 'lesca-user-agent';
+import { Suspense, lazy, memo, useContext, useEffect, useMemo, useReducer, useState } from 'react';
 import ReactDOM from 'react-dom/client';
+
+const Desktop = lazy(() => import('./desktop'));
 
 Click.install();
 
@@ -35,7 +39,7 @@ const Pages = memo(() => {
       const Element = lazy(() => import(`./${target}/index.tsx`));
       return (
         <Suspense fallback=''>
-          <Element>Static Pages</Element>
+          <Element />
         </Suspense>
       );
     }
@@ -49,12 +53,34 @@ const App = () => {
   const [state, setState] = useReducer(Reducer, InitialState);
   const value: TContext = useMemo(() => [state, setState], [state]);
   useSoundsOnFirstTouch(setState);
+
+  const [device, setDevice] = useState(UserAgent.get());
+
+  useEffect(() => {
+    const resize = () => {
+      if (QueryString.get('m') === '1') {
+        setDevice(UserAgentType.Mobile);
+        return;
+      }
+      setDevice(UserAgent.get());
+    };
+    resize();
+    window.addEventListener('resize', resize);
+    return () => window.removeEventListener('resize', resize);
+  }, []);
+
   return (
     <div className='App'>
       <Context.Provider {...{ value }}>
-        <Container scroll={state[ActionType.Scroll]?.enabled}>
-          <Pages />
-        </Container>
+        {device === UserAgentType.Mobile ? (
+          <Container scroll={state[ActionType.Scroll]?.enabled}>
+            <Pages />
+          </Container>
+        ) : (
+          <Suspense fallback=''>
+            <Desktop />
+          </Suspense>
+        )}
         {state[ActionType.LoadingProcess]?.enabled && <LoadingProcess />}
         {state[ActionType.Modal]?.enabled && <Modal />}
       </Context.Provider>
