@@ -147,15 +147,7 @@ const Ticket = ({ number, type, data, shouldAnimate }: TicketProps) => {
             />
           </svg>
         </div>
-        <div className='inner'>
-          <div className='name-a'>{nameA}</div>
-          <div className='picture-a' />
-          <div className='symbol'>
-            <div className={symbolClass} />
-          </div>
-          <div className='name-b'>{nameB}</div>
-          <div className='picture-b' />
-        </div>
+        <div className='inner'></div>
       </div>
       <div className='line'>
         <div></div>

@@ -104,16 +104,16 @@
       @img: './img/ticket-right.svg';
       @apply relative overflow-hidden;
 
-      &::before {
+      &::after {
         padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
         // background-image: url(@img);
         content: '';
 
-        @apply block w-full;
+        @apply z-10 block w-full;
       }
 
       & > .logo-full-meal {
-        &::before {
+        &::after {
           top: (12 * @u);
           left: (12 * @u);
           width: unit(image-width(@img) * @scale / 4.72, cqw);
@@ -129,7 +129,7 @@
       }
 
       & > .logo-swear-heart {
-        &::before {
+        &::after {
           top: (12 * @u);
           left: (12 * @u);
           width: unit(image-width(@img) * @scale / 4.72, cqw);
@@ -142,26 +142,13 @@
 
           @apply absolute bg-cover;
         }
-      }
-
-      & > .logo-swear-heart {
         &::before {
-          top: (12 * @u);
-          left: (12 * @u);
-          width: unit(image-width(@img) * @scale / 4.72, cqw);
-          height: unit(image-height(@img) * @scale / 4.72, cqw);
-          background-image: url(@img);
-          content: '';
-
-          @img: '../../../img/sweat-heart.svg';
-          @scale: 0.15;
-
-          @apply absolute bg-cover;
+          @apply hidden;
         }
       }
 
       & > .logo-star-1-1 {
-        &::before {
+        &::after {
           top: (12 * @u);
           left: (12 * @u);
           width: unit(image-width(@img) * @scale / 4.72, cqw);
@@ -174,6 +161,10 @@
 
           @apply absolute bg-cover;
         }
+
+        &::before {
+          @apply hidden;
+        }
       }
 
       & > .bg {
@@ -182,9 +173,9 @@
         @img: './img/ticket-right.svg';
         @apply absolute top-0 left-0 w-full;
 
-        &::after {
+        &::before {
           top: -32%;
-          right: -11%;
+          left: -11%;
           width: unit(image-width(@img) * @scale / 4.72, cqw);
           height: unit(image-height(@img) * @scale / 4.72, cqw);
           background-image: url(@img);
@@ -202,87 +193,6 @@
         @scale: 600;
 
         @apply absolute top-0 flex h-full w-full flex-row flex-nowrap items-center justify-between;
-
-        .name-a {
-          font-size: (20 * @u);
-          line-height: 1.4;
-
-          @apply font-black tracking-tighter text-black;
-        }
-
-        .picture-a {
-          // margin-right: -11.3%;
-          // width: (unit(image-width(@img))) / @scale * 100%;
-          width: 10%;
-
-          @img: './img/pic-0.png';
-          @apply relative;
-
-          &::before {
-            padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-            background-image: url(@img);
-            content: '';
-
-            @apply inline-block w-full bg-contain bg-center bg-no-repeat;
-          }
-        }
-
-        .symbol {
-          width: (44 * @u);
-          height: (44 * @u);
-
-          @apply flex items-center justify-center rounded-full bg-white;
-
-          & > div {
-            &::before {
-              content: '';
-
-              @apply block w-full bg-contain bg-center bg-no-repeat;
-            }
-          }
-
-          & > .symbol-give {
-            @img: './img/symbol-give.svg';
-            @apply w-8/12;
-            &::before {
-              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-              background-image: url(@img);
-            }
-          }
-
-          & > .symbol-plus {
-            @img: './img/symbol-plus.svg';
-            @apply w-5/12;
-            &::before {
-              padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-              background-image: url(@img);
-            }
-          }
-        }
-
-        .name-b {
-          font-size: (20 * @u);
-          line-height: 1.4;
-
-          @apply font-black tracking-tighter text-black;
-        }
-
-        .picture-b {
-          // margin-right: -5.3%;
-          // width: (unit(image-width(@img))) / @scale * 100%;
-          width: 10%;
-
-          @img: './img/pic-1.png';
-          @apply relative;
-
-          &::before {
-            padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
-            background-image: url(@img);
-            content: '';
-
-            @apply inline-block w-full bg-contain bg-center bg-no-repeat;
-          }
-        }
       }
     }
 

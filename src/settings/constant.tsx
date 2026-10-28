@@ -32,9 +32,9 @@ export const ModalState: TModalState = {
 export const UserResultState: TUserResultState = {
   time: 'allDay',
   input: [
-    { className: 'chicken', dataset: { name: '鷄肉類漢堡', id: 'chicken_burger' } },
-    { className: 'mspicy', dataset: { name: '勁辣香鷄翅', id: 'spicy_wings' } },
-    { className: 'mfries', dataset: { name: '薯條', id: 'fries' } },
+    { className: 'mapple', dataset: { name: '蘋果派', id: 'apple_pie' } },
+    { className: 'mice', dataset: { name: '蛋捲冰淇淋', id: 'cone' } },
+    { className: 'beef', dataset: { name: '牛肉類漢堡', id: 'beef_burger' } },
   ],
 };
 
