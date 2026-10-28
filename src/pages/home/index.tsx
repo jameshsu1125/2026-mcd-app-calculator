@@ -4,11 +4,9 @@ import { HomeContext, HomeState, THomeState } from './config';
 import './index.less';
 import Intro from './intro';
 import Result from './result';
-import useTouchOnce from '@/hooks/useTouchOnce';
 
 const Home = memo(() => {
   const [state, setState] = useState<THomeState>(HomeState);
-  const [] = useTouchOnce();
 
   const page = useMemo(() => {
     switch (state.page) {

@@ -54,18 +54,11 @@ const Ticket = ({ number, type, data, shouldAnimate }: TicketProps) => {
         return (
           <>
             買{data.products[0].role}
-            <br />
             {data.products[0].name}
           </>
         );
       case '1+1 星級點':
-        return (
-          <>
-            買紅區
-            <br />
-            {data.products[0].name}
-          </>
-        );
+        return <>買紅區{data.products[0].name}</>;
       case '買一送一':
         return (
           <>
@@ -86,25 +79,13 @@ const Ticket = ({ number, type, data, shouldAnimate }: TicketProps) => {
   const nameB = useMemo(() => {
     switch (type) {
       case '數位甜心卡':
-        return (
-          <>
-            B區
-            <br />
-            {data.products[1].name}
-          </>
-        );
+        return <>B區{data.products[1].name}</>;
       case '1+1 星級點':
-        return (
-          <>
-            白區
-            {data.products[1].name}
-          </>
-        );
+        return <>白區{data.products[1].name}</>;
       case '買一送一':
         return data.products[1].name;
       case '買套餐送贈品':
         return data.products[1].name;
-
       case '滿額送':
         return '';
 
@@ -148,13 +129,17 @@ const Ticket = ({ number, type, data, shouldAnimate }: TicketProps) => {
           </svg>
         </div>
         <div className='inner'>
-          <div className='name-a'>{nameA}</div>
-          <div className='picture-a' />
+          <div className='section-A'>
+            <div className={twMerge('pic', data.products[0].className || '')}></div>
+            <div className='name'>{nameA}</div>
+          </div>
           <div className='symbol'>
             <div className={symbolClass} />
           </div>
-          <div className='name-b'>{nameB}</div>
-          <div className='picture-b' />
+          <div className='section-B'>
+            <div className={twMerge('pic', data.products[1].className || '')}></div>
+            <div className='name'>{nameB}</div>
+          </div>
         </div>
       </div>
       <div className='line'>

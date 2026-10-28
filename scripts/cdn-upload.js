@@ -5,7 +5,7 @@ import SftpClient from 'ssh2-sftp-client';
 import { loadEnv } from 'vite';
 import { ROOT, hashFile, listAssets, normalizeFolder } from './lib/images.js';
 
-// 用法：npm run cdn:upload            只上傳有變動的圖片與字型
+// 用法：npm run cdn:upload            只上傳有變動的圖片、字型與音檔
 //      npm run cdn:upload -- --force  全部重新上傳
 const force = process.argv.includes('--force');
 const MANIFEST = resolve(ROOT, 'scripts/.cdn-manifest.json');

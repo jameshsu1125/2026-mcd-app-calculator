@@ -1,7 +1,8 @@
-import { DatasetState } from '@/settings/constant';
 import { Howl, Howler } from 'howler';
-import { MP3List } from './config';
+import { SoundList } from './config';
 import { SoundName } from './type';
+
+export type { SoundName } from './type';
 
 /** Howler 全域物件上未列入型別定義、但恢復音訊時需要的內部成員 */
 type HowlerInternal = {
@@ -25,63 +26,29 @@ const GESTURE_EVENTS = ['touchend', 'mousedown', 'click', 'keydown'] as const;
  */
 const STALLED_SEEK_TOLERANCE = 0.05;
 
-type SoundTrackProps = {
-  baseURI?: string;
-  onload?: (type: PreloadType) => void;
+const SOUND_NAMES = Object.keys(SoundList) as SoundName[];
+
+type Track = {
+  src: string;
+  loop: boolean;
+  loaded: boolean;
+  howl: Howl | null;
+};
+
+type SoundsProps = {
+  /** 全部音檔讀取完成 */
+  onLoad?: () => void;
   onError?: (message: string) => void;
 };
 
-export type PreloadType = 'onStart';
-
 /**
  * Howler.js 音效管理類別。
- * 初始化時預載 bgm 與按鈕音效，進入旅程場景時依場景名稱切換對應的背景音樂。
- * 支援 play / pause / mute 操作。
+ * 建立時立即讀取 SoundList 內全部音檔；應在使用者第一次點擊畫面時建立（見 useSoundsOnFirstTouch）。
+ * 支援 play / stop / fadeOut / mute，並處理 App 切到背景再回來時循環音軌失聲的問題。
  */
-
 export default class Sounds {
-  public track: Record<
-    SoundName,
-    { src: string[]; loop: boolean; onload: boolean; track: Howl | null; preloadType: PreloadType }
-  > = {
-    bgm: {
-      src: [MP3List.bgm],
-      loop: true,
-      onload: false,
-      track: null,
-      preloadType: 'onStart',
-    },
-    click: {
-      src: [MP3List.click],
-      loop: false,
-      onload: false,
-      track: null,
-      preloadType: 'onStart',
-    },
-    correct: {
-      src: [MP3List.correct],
-      loop: false,
-      onload: false,
-      track: null,
-      preloadType: 'onStart',
-    },
-    wrong: {
-      src: [MP3List.wrong],
-      loop: false,
-      onload: false,
-      track: null,
-      preloadType: 'onStart',
-    },
-    levelUp: {
-      src: [MP3List.levelUp],
-      loop: false,
-      onload: false,
-      track: null,
-      preloadType: 'onStart',
-    },
-  };
-
-  private onload: (type: PreloadType) => void;
+  private tracks: Record<SoundName, Track>;
+  private onLoad: () => void;
   private onError: (message: string) => void;
   private isMuted = false;
 
@@ -97,13 +64,155 @@ export default class Sounds {
   /** AudioContext 已確定救不回來，等使用者下一個手勢就整組重建 */
   private pendingRebuild = false;
 
-  constructor(props: SoundTrackProps) {
-    this.onload = props.onload || (() => {});
-    this.onError = props.onError || (() => {});
-    this.init(props.baseURI);
-    this.preload('onStart');
+  constructor({ onLoad, onError }: SoundsProps = {}) {
+    this.onLoad = onLoad || (() => {});
+    this.onError = onError || (() => {});
+    this.tracks = Object.fromEntries(
+      SOUND_NAMES.map((name) => [
+        name,
+        { src: SoundList[name].src, loop: SoundList[name].loop, loaded: false, howl: null },
+      ]),
+    ) as Record<SoundName, Track>;
+
+    SOUND_NAMES.forEach((name) =>
+      this.createTrack(name, () => {
+        if (this.isLoaded()) this.onLoad();
+      }),
+    );
     this.bindLifecycle();
   }
+
+  /** 全部音檔是否都已讀取完成 */
+  public isLoaded(): boolean {
+    return SOUND_NAMES.every((name) => this.tracks[name].loaded);
+  }
+
+  public checkIsMuted(): boolean {
+    return this.isMuted;
+  }
+
+  /** 建立（或重建）單一音軌 */
+  private createTrack(name: SoundName, onLoaded?: () => void): void {
+    const track = this.tracks[name];
+    track.howl?.unload();
+    track.loaded = false;
+
+    const howl = new Howl({
+      src: [track.src],
+      loop: track.loop,
+      onload: () => {
+        track.loaded = true;
+        if (this.isMuted) howl.mute(true);
+        onLoaded?.();
+      },
+      onloaderror: (_id, error) => this.onError(`音軌 ${name} 載入失敗：${error}`),
+      // 瀏覽器尚未解鎖音訊時，等 Howler 解鎖後再播
+      onplayerror: () => howl.once('unlock', () => howl.play()),
+    });
+    track.howl = howl;
+  }
+
+  /** 取得已讀取完成的 Howl 實例 */
+  private getHowl(name: SoundName): Howl | null {
+    const track = this.tracks[name];
+    return track.loaded ? track.howl : null;
+  }
+
+  public play(name: SoundName, volume = 1, canPlayTwice = true): void {
+    const howl = this.getHowl(name);
+    if (!howl) {
+      this.onError(`音效 ${name} 尚未載入`);
+      return;
+    }
+    if (!canPlayTwice && howl.playing()) return;
+
+    try {
+      howl.volume(volume);
+      howl.play();
+      if (this.tracks[name].loop) this.currentLoop = name;
+    } catch (error) {
+      // 播放失敗時重建音軌，等重新讀取完成後再播一次
+      this.onError(`播放 ${name} 失敗，重新建立音軌：${error}`);
+      this.createTrack(name, () => this.play(name, volume, canPlayTwice));
+    }
+  }
+
+  public stop(name: SoundName): void {
+    if (this.currentLoop === name) this.clearLoop();
+    this.getHowl(name)?.stop();
+  }
+
+  public stopAll(): void {
+    this.clearLoop();
+    SOUND_NAMES.forEach((name) => this.getHowl(name)?.stop());
+  }
+
+  public fadeOut(name: SoundName, duration = 1000): void {
+    if (this.currentLoop === name) this.clearLoop();
+
+    const howl = this.getHowl(name);
+    if (!howl) return;
+
+    const volume = howl.volume();
+    howl.fade(volume, 0, duration);
+    howl.once('fade', () => {
+      howl.stop();
+      howl.volume(volume); // 恢復原始音量以便下次播放
+    });
+  }
+
+  public mute(): void {
+    this.setMuted(true);
+  }
+
+  public unmute(): void {
+    this.setMuted(false);
+  }
+
+  private setMuted(muted: boolean): void {
+    this.isMuted = muted;
+    SOUND_NAMES.forEach((name) => this.getHowl(name)?.mute(muted));
+  }
+
+  private clearLoop(): void {
+    this.currentLoop = null;
+    this.loopSeekAtHide = null;
+  }
+
+  /** 卸載所有音軌並移除生命週期監聽 */
+  public destroy(): void {
+    document.removeEventListener('visibilitychange', this.handleVisibilityChange);
+    window.removeEventListener('pagehide', this.handleBackground);
+    window.removeEventListener('pageshow', this.handleForeground);
+    window.removeEventListener('focus', this.handleForeground);
+
+    this.clearLoop();
+    SOUND_NAMES.forEach((name) => {
+      const track = this.tracks[name];
+      track.howl?.unload();
+      track.howl = null;
+      track.loaded = false;
+    });
+  }
+
+  /** 音訊狀態快照，供除錯「有音訊 icon 卻沒聲音」這類問題時檢視 */
+  public checkAudioStatus() {
+    const ctx = howlerInternal().ctx;
+    const howl = this.getLoopHowl();
+    const seek = howl?.seek();
+
+    return {
+      available: !document.hidden && ctx?.state === 'running',
+      context: ctx?.state || 'unknown',
+      loaded: this.isLoaded(),
+      currentLoop: this.currentLoop,
+      playing: howl?.playing() ?? false,
+      seek: typeof seek === 'number' ? seek : null,
+      seekAtHide: this.loopSeekAtHide,
+    };
+  }
+
+  // ───────────────────────── 背景／前景切換的恢復機制 ─────────────────────────
 
   /**
    * 監聽回到前景的時機。
@@ -124,59 +233,44 @@ export default class Sounds {
   };
 
   private handleForeground = (): void => {
-    if (document.visibilityState !== 'visible') return;
-    this.resume();
+    if (document.visibilityState === 'visible') this.resume();
   };
 
   private handleBackground = (): void => {
     this.snapshotLoop();
   };
 
-  /** 取得目前循環音軌的 Howl 實例 */
-  private getLoopTrack(): Howl | null {
-    const name = this.currentLoop;
-    if (!name) return null;
-
-    const trackInfo = this.track[name];
-    if (!trackInfo || !trackInfo.onload || !trackInfo.track) return null;
-
-    return trackInfo.track;
+  private getLoopHowl(): Howl | null {
+    return this.currentLoop ? this.getHowl(this.currentLoop) : null;
   }
 
   /** 記下切到背景當下的播放位置，回前景時用來比對音軌是否還活著 */
   private snapshotLoop(): void {
-    const track = this.getLoopTrack();
-    if (!track) {
-      this.loopSeekAtHide = null;
-      return;
-    }
-
-    const seek = track.seek();
+    const seek = this.getLoopHowl()?.seek();
     this.loopSeekAtHide = typeof seek === 'number' ? seek : null;
   }
 
   /** 從指定位置重新播放循環音軌；stop 會把 seek 歸零，所以順序必須是 stop → seek → play */
-  private replayLoopFrom(track: Howl, position: number | null): void {
-    track.stop();
-    if (position !== null && position > 0) track.seek(position);
-    track.play();
+  private replayLoopFrom(howl: Howl, position: number | null): void {
+    howl.stop();
+    if (position !== null && position > 0) howl.seek(position);
+    howl.play();
   }
 
   /**
    * 恢復目前的循環音軌。
-   * 不能只看 track.playing()：iOS 中斷後 source node 已失效，但 Howler 仍認定在播放，
+   * 不能只看 playing()：iOS 中斷後 source node 已失效，但 Howler 仍認定在播放，
    * 這時 Safari 網址列還會顯示音訊 icon 卻完全沒有聲音。
    * 因此改以「播放位置有沒有從切到背景時前進」來判斷音軌是否真的還活著。
    */
   private restoreLoop(): void {
-    const track = this.getLoopTrack();
-    if (!track) return;
+    const howl = this.getLoopHowl();
+    if (!howl) return;
 
     const previous = this.loopSeekAtHide;
-    const current = track.seek();
 
-    if (!track.playing()) {
-      this.replayLoopFrom(track, previous);
+    if (!howl.playing()) {
+      this.replayLoopFrom(howl, previous);
       this.loopSeekAtHide = null;
       return;
     }
@@ -184,10 +278,11 @@ export default class Sounds {
     // 沒有比對基準就不動它，以免把正常播放中的音軌打斷
     if (previous === null) return;
 
+    const current = howl.seek();
     const isStalled =
       typeof current !== 'number' || Math.abs(current - previous) < STALLED_SEEK_TOLERANCE;
 
-    if (isStalled) this.replayLoopFrom(track, previous);
+    if (isStalled) this.replayLoopFrom(howl, previous);
     this.loopSeekAtHide = null;
   }
 
@@ -212,22 +307,6 @@ export default class Sounds {
     GESTURE_EVENTS.forEach((event) => document.addEventListener(event, unlock, true));
   }
 
-  /** 建立單一音軌的 Howl，不觸發外部傳入的 onload callback（重建流程專用） */
-  private createTrack(name: SoundName, onLoaded?: () => void): void {
-    const trackInfo = this.track[name];
-
-    trackInfo.track = new Howl({
-      src: trackInfo.src,
-      loop: trackInfo.loop,
-      onload: () => {
-        trackInfo.onload = true;
-        if (this.isMuted) trackInfo.track?.mute(true);
-        onLoaded?.();
-      },
-      onloaderror: () => this.onError(`音軌 ${name} 重新載入失敗`),
-    });
-  }
-
   /**
    * 重建整組音訊。
    *
@@ -241,15 +320,11 @@ export default class Sounds {
   private rebuildAudio(): void {
     const loopName = this.currentLoop;
     const position = this.loopSeekAtHide;
-    const loadedNames = (Object.keys(this.track) as SoundName[]).filter(
-      (name) => this.track[name].onload,
-    );
 
     Howler.unload();
-
-    Object.values(this.track).forEach((trackInfo) => {
-      trackInfo.track = null;
-      trackInfo.onload = false;
+    SOUND_NAMES.forEach((name) => {
+      this.tracks[name].howl = null;
+      this.tracks[name].loaded = false;
     });
 
     // 音檔載入是非同步的，等到 onload 時早已離開手勢的呼叫堆疊，
@@ -260,19 +335,15 @@ export default class Sounds {
       freshCtx.resume().catch(() => this.onError('新的 AudioContext 啟動失敗'));
     }
 
-    loadedNames.forEach((name) => {
-      const isLoopTrack = name === loopName;
-
+    SOUND_NAMES.forEach((name) =>
       this.createTrack(name, () => {
-        if (!isLoopTrack) return;
-
-        const track = this.track[name].track;
-        if (!track) return;
-
-        this.replayLoopFrom(track, position);
+        if (name !== loopName) return;
+        const howl = this.getHowl(name);
+        if (!howl) return;
+        this.replayLoopFrom(howl, position);
         this.loopSeekAtHide = null;
-      });
-    });
+      }),
+    );
   }
 
   /**
@@ -286,12 +357,7 @@ export default class Sounds {
     const howler = howlerInternal();
     const ctx = howler.ctx;
 
-    if (!ctx) {
-      this.restoreLoop();
-      return;
-    }
-
-    if (ctx.state === 'running') {
+    if (!ctx || ctx.state === 'running') {
       this.restoreLoop();
       return;
     }
@@ -318,238 +384,5 @@ export default class Sounds {
       if (ctx.state === 'running') this.restoreLoop();
       else this.armGestureResume();
     }, RESUME_FALLBACK_DELAY);
-  }
-
-  /** 卸載所有音軌並移除生命週期監聽 */
-  public destroy(): void {
-    document.removeEventListener('visibilitychange', this.handleVisibilityChange);
-    window.removeEventListener('pagehide', this.handleBackground);
-    window.removeEventListener('pageshow', this.handleForeground);
-    window.removeEventListener('focus', this.handleForeground);
-
-    this.currentLoop = null;
-    this.loopSeekAtHide = null;
-    Object.values(this.track).forEach((trackInfo) => {
-      trackInfo.track?.unload();
-      trackInfo.track = null;
-      trackInfo.onload = false;
-    });
-  }
-
-  init(baseURI?: string) {
-    Object.entries(this.track).forEach(([key, trackInfo]) => {
-      this.track[key as SoundName].src = trackInfo.src.map(
-        (src) => `${baseURI || DatasetState.dataset.baseUri}${src}`,
-      );
-    });
-  }
-
-  private recreateTrack(name: SoundName): void {
-    const trackInfo = this.track[name];
-    if (!trackInfo) return;
-
-    // 停止並清理舊的音軌
-    if (trackInfo.track) {
-      try {
-        trackInfo.track.stop();
-        trackInfo.track.unload();
-      } catch {
-        this.onError(`清理音軌 ${name} 失敗`);
-      }
-    }
-
-    // 創建新的音軌
-    trackInfo.track = new Howl({
-      src: trackInfo.src,
-      loop: trackInfo.loop,
-      // html5: false, // 在移動設備上，Web Audio API 通常更穩定
-      preload: true,
-      onload: () => {
-        trackInfo.onload = true;
-      },
-      onloaderror: () => {
-        this.onError(`音軌 ${name} 重新載入失敗`);
-      },
-    });
-  }
-
-  preload(type: PreloadType, onload?: (type: PreloadType) => void) {
-    this.onload = onload || this.onload;
-
-    const isLoadedBefore = Object.values(this.track)
-      .filter((value) => value.preloadType === type)
-      .every((value) => value.onload);
-
-    if (isLoadedBefore) {
-      this.checkIsLoaded(type);
-      return;
-    }
-
-    Object.entries(this.track)
-      .filter((track) => track[1].preloadType === type)
-      .forEach(([key, value]) => {
-        this.track[key as SoundName].track = new Howl({
-          src: value.src,
-          loop: value.loop,
-          onload: () => {
-            value.onload = true;
-            this.checkIsLoaded(type);
-            if (this.isMuted) this.track[key as SoundName].track?.mute(true);
-          },
-        });
-      });
-  }
-
-  checkIsLoaded(type: PreloadType) {
-    const isOnStartLoaded = Object.values(this.track)
-      .filter((value) => value.preloadType === type)
-      .every((value) => value.onload);
-    if (isOnStartLoaded) {
-      this.onload(type);
-    }
-  }
-
-  preloadByName(name: string[], preload: PreloadType, onload?: (type: PreloadType) => void) {
-    this.onload = onload || this.onload;
-    name.forEach((n) => {
-      const soundName = n as SoundName;
-      if (this.track[soundName] && !this.track[soundName].onload) {
-        this.track[soundName].track = new Howl({
-          src: this.track[soundName].src,
-          loop: this.track[soundName].loop,
-          html5: true,
-          onload: () => {
-            this.track[soundName].onload = true;
-            if (onload) onload(preload);
-            if (this.isMuted) this.track[soundName].track?.mute(true);
-          },
-          onloaderror: () => {
-            this.onError(`音軌 ${n} 重新載入失敗`);
-          },
-        });
-      }
-    });
-  }
-
-  play(name: SoundName, volume = 1, canPlayTwice = true) {
-    const trackInfo = this.track[name];
-
-    if (!trackInfo || !trackInfo.onload || !trackInfo.track) {
-      this.onError(`音頻 ${name} 尚未載入或不存在`);
-      return;
-    }
-
-    const track = trackInfo.track;
-
-    if (!canPlayTwice && track.playing()) {
-      this.onError(`該語音已在播放中，無法重複播放`);
-      return;
-    }
-
-    try {
-      // 設定音量並播放
-      track.volume(volume);
-      track.play();
-      if (trackInfo.loop) this.currentLoop = name;
-    } catch {
-      this.onError(`播放 ${name} 失敗，嘗試重新創建`);
-      // 如果播放失敗，嘗試重新創建音軌
-      this.recreateTrack(name as SoundName);
-
-      // 重新嘗試播放
-      setTimeout(() => {
-        if (this.track[name].track) {
-          try {
-            this.track[name].track!.volume(volume);
-            this.track[name].track!.play();
-            if (this.track[name].loop) this.currentLoop = name;
-          } catch (retryError) {
-            this.onError(`重試播放 ${name} 也失敗: ${retryError}`);
-          }
-        }
-      }, 100);
-    }
-  }
-
-  stop(name: SoundName) {
-    // alert(`${this.track[name]}, ${this.track[name]?.track}, ${this.track[name].onload}`);
-    if (this.currentLoop === name) {
-      this.currentLoop = null;
-      this.loopSeekAtHide = null;
-    }
-    if (this.track[name] && this.track[name].onload && this.track[name].track) {
-      this.track[name].track!.stop();
-    }
-  }
-
-  stopAll() {
-    this.currentLoop = null;
-    this.loopSeekAtHide = null;
-    Object.values(this.track).forEach((trackInfo) => {
-      if (trackInfo.onload && trackInfo.track) {
-        trackInfo.track.stop();
-      }
-    });
-  }
-
-  fadeOut(name: SoundName, duration = 1000) {
-    if (this.currentLoop === name) {
-      this.currentLoop = null;
-      this.loopSeekAtHide = null;
-    }
-    if (this.track[name] && this.track[name].onload && this.track[name].track) {
-      const track = this.track[name].track!;
-      const currentVolume = track.volume();
-      track.fade(currentVolume, 0, duration);
-      setTimeout(() => {
-        track.stop();
-        track.volume(currentVolume); // 恢復原始音量以便下次播放
-      }, duration);
-    }
-  }
-
-  public checkIsMuted() {
-    return this.isMuted;
-  }
-
-  public mute() {
-    this.isMuted = true;
-    Object.values(this.track).forEach((trackInfo) => {
-      if (trackInfo.onload && trackInfo.track) {
-        trackInfo.track.mute(true);
-      }
-    });
-  }
-
-  public unmute() {
-    this.isMuted = false;
-    Object.values(this.track).forEach((trackInfo) => {
-      if (trackInfo.onload && trackInfo.track) {
-        trackInfo.track.mute(false);
-      }
-    });
-  }
-
-  /** 音訊狀態快照，供除錯「有音訊 icon 卻沒聲音」這類問題時檢視 */
-  public checkAudioStatus(): {
-    available: boolean;
-    context: string;
-    currentLoop: SoundName | null;
-    playing: boolean;
-    seek: number | null;
-    seekAtHide: number | null;
-  } {
-    const ctx = (Howler as unknown as HowlerInternal).ctx;
-    const track = this.getLoopTrack();
-    const seek = track?.seek();
-
-    return {
-      available: !document.hidden && ctx?.state === 'running',
-      context: ctx?.state || 'unknown',
-      currentLoop: this.currentLoop,
-      playing: track?.playing() ?? false,
-      seek: typeof seek === 'number' ? seek : null,
-      seekAtHide: this.loopSeekAtHide,
-    };
   }
 }
