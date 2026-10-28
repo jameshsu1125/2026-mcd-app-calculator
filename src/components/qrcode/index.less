@@ -10,10 +10,11 @@
     height: image-height(@img) * @scale;
     background-color: #fef1d2;
     background-image: url(@img);
+    background-size: 70%;
 
     @scale: 0.7;
     @img: './img/logo.jpg';
 
-    @apply rounded-l-full rounded-r-full bg-white px-10 py-5;
+    @apply rounded-l-full rounded-r-full bg-white bg-center bg-no-repeat px-10 py-5;
   }
 }
