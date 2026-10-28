@@ -20,7 +20,7 @@ export const LoadingProcessState: TLoadingProcessState = {
 };
 
 export const ModalState: TModalState = {
-  enabled: true,
+  enabled: false,
   className: 'pb-5',
   body: (
     <>

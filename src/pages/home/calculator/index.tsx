@@ -50,6 +50,7 @@ const Calculator = memo(() => {
         type: ActionType.Modal,
         state: {
           enabled: true,
+          className: 'pb-5',
           body: (
             <>
               <HiddenDiscount />

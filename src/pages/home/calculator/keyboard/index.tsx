@@ -70,7 +70,11 @@ const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
                 if (userInput.length < MIN_INPUT_LENGTH) {
                   setContext({
                     type: ActionType.Modal,
-                    state: { enabled: true, body: MESSAGE_KEYBOARD_INPUT_MIN },
+                    state: {
+                      enabled: true,
+                      body: MESSAGE_KEYBOARD_INPUT_MIN,
+                      className: '',
+                    },
                   });
                   sounds?.instance?.stopAll();
                   sounds?.instance?.play('wrong');
@@ -118,7 +122,7 @@ const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
             if (userInput.length >= MAX_INPUT_LENGTH) {
               setContext({
                 type: ActionType.Modal,
-                state: { enabled: true, body: MESSAGE_KEYBOARD_INPUT_MAX },
+                state: { enabled: true, body: MESSAGE_KEYBOARD_INPUT_MAX, className: '' },
               });
               sounds?.instance?.stopAll();
               sounds?.instance?.play('wrong');

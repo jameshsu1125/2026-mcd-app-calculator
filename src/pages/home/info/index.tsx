@@ -30,7 +30,10 @@ const Info = memo(({ shouldFadeIn, onEnd, isReverse }: InfoProps) => {
       <Button
         id='info'
         onClick={() => {
-          setContext({ type: ActionType.Modal, state: { enabled: true, body: INFO_MODAL_BODY } });
+          setContext({
+            type: ActionType.Modal,
+            state: { enabled: true, body: INFO_MODAL_BODY, className: '' },
+          });
         }}
       >
         <Button.Info isReverse={isReverse} />
