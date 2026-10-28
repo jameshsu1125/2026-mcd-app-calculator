@@ -32,7 +32,7 @@ const Group = memo(() => {
         body = '分享成功！';
     }
 
-    setContext({ type: ActionType.Modal, state: { enabled: true, body } });
+    setContext({ type: ActionType.Modal, state: { enabled: true, body, className: '' } });
   };
 
   return (
