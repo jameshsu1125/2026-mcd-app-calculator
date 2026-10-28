@@ -1,5 +1,5 @@
 export const INFO_MODAL_BODY = (
-  <div className='text-sm'>
+  <div className='flex flex-col gap-4 px-[5%] text-justify text-xs'>
     <div>
       •本計算機之優惠組合及金額計算，以麥當勞APP內「週年慶週週優惠券」、「1+1星級點」、「甜心卡買A送B優惠」為計算範圍，部分優惠可能因使用條件、適用餐廳、訂餐方式或活動期間而有所不同。
     </div>

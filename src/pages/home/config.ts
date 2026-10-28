@@ -15,5 +15,5 @@ export type THomeState = { step: HomeStepType; page: HomePageType };
 
 export type HomeContext = [THomeState, Dispatch<SetStateAction<THomeState>>];
 
-export const HomeState = { step: HomeStepType.unset, page: HomePageType.intro };
+export const HomeState = { step: HomeStepType.unset, page: HomePageType.calculator };
 export const HomeContext = createContext<HomeContext>([HomeState, () => {}]);

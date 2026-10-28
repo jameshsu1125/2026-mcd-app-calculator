@@ -15,6 +15,7 @@ const Modal = memo(() => {
     Click.add(`#${id}`, () => {
       setContext({ type: ActionType.Modal, state: { enabled: false } });
     });
+    Click.addPreventExcept(`#${id}`);
   }, [id]);
 
   return (
@@ -29,13 +30,13 @@ const Modal = memo(() => {
       />
       <div className='inner'>
         <TweenerDivProvider
-          className='dialog'
+          className='dialog pointer-events-auto'
           shouldFadeIn
           initialStyle={{ opacity: 0, y: 50 }}
           tweenTo={{ opacity: 1, y: 0 }}
           options={{ duration: 300, delay: 150 }}
         >
-          <div>{modal?.body}</div>
+          <div className='body'>{modal?.body}</div>
           <div className='close'>
             <Button
               onClick={() => {
