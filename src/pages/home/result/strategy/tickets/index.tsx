@@ -3,6 +3,8 @@ import useResult, { Coupons } from '@/hooks/useResult';
 import { memo, useMemo, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import './index.less';
+import { getTicketSides } from './pic';
+import './pic.less';
 import TweenerDivProvider from '@/components/tweenerProvider';
 
 type TicketProps = {
@@ -48,22 +50,26 @@ const Ticket = ({ number, type, data, shouldAnimate }: TicketProps) => {
     }
   }, [type]);
 
+  const sides = useMemo(() => getTicketSides(data), [data]);
+  const productA = sides.a.product;
+  const productB = sides.b.product;
+
   const nameA = useMemo(() => {
     switch (type) {
       case '數位甜心卡':
         return (
           <>
-            買{data.products[0].role}
-            {data.products[0].name}
+            買{productA.role}
+            {productA.name}
           </>
         );
       case '1+1 星級點':
-        return <>買紅區{data.products[0].name}</>;
+        return <>買紅區{productA.name}</>;
       case '買一送一':
         return (
           <>
-            {data.products[0].role}
-            {data.products[0].name}
+            {productA.role}
+            {productA.name}
           </>
         );
       case '買套餐送贈品':
@@ -74,24 +80,24 @@ const Ticket = ({ number, type, data, shouldAnimate }: TicketProps) => {
 
       default:
     }
-  }, [type, data]);
+  }, [type, productA, productB]);
 
   const nameB = useMemo(() => {
     switch (type) {
       case '數位甜心卡':
-        return <>B區{data.products[1].name}</>;
+        return <>B區{productB.name}</>;
       case '1+1 星級點':
-        return <>白區{data.products[1].name}</>;
+        return <>白區{productB.name}</>;
       case '買一送一':
-        return data.products[1].name;
+        return productB.name;
       case '買套餐送贈品':
-        return data.products[1].name;
+        return productB.name;
       case '滿額送':
         return '';
 
       default:
     }
-  }, [type, data]);
+  }, [type, productA, productB]);
 
   return (
     <TweenerDivProvider
@@ -130,14 +136,14 @@ const Ticket = ({ number, type, data, shouldAnimate }: TicketProps) => {
         </div>
         <div className='inner'>
           <div className='section-A'>
-            <div className={twMerge('pic', data.products[0].className || '')}></div>
+            <div className={twMerge('pic', sides.a.picClass)}></div>
             <div className='name'>{nameA}</div>
           </div>
           <div className='symbol'>
             <div className={symbolClass} />
           </div>
           <div className='section-B'>
-            <div className={twMerge('pic', data.products[1].className || '')}></div>
+            <div className={twMerge('pic', sides.b.picClass)}></div>
             <div className='name'>{nameB}</div>
           </div>
         </div>
