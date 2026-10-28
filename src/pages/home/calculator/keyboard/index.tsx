@@ -21,7 +21,7 @@ type TKeyButtonProps = {
 };
 
 const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
-  const [, setContext] = useContext(Context);
+  const [{ sounds }, setContext] = useContext(Context);
   const [{ step, userInput, time }, setState] = useContext(CalculatorContext);
   const [, setHomeState] = useContext(HomeContext);
   return (
@@ -61,6 +61,8 @@ const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
                   time: prev.time === 'breakfast' ? 'allDay' : 'breakfast',
                   userInput: [],
                 }));
+                sounds?.instance?.stopAll();
+                sounds?.instance?.play('correct');
                 break;
 
               case 'enter':
@@ -69,6 +71,8 @@ const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
                     type: ActionType.Modal,
                     state: { enabled: true, body: MESSAGE_KEYBOARD_INPUT_MIN },
                   });
+                  sounds?.instance?.stopAll();
+                  sounds?.instance?.play('wrong');
                 } else {
                   setContext({
                     type: ActionType.UserResult,
@@ -78,11 +82,33 @@ const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
                     type: ActionType.LoadingProcess,
                     state: { enabled: true, body: '計算中' },
                   });
+                  sounds?.instance?.stopAll();
+                  sounds?.instance?.play('levelUp');
 
                   setTimeout(() => {
                     setHomeState((prev) => ({ ...prev, page: HomePageType.result }));
                   }, 1500);
                 }
+                break;
+
+              case 'script':
+                sounds?.instance?.stopAll();
+                sounds?.instance?.play('script');
+                break;
+
+              case 'hungry':
+                sounds?.instance?.stopAll();
+                sounds?.instance?.play('hungry');
+                break;
+
+              case 'bird':
+                sounds?.instance?.stopAll();
+                sounds?.instance?.play('bird');
+                break;
+
+              case 'mcd':
+                sounds?.instance?.stopAll();
+                sounds?.instance?.play('success');
                 break;
             }
           } else {
@@ -91,6 +117,8 @@ const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
                 type: ActionType.Modal,
                 state: { enabled: true, body: MESSAGE_KEYBOARD_INPUT_MAX },
               });
+              sounds?.instance?.stopAll();
+              sounds?.instance?.play('wrong');
               return;
             }
             setState((prev) => ({

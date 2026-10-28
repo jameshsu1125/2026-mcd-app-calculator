@@ -5,6 +5,8 @@ import Info from './info';
 import Keyboard from './keyboard';
 import Regular from './regular';
 import Skip from './skip';
+import { useContext } from 'react';
+import { Context } from '@/settings/constant';
 
 type TRegularProps = IReactProps & {
   id?: string;
@@ -16,13 +18,17 @@ type TRegularProps = IReactProps & {
 };
 
 const Button = ({ id, children, className, style, onClick, dataset, disabled }: TRegularProps) => {
+  const [{ sounds }] = useContext(Context);
   return (
     <button
       id={id}
       className={twMerge('cursor-pointer bg-transparent', className)}
       disabled={disabled}
       style={style}
-      onClick={onClick}
+      onClick={() => {
+        onClick?.();
+        sounds?.instance?.play('click');
+      }}
       data-dataset={dataset}
     >
       {children}
