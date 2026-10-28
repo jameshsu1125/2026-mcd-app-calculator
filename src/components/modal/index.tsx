@@ -5,6 +5,7 @@ import './index.less';
 import Click from 'lesca-click';
 import { ActionType } from '@/settings/type';
 import TweenerDivProvider from '../tweenerProvider';
+import { twMerge } from 'tailwind-merge';
 
 const Modal = memo(() => {
   const [{ modal }, setContext] = useContext(Context);
@@ -30,7 +31,7 @@ const Modal = memo(() => {
       />
       <div className='inner'>
         <TweenerDivProvider
-          className='dialog pointer-events-auto'
+          className={twMerge('dialog pointer-events-auto', 'py-24', modal?.className)}
           shouldFadeIn
           initialStyle={{ opacity: 0, y: 50 }}
           tweenTo={{ opacity: 1, y: 0 }}

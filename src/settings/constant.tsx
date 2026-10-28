@@ -11,6 +11,7 @@ import {
   TSoundsState,
   TUserResultState,
 } from './type';
+import HiddenDiscount from '@/components/hiddenDiscount';
 
 export const LoadingProcessState: TLoadingProcessState = {
   enabled: false,
@@ -19,11 +20,11 @@ export const LoadingProcessState: TLoadingProcessState = {
 };
 
 export const ModalState: TModalState = {
-  enabled: false,
+  enabled: true,
+  className: 'pb-5',
   body: (
     <>
-      親愛的麥粉 <br />
-      已達輸入上限啦😅
+      <HiddenDiscount />
     </>
   ),
 };

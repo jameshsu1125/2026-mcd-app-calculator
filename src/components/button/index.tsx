@@ -1,12 +1,14 @@
+import { Context } from '@/settings/constant';
 import { IReactProps } from '@/settings/type';
+import { useContext } from 'react';
 import { twMerge } from 'tailwind-merge';
+import Active from './active';
 import Close from './close';
+import Copy from './copy';
 import Info from './info';
 import Keyboard from './keyboard';
 import Regular from './regular';
 import Skip from './skip';
-import { useContext } from 'react';
-import { Context } from '@/settings/constant';
 
 type TRegularProps = IReactProps & {
   id?: string;
@@ -41,5 +43,7 @@ Button.Info = Info;
 Button.Keyboard = Keyboard;
 Button.Skip = Skip;
 Button.Close = Close;
+Button.Copy = Copy;
+Button.Active = Active;
 
 export default Button;

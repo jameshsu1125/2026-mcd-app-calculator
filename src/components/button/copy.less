@@ -1,0 +1,16 @@
+@import url('@/settings/global.css');
+
+button {
+  .copy {
+    @apply duration-150;
+    & > * {
+      transform: scaleY(1.2);
+    }
+  }
+
+  &:active {
+    .copy {
+      transform: scale(0.9);
+    }
+  }
+}

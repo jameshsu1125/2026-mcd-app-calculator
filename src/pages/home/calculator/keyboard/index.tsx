@@ -53,6 +53,7 @@ const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
                   ...prev,
                   userInput: prev.userInput.slice(0, -1),
                 }));
+
                 break;
 
               case 'switch':
@@ -107,8 +108,10 @@ const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
                 break;
 
               case 'mcd':
-                sounds?.instance?.stopAll();
-                sounds?.instance?.play('success');
+                setState((prev) => ({
+                  ...prev,
+                  hiddenDiscounts: [...prev.hiddenDiscounts, 'mcd'],
+                }));
                 break;
             }
           } else {
@@ -124,6 +127,11 @@ const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
             setState((prev) => ({
               ...prev,
               userInput: [...prev.userInput, { className, dataset }],
+            }));
+
+            setState((prev) => ({
+              ...prev,
+              hiddenDiscounts: [...prev.hiddenDiscounts, className],
             }));
           }
         }}

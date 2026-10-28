@@ -1,17 +1,18 @@
+import Blockquote from '@/components/blockquote';
+import Contain from '@/components/contain';
+import HiddenDiscount from '@/components/hiddenDiscount';
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
+import Click from 'lesca-click';
 import OnloadProvider from 'lesca-react-onload';
-import Contain from '@/components/contain';
 import { memo, useContext, useEffect, useState } from 'react';
+import Info from '../info';
+import Logo from '../logo';
 import { CalculatorContext, CalculatorState, CalculatorStepType } from './config';
 import './index.less';
-import Info from '../info';
 import Instructions from './instructions';
 import Keyboard from './keyboard';
-import Logo from '../logo';
 import Screen from './screen';
-import Blockquote from '@/components/blockquote';
-import Click from 'lesca-click';
 
 const Calculator = memo(() => {
   const [, setContext] = useContext(Context);
@@ -34,6 +35,30 @@ const Calculator = memo(() => {
       Click.setEnabled(true);
     };
   }, []);
+
+  useEffect(() => {
+    const discountsArrays = ['mcd', 'chicken', 'mcf', 'mcn', 'mfries'];
+    const getHiddenDiscounts = (ordered: boolean) => {
+      const hidden = state.hiddenDiscounts;
+      if (hidden.length !== discountsArrays.length) return false;
+      if (ordered) return hidden.every((item, i) => item === discountsArrays[i]);
+      const set = new Set(hidden);
+      return set.size === discountsArrays.length && discountsArrays.every((item) => set.has(item));
+    };
+    if (getHiddenDiscounts(false)) {
+      setContext({
+        type: ActionType.Modal,
+        state: {
+          enabled: true,
+          body: (
+            <>
+              <HiddenDiscount />
+            </>
+          ),
+        },
+      });
+    }
+  }, [state.hiddenDiscounts]);
 
   return (
     <CalculatorContext.Provider value={[state, setState]}>

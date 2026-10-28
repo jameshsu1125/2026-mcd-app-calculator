@@ -31,6 +31,7 @@ export type TCalculatorState = {
     className: (typeof Keyboards)['breakfast' | 'allDay'][number]['className'];
     dataset: { id: string; name: string };
   }[];
+  hiddenDiscounts: string[];
 };
 export type TCalculatorContext = [TCalculatorState, Dispatch<SetStateAction<TCalculatorState>>];
 
@@ -60,6 +61,7 @@ export const CalculatorState: TCalculatorState = {
   step: CalculatorStepType.unset,
   instructionState: { step: 0, enabled: getInstructionEnabled() },
   userInput: [],
+  hiddenDiscounts: [],
 };
 
 export const CalculatorContext = createContext<TCalculatorContext>([CalculatorState, () => {}]);

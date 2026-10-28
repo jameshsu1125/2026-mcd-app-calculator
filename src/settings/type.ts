@@ -41,6 +41,7 @@ export type TLoadingProcessState = {
 export type TModalState = {
   enabled?: boolean;
   body?: ReactNode;
+  className?: string;
 };
 
 export type TScrollState = {

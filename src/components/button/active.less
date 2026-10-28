@@ -1,0 +1,25 @@
+@import url('@/settings/global.css');
+
+button {
+  .active {
+    background-color: #db0007;
+    box-shadow:
+      inset 0px 7px 5px rgba(225, 44, 48, 0.9),
+      inset 0px -7px 6px rgba(178, 0, 6, 0.9);
+
+    padding-inline: 5%;
+    padding-block: 5%;
+
+    @apply inset-0 rounded-l-full rounded-r-full text-lg whitespace-nowrap text-white;
+  }
+
+  &:active {
+    .active {
+      background-color: #b40006;
+      box-shadow:
+        inset 0px 4px 5px rgba(225, 44, 48, 0.9),
+        inset 0px -4px 6px rgba(178, 0, 6, 0.9);
+      transform: translateY(2px);
+    }
+  }
+}
