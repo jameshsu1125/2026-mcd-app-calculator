@@ -3,6 +3,7 @@ import copy from 'copy-to-clipboard';
 import { memo } from 'react';
 import Button from '../button';
 import './index.less';
+import { trackCustomEvent } from '@/utils';
 
 const HIDDEN_DISCOUNT_AVAILABLE_AT = new Date('2026-11-17T23:59:59+08:00').getTime();
 
@@ -25,6 +26,7 @@ const HiddenDiscount = memo(() => (
           onClick={() => {
             copy('this is fake code').then(() => {
               alert('已複製到剪貼簿');
+              trackCustomEvent('複製到剪貼簿按鍵');
             });
           }}
         >
@@ -36,7 +38,10 @@ const HiddenDiscount = memo(() => (
       <Button
         className='w-7/12'
         onClick={() => {
-          window.open(MCD_GET_HIDDEN_DISCOUNT_URL, '_blank');
+          trackCustomEvent('前往APP領取按鍵');
+          setTimeout(() => {
+            window.open(MCD_GET_HIDDEN_DISCOUNT_URL, '_blank');
+          }, 300);
         }}
       >
         <Button.Active>前往APP領取</Button.Active>
