@@ -1,12 +1,43 @@
 import TweenerDivProvider from '@/components/tweenerProvider';
-import { memo, useContext } from 'react';
+import { memo, useContext, useMemo } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { ResultContext, ResultStepType } from '../config';
 import { Char } from './config';
 import './idles.less';
+import { Bezier } from 'lesca-use-tween';
+
+const Idle0 = memo(() => {
+  const [{ step }] = useContext(ResultContext);
+  return (
+    <>
+      <div className='body' />
+      <div className='left-hand' />
+      <div className='right-hand' />
+      <div className='left-eye' />
+      <div className='right-eye' />
+
+      <TweenerDivProvider
+        className='item'
+        initialStyle={{ opacity: 0, scale: 0, y: 200 }}
+        tweenTo={{ opacity: 1, y: 0, scale: 1 }}
+        shouldFadeIn={step === ResultStepType.fadeIn}
+        options={{ duration: 250, delay: 700, easing: Bezier.outBack }}
+      />
+    </>
+  );
+});
 
 const Idles = memo(({ idleType }: { idleType: 0 | 1 | 2 | -1 | 4 | 3 | 5 }) => {
   const [{ step }] = useContext(ResultContext);
+
+  const idleComponent = useMemo(() => {
+    switch (idleType) {
+      case 0:
+        return <Idle0 />;
+      default:
+        return null;
+    }
+  }, [idleType]);
 
   return (
     <div className={twMerge('idle', `idle-${idleType}`)}>
@@ -17,12 +48,7 @@ const Idles = memo(({ idleType }: { idleType: 0 | 1 | 2 | -1 | 4 | 3 | 5 }) => {
           shouldFadeIn={step === ResultStepType.fadeIn}
           options={Char[idleType].options}
         >
-          <div className='body' />
-          <div className='left-hand' />
-          <div className='right-hand' />
-          <div className='left-eye' />
-          <div className='right-eye' />
-          <div className='item' />
+          {idleComponent}
         </TweenerDivProvider>
       ) : (
         <div />
