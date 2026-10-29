@@ -36,13 +36,6 @@ const Calculator = memo(() => {
   }, [state.step, state.instructionState.enabled]);
 
   useEffect(() => {
-    Click.setEnabled(false);
-    return () => {
-      Click.setEnabled(true);
-    };
-  }, []);
-
-  useEffect(() => {
     const shouldDisplayHiddenDiscount = QueryString.get('hiddenDiscount') === '1';
     if (!isHiddenDiscountAvailable() && !shouldDisplayHiddenDiscount) return;
 
@@ -79,7 +72,7 @@ const Calculator = memo(() => {
         }}
       >
         <div className='Calculator'>
-          <Contain paddingBlock='5%' allowScroll>
+          <Contain paddingBlock='5%' className='gap-[5%]'>
             <Blockquote className='blockquote items-start justify-between'>
               <Info
                 shouldFadeIn={state.step === CalculatorStepType.keyboardDidFadeIn}

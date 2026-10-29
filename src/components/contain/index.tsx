@@ -1,6 +1,7 @@
 import { memo, useEffect, useRef, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import './index.less';
+import Click from 'lesca-click';
 
 type ContainProps = {
   children?: React.ReactNode;
@@ -31,6 +32,15 @@ const Contain = memo(
 
       return () => observer.disconnect();
     }, []);
+
+    useEffect(() => {
+      if (allowScroll) {
+        if (overflow) Click.setEnabled(false);
+        else Click.setEnabled(true);
+
+        return () => Click.setEnabled(true);
+      }
+    }, [overflow]);
 
     return (
       <div ref={innerRef} className={twMerge('Contain inner', overflow && 'scrollable', className)}>

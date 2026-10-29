@@ -3,6 +3,12 @@
 .Contain {
   @apply flex h-full w-full items-start justify-center overflow-y-hidden;
 
+  @media only screen and (max-width: 450px) {
+    & {
+      padding-inline: 5%;
+    }
+  }
+
   // 內容超過螢幕高度時才出現 Scroll（隱藏捲軸外觀）
   &.scrollable {
     scrollbar-width: none;

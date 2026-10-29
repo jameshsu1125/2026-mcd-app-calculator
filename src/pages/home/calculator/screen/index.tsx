@@ -42,7 +42,7 @@ const Screen = memo(() => {
   }, [userInput]);
 
   return (
-    <div className='blockquote min-h-24 flex-1 items-stretch justify-between'>
+    <div className='blockquote my-[5%] min-h-24 flex-1 items-stretch justify-between'>
       <TweenerDivProvider
         className='input text-black'
         initialStyle={{ opacity: 0, y: 100 }}
