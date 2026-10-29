@@ -47,7 +47,7 @@ const Calculator = memo(() => {
       const set = new Set(hidden);
       return set.size === discountsArrays.length && discountsArrays.every((item) => set.has(item));
     };
-    if (getHiddenDiscounts(false)) {
+    if (getHiddenDiscounts(true)) {
       setContext({
         type: ActionType.Modal,
         state: {

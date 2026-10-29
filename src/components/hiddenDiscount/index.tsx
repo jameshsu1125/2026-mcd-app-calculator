@@ -1,8 +1,8 @@
+import { MCD_GET_HIDDEN_DISCOUNT_URL } from '@/settings/config';
 import copy from 'copy-to-clipboard';
 import { memo } from 'react';
 import Button from '../button';
 import './index.less';
-import { MCD_APP_URL } from '@/settings/config';
 
 const HiddenDiscount = memo(() => {
   return (
@@ -33,7 +33,7 @@ const HiddenDiscount = memo(() => {
         <Button
           className='w-7/12'
           onClick={() => {
-            window.open(MCD_APP_URL, '_blank');
+            window.open(MCD_GET_HIDDEN_DISCOUNT_URL, '_blank');
           }}
         >
           <Button.Active>前往APP領取</Button.Active>
