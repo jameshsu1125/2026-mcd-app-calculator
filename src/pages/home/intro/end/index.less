@@ -31,7 +31,7 @@
         content: '';
         opacity: 0.5;
 
-        @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+        @apply block w-full bg-contain bg-center bg-no-repeat;
       }
 
       & > div {
@@ -40,7 +40,7 @@
         &::before {
           content: '';
 
-          @apply inline-block w-full bg-contain bg-center bg-no-repeat;
+          @apply block w-full bg-contain bg-center bg-no-repeat;
         }
       }
 
@@ -97,7 +97,7 @@
       }
 
       & > div:nth-child(5) {
-        top: 31.8%;
+        top: 34.2%;
         left: 67.1%;
         width: (unit(image-width(@img))) / 300 * 100%;
 

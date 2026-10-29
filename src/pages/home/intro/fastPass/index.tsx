@@ -3,7 +3,7 @@ import Frame from './frame';
 import './index.less';
 import UpperText from './upperText';
 import TweenerDivProvider from '@/components/tweenerProvider';
-import { IntroContext, IntroStepType } from '../config';
+import { INTRO_SPEED, IntroContext, IntroStepType } from '../config';
 import { Bezier } from 'lesca-use-tween';
 
 const FastPass = memo(() => {
@@ -17,7 +17,7 @@ const FastPass = memo(() => {
         tweenTo={{ scale: 30 }}
         shouldFadeIn={step === IntroStepType.fadeIn}
         options={{
-          duration: 18000,
+          duration: 18000 * INTRO_SPEED,
           easing: Bezier.inQuart,
           onEnd: () => {
             setState((prev) => ({

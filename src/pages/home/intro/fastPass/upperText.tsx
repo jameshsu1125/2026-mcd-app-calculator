@@ -1,7 +1,7 @@
 import TweenerDivProvider from '@/components/tweenerProvider';
 import { memo, useContext, useEffect, useRef } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { IntroContext, IntroStepType } from '../config';
+import { INTRO_SPEED, IntroContext, IntroStepType } from '../config';
 import './index.less';
 import { Bezier } from 'lesca-use-tween';
 
@@ -42,7 +42,7 @@ const UpperText = memo(() => {
       initialStyle={{ opacity: 0 }}
       tweenTo={{ opacity: 1 }}
       shouldFadeIn={step === IntroStepType.frameDidBlanking}
-      options={{ duration: 5000, easing: Bezier.outQuart, delay: 500 }}
+      options={{ duration: 5000 * INTRO_SPEED, easing: Bezier.outQuart, delay: 500 * INTRO_SPEED }}
 
       fadeOutStyle={{ opacity: 0 }}
       optionsFadeOut={{ duration: 10 }}
@@ -56,7 +56,11 @@ const UpperText = memo(() => {
           initialStyle={{ scale: 1 }}
           tweenTo={{ scale: 2 + Math.random() * 1.5 }}
           shouldFadeIn={step === IntroStepType.frameDidBlanking}
-          options={{ duration: 7000 + Math.random() * 1500, easing: Bezier.inQuart, delay: 2500 }}
+          options={{
+            duration: (7000 + Math.random() * 1500) * INTRO_SPEED,
+            easing: Bezier.inQuart,
+            delay: 2500 * INTRO_SPEED,
+          }}
         >
           <div />
         </TweenerDivProvider>

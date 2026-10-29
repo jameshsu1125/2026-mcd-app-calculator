@@ -1,7 +1,7 @@
 import TweenerDivProvider from '@/components/tweenerProvider';
 import { Bezier } from 'lesca-use-tween';
 import { memo, useContext, useRef, useState } from 'react';
-import { IntroContext, IntroStepType } from '../config';
+import { INTRO_SPEED, IntroContext, IntroStepType } from '../config';
 import './index.less';
 
 const Color = memo(() => {
@@ -12,7 +12,7 @@ const Color = memo(() => {
       className='absolute top-0 h-full w-full bg-black'
       initialStyle={{ backgroundColor: '#000' }}
       tweenTo={{ backgroundColor: '#ffbc0d' }}
-      options={{ duration: 11000, easing: Bezier.inCirc }}
+      options={{ duration: 11000 * INTRO_SPEED, easing: Bezier.inCirc }}
       shouldFadeIn={state.step === IntroStepType.fadeIn}
     />
   );
@@ -30,7 +30,7 @@ const Glow = memo(() => {
       initialStyle={{ opacity: 0, scale: 1, y: 0, x: 0 }}
       tweenTo={{ opacity: 1, scale: 2 }}
       options={{
-        duration: 15000,
+        duration: 15000 * INTRO_SPEED,
         easing: Bezier.inQuart,
         onStart: () => {
           timeRef.current = new Date().getTime();
@@ -38,7 +38,7 @@ const Glow = memo(() => {
         onUpdate: () => {
           const now = new Date().getTime();
           const delta = now - timeRef.current;
-          if (delta < 11000) return;
+          if (delta < 11000 * INTRO_SPEED) return;
           setShouldFadeOut(true);
         },
         onEnd: () => {
@@ -48,7 +48,7 @@ const Glow = memo(() => {
       shouldFadeIn={state.step === IntroStepType.fadeIn}
       fadeOutStyle={{ opacity: 1, scale: 2.5, y: -200, x: 100 }}
       optionsFadeOut={{
-        duration: 800,
+        duration: 800 * INTRO_SPEED,
         easing: Bezier.inOutQuart,
         onStart: () => {
           setState((prev) => ({ ...prev, shouldEndFadeIn: true }));
@@ -58,7 +58,7 @@ const Glow = memo(() => {
       tweenQueue={[{ opacity: 0, y: -window.innerHeight }]}
       shouldUseTweenQueue={state.step === IntroStepType.patternDidFadeIn}
       tweenQueueOptions={{
-        duration: 300,
+        duration: 300 * INTRO_SPEED,
         easing: Bezier.inBack,
       }}
     />

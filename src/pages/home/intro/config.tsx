@@ -27,3 +27,5 @@ export const IntroState = {
 export const IntroContext = createContext<IntroContext>([IntroState, () => {}]);
 
 export const END_STAY_DURATION = 1000;
+
+export const INTRO_SPEED = 0.2;
