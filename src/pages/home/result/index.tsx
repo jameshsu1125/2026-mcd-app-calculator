@@ -1,5 +1,5 @@
 import { Context } from '@/settings/constant';
-import { ActionType } from '@/settings/type';
+import { ActionType, LoadingProcessVersion } from '@/settings/type';
 import OnloadProvider from 'lesca-react-onload';
 import { memo, useContext, useEffect, useRef, useState } from 'react';
 import { ResultContext, ResultState, ResultStepType } from './config';
@@ -16,7 +16,10 @@ const Result = memo(() => {
   const [state, setState] = useState(ResultState);
 
   useEffect(() => {
-    setContext({ type: ActionType.Scroll, state: { enabled: true } });
+    setContext({
+      type: ActionType.Scroll,
+      state: { enabled: true, version: LoadingProcessVersion.Legacy, body: 'Loading...' },
+    });
     trackPageView('/result', '結果頁');
   }, []);
 

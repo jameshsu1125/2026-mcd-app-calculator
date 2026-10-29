@@ -2,7 +2,7 @@ import Blockquote from '@/components/blockquote';
 import Contain from '@/components/contain';
 import HiddenDiscount, { isHiddenDiscountAvailable } from '@/components/hiddenDiscount';
 import { Context } from '@/settings/constant';
-import { ActionType } from '@/settings/type';
+import { ActionType, LoadingProcessVersion } from '@/settings/type';
 import Click from 'lesca-click';
 import OnloadProvider from 'lesca-react-onload';
 import { memo, useContext, useEffect, useState } from 'react';
@@ -21,7 +21,10 @@ const Calculator = memo(() => {
   const [state, setState] = useState(CalculatorState);
 
   useEffect(() => {
-    setContext({ type: ActionType.LoadingProcess, state: { enabled: true } });
+    setContext({
+      type: ActionType.LoadingProcess,
+      state: { enabled: true, version: LoadingProcessVersion.Legacy, body: 'Loading...' },
+    });
     trackPageView('/calculator', '計算機頁');
   }, []);
 

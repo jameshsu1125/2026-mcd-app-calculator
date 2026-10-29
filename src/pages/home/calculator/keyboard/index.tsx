@@ -2,7 +2,7 @@ import Button from '@/components/button';
 import TweenerDivProvider from '@/components/tweenerProvider';
 import { MESSAGE_KEYBOARD_INPUT_MAX, MESSAGE_KEYBOARD_INPUT_MIN } from '@/settings/config';
 import { Context } from '@/settings/constant';
-import { ActionType } from '@/settings/type';
+import { ActionType, LoadingProcessVersion } from '@/settings/type';
 import { memo, useContext, useMemo } from 'react';
 import { HomeContext, HomePageType } from '../../config';
 import {
@@ -87,7 +87,7 @@ const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
                   });
                   setContext({
                     type: ActionType.LoadingProcess,
-                    state: { enabled: true, body: '計算中' },
+                    state: { enabled: true, body: '計算中', version: LoadingProcessVersion.Mcd },
                   });
                   sounds?.instance?.stopAll();
                   sounds?.instance?.play('levelUp');
