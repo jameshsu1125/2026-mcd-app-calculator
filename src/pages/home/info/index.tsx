@@ -5,6 +5,7 @@ import { ActionType } from '@/settings/type';
 import { Bezier } from 'lesca-use-tween';
 import { memo, useContext } from 'react';
 import { INFO_MODAL_BODY } from './config';
+import { trackCustomEvent } from '@/utils';
 
 type InfoProps = {
   shouldFadeIn: boolean;
@@ -34,6 +35,7 @@ const Info = memo(({ shouldFadeIn, onEnd, isReverse }: InfoProps) => {
             type: ActionType.Modal,
             state: { enabled: true, body: INFO_MODAL_BODY, className: '' },
           });
+          trackCustomEvent('保護文字按鍵');
         }}
       >
         <Button.Info isReverse={isReverse} />

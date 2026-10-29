@@ -13,6 +13,7 @@ import './index.less';
 import Instructions from './instructions';
 import Keyboard from './keyboard';
 import Screen from './screen';
+import { trackPageView } from '@/utils';
 
 const Calculator = memo(() => {
   const [, setContext] = useContext(Context);
@@ -20,6 +21,7 @@ const Calculator = memo(() => {
 
   useEffect(() => {
     setContext({ type: ActionType.LoadingProcess, state: { enabled: true } });
+    trackPageView('/calculator', '計算機頁');
   }, []);
 
   // 教學已被略過時，直接進入計算機

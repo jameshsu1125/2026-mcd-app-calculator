@@ -13,6 +13,7 @@ import {
   MAX_INPUT_LENGTH,
   MIN_INPUT_LENGTH,
 } from '../config';
+import { trackCustomEvent } from '@/utils';
 
 type TKeyButtonProps = {
   className: (typeof Keyboards)['breakfast' | 'allDay'][number]['className'];
@@ -46,6 +47,7 @@ const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
         disabled={userInput.some((input) => input.className === className)}
         className='relative block w-full pb-[100%]'
         onClick={() => {
+          trackCustomEvent(`計算機按鍵-${dataset.name}`, dataset);
           if (Object.keys(InputOtherActionType).includes(className)) {
             switch (className) {
               case 'del':

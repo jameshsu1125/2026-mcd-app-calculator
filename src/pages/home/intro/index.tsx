@@ -7,6 +7,7 @@ import FastPass from './fastPass';
 import './index.less';
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
+import { trackPageView } from '@/utils';
 
 const Intro = memo(() => {
   const [, setContext] = useContext(Context);
@@ -14,6 +15,7 @@ const Intro = memo(() => {
 
   useEffect(() => {
     setContext({ type: ActionType.LoadingProcess, state: { enabled: true, body: 'Loading' } });
+    trackPageView('/intro', '開場動畫頁');
   }, []);
 
   return (

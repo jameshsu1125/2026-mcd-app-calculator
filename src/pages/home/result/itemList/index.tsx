@@ -5,6 +5,7 @@ import { ActionType } from '@/settings/type';
 import { memo, useCallback, useContext, useMemo } from 'react';
 import { MIN_INPUT_LENGTH } from '../../calculator/config';
 import './index.less';
+import { trackCustomEvent } from '@/utils';
 
 const ItemList = memo(() => {
   const [{ userResult }, setContext] = useContext(Context);
@@ -22,6 +23,7 @@ const ItemList = memo(() => {
       if (removeItem) {
         if (removeItem?.length >= MIN_INPUT_LENGTH) {
           setContext({ type: ActionType.UserResult, state: { input: removeItem } });
+          trackCustomEvent(`刪除項目badge-${item.name}`, item);
         }
       }
     },

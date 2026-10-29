@@ -1,7 +1,7 @@
 import Button from '@/components/button';
 import useCaptureImage from '@/hooks/useCaptureImage';
 import { MCD_APP_URL } from '@/settings/config';
-import { shareURL, shareWithoutImage } from '@/utils';
+import { shareURL, shareWithoutImage, trackCustomEvent } from '@/utils';
 import { memo, useContext } from 'react';
 import { ResultContext } from '../../config';
 import './index.less';
@@ -21,15 +21,18 @@ const Group = memo(() => {
     switch (type) {
       case 'userCancel':
         body = '使用者取消分享，請重新嘗試。';
+        trackCustomEvent('使用者取消分享');
         break;
 
       case 'error':
         body = '瀏覽器不支援或是發生錯誤，請查明後再試。';
+        trackCustomEvent('分享錯誤');
         break;
 
       default:
       case 'success':
         body = '分享成功！';
+        trackCustomEvent('分享成功');
     }
 
     setContext({ type: ActionType.Modal, state: { enabled: true, body, className: '' } });
@@ -38,7 +41,15 @@ const Group = memo(() => {
   return (
     <div className='Group'>
       <div className='flex w-full flex-col gap-8'>
-        <Button className='w-full' onClick={() => window.open(MCD_APP_URL, '_blank')}>
+        <Button
+          className='w-full'
+          onClick={() => {
+            trackCustomEvent('前往 App 找更多攻略按鍵');
+            setTimeout(() => {
+              window.open(MCD_APP_URL, '_blank');
+            }, 300);
+          }}
+        >
           <Button.Regular>
             <div className='open-app' />
           </Button.Regular>
@@ -52,6 +63,7 @@ const Group = memo(() => {
                 if (!blob) shareWithoutImage({ onEnd });
                 else shareURL({ blob, onEnd });
               });
+              trackCustomEvent('下載並分享攻略按鍵');
             }
           }}
         >
@@ -68,6 +80,7 @@ const Group = memo(() => {
             });
             setContext({ type: ActionType.Scroll, state: { enabled: false } });
             setHomeState({ step: HomeStepType.unset, page: HomePageType.calculator });
+            trackCustomEvent('再玩一次');
           }}
         >
           <Button.Regular>

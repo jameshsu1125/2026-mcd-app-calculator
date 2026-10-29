@@ -8,6 +8,7 @@ import './index.less';
 import ItemList from './itemList';
 import Strategy from './strategy';
 import Group from './strategy/group';
+import { trackPageView } from '@/utils';
 
 const Result = memo(() => {
   const targetRef = useRef<HTMLDivElement>(null);
@@ -16,6 +17,7 @@ const Result = memo(() => {
 
   useEffect(() => {
     setContext({ type: ActionType.Scroll, state: { enabled: true } });
+    trackPageView('/result', '結果頁');
   }, []);
 
   useEffect(() => {
