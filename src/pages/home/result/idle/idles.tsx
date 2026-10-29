@@ -7,6 +7,7 @@ import { Char } from './config';
 import './idles.less';
 
 const Idle0 = memo(() => {
+  const [{ step }] = useContext(ResultContext);
   return (
     <>
       <div className='body' />
@@ -14,6 +15,13 @@ const Idle0 = memo(() => {
       <div className='right-hand' />
       <div className='left-eye' />
       <div className='right-eye' />
+      <TweenerDivProvider
+        className='item'
+        initialStyle={{ opacity: 0, scale: 0, y: 200 }}
+        tweenTo={{ opacity: 1, y: 0, scale: 1 }}
+        shouldFadeIn={step === ResultStepType.fadeIn}
+        options={{ duration: 250, delay: 700, easing: Bezier.outBack }}
+      />
     </>
   );
 });
@@ -61,19 +69,6 @@ const Effect1 = memo(() => {
   );
 });
 
-const Effect0 = memo(() => {
-  const [{ step }] = useContext(ResultContext);
-  return (
-    <TweenerDivProvider
-      className='item'
-      initialStyle={{ opacity: 0, scale: 0, y: 200 }}
-      tweenTo={{ opacity: 1, y: 0, scale: 1 }}
-      shouldFadeIn={step === ResultStepType.fadeIn}
-      options={{ duration: 250, delay: 700, easing: Bezier.outBack }}
-    />
-  );
-});
-
 const Idles = memo(({ idleType }: { idleType: 0 | 1 | 2 | -1 | 4 | 3 | 5 }) => {
   const [{ step }] = useContext(ResultContext);
 
@@ -90,8 +85,6 @@ const Idles = memo(({ idleType }: { idleType: 0 | 1 | 2 | -1 | 4 | 3 | 5 }) => {
 
   const Effect = useMemo(() => {
     switch (idleType) {
-      case 0:
-        return <Effect0 />;
       case 1:
         return <Effect1 />;
       default:
