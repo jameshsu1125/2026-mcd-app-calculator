@@ -1,3 +1,4 @@
+import QueryString from 'lesca-url-parameters';
 import { createContext, Dispatch, SetStateAction } from 'react';
 
 type TimePeriod = 'breakfast' | 'allDay';
@@ -37,9 +38,12 @@ export type TCalculatorContext = [TCalculatorState, Dispatch<SetStateAction<TCal
 
 // 看過教學後，隱藏教學的時間（毫秒）
 export const INSTRUCTION_HIDE_DURATION = 7 * 24 * 60 * 60 * 1000;
+export const ALWAYS_SHOW_INSTRUCTION = QueryString.get('instruction') === '1';
 const INSTRUCTION_STORAGE_KEY = 'mcd-calculator-instruction-seen-at';
 
 export const getInstructionEnabled = () => {
+  if (ALWAYS_SHOW_INSTRUCTION) return true;
+
   try {
     const seenAt = Number(localStorage.getItem(INSTRUCTION_STORAGE_KEY));
     return !(seenAt && Date.now() - seenAt < INSTRUCTION_HIDE_DURATION);
