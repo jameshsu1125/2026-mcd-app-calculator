@@ -10,6 +10,8 @@ import Logo from '../../logo';
 import { Char, Effects, Items } from './config';
 import './index.less';
 import { ResultContext, ResultStepType } from '../config';
+import Idles from './idles';
+import { TIdleType } from '@/settings/type';
 
 const CATEGORY_TYPE_TO_CLASS = {
   肉類: 'meat',
@@ -75,10 +77,10 @@ const Idle = memo(() => {
   const [{ step }] = useContext(ResultContext);
   const view = useResult();
 
-  const IdleType = useMemo(() => {
+  const idleType = useMemo(() => {
     if (!view) return -1;
 
-    // return 5;
+    return 0;
 
     if (view.summary.savings <= MINIMAL_SAVING_AMOUNT) return 4;
     if (view.summary.savings >= MAXIMAL_SAVING_AMOUNT) return 3;
@@ -112,7 +114,7 @@ const Idle = memo(() => {
             <div className='relative flex w-full flex-col items-center justify-center gap-2 px-5'>
               <Blockquote className='justify-center'>
                 <TweenerDivProvider
-                  className={twMerge('headline', `headline-${IdleType}`)}
+                  className={twMerge('headline', `headline-${idleType}`)}
                   initialStyle={{ opacity: 0, y: 50, scaleX: 0.5, scaleY: 1.5 }}
                   tweenTo={{ opacity: 1, y: 0, scaleX: 1, scaleY: 1 }}
                   shouldFadeIn={step === ResultStepType.fadeIn}
@@ -121,28 +123,15 @@ const Idle = memo(() => {
               </Blockquote>
               <Blockquote className='justify-center'>
                 <TweenerDivProvider
-                  className={twMerge('subline', `subline-${IdleType}`)}
+                  className={twMerge('subline', `subline-${idleType}`)}
                   initialStyle={{ opacity: 0, y: 50, scaleX: 0.5, scaleY: 1.5 }}
                   tweenTo={{ opacity: 1, y: 0, scaleX: 1, scaleY: 1 }}
                   shouldFadeIn={step === ResultStepType.fadeIn}
                   options={{ duration: 250, delay: 300, easing: Bezier.outBack }}
                 />
               </Blockquote>
-              <Blockquote className='justify-center pt-8'>
-                <div className={twMerge('idle', `idle-${IdleType}`)}>
-                  {IdleType >= 0 ? (
-                    <TweenerDivProvider
-                      initialStyle={Char[IdleType].initialStyle}
-                      tweenTo={Char[IdleType].tweenTo}
-                      shouldFadeIn={step === ResultStepType.fadeIn}
-                      options={Char[IdleType].options}
-                    />
-                  ) : (
-                    <div />
-                  )}
-                  <Item index={IdleType} />
-                  <Effect index={IdleType} />
-                </div>
+              <Blockquote className='justify-center pt-0'>
+                <Idles idleType={idleType} />
               </Blockquote>
               <TweenerDivProvider
                 className='fast-pass'

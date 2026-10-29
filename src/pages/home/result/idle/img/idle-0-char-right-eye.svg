@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30.1" height="18.9" viewBox="0 0 30.1 18.9">
+<defs>
+	<clipPath id="reye-clip">
+		<rect x="10.3" y="-3.1" transform="matrix(0.2665 -0.9638 0.9638 0.2665 2.1585 22.682)" width="11.4" height="26.1"/>
+	</clipPath>
+</defs>
+<rect fill="#FFFFFF" x="10.3" y="-3.1" transform="matrix(0.2665 -0.9638 0.9638 0.2665 2.1585 22.682)" width="11.4" height="26.1"/>
+<g clip-path="url(#reye-clip)">
+	<path d="M13.7,9.2c-1.2,3.7-5.2,5.7-8.9,4.5c-3.7-1.2-5.7-5.2-4.5-8.9c1.2-3.7,5.2-5.7,8.9-4.5C12.9,1.5,14.9,5.5,13.7,9.2">
+		<animateTransform attributeName="transform" type="translate" dur="4s" repeatCount="indefinite"
+			values="0 0;0 0;4 2;4 2;0 0;0 0" keyTimes="0;0.3;0.42;0.72;0.84;1"
+			calcMode="spline" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1"/>
+	</path>
+</g>
+</svg>
