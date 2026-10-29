@@ -18,6 +18,19 @@ const Instructions = memo(() => {
     }
   }, [instructionState]);
 
+  // 每次 instructionState.step 改變（含點擊）都會重新計時 2 秒
+  useEffect(() => {
+    if (step !== CalculatorStepType.infoDidFadeIn) return undefined;
+    if (instructionState.step < 1 || instructionState.step > 5) return undefined;
+    const timer = setTimeout(() => {
+      setState((prev) => ({
+        ...prev,
+        instructionState: { ...prev.instructionState, step: prev.instructionState.step + 1 },
+      }));
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [step, instructionState.step]);
+
   useEffect(() => {
     Click.add(`#${id}`, () => {
       setState((prev) => ({
