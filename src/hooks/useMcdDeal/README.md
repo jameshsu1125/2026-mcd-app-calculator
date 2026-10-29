@@ -155,7 +155,7 @@ const result = solveMcdDeal('regular', ['beef_burger', 'fries', 'soda'], 'max_sa
 | | `filet` | 麥香魚 | 52 | 92 |
 | | `hashbrown` | 薯餅 | 37 | 37 |
 | 第 3 列 | `soda` | 汽水 | 33 | 38 |
-| | `mccafe` | McCafe | 50 | 87 |
+| | `mccafe` | McCafé | 50 | 87 |
 | | `tea` | 茶飲 | 33 | 68 |
 | | `corn_soup` | 玉米湯 | 48 | 58 |
 | 第 4 列 | （切換時段） | | | |
@@ -176,7 +176,7 @@ const result = solveMcdDeal('regular', ['beef_burger', 'fries', 'soda'], 'max_sa
 | | `fries` | 薯條 | 40 | 66 |
 | | `apple_pie` | 蘋果派 | 40 | 40 |
 | 第 3 列 | `soda` | 汽水 | 33 | 38 |
-| | `mccafe` | McCafe | 50 | 87 |
+| | `mccafe` | McCafé | 50 | 87 |
 | | `tea` | 茶飲 | 33 | 68 |
 | | `corn_soup` | 玉米湯 | 48 | 58 |
 | 第 4 列 | （切換時段） | | | |
@@ -205,7 +205,7 @@ const result = solveMcdDeal('regular', ['beef_burger', 'fries', 'soda'], 'max_sa
 | 麥克鷄塊、麥脆鷄腿、勁辣香鷄翅 | `['炸物', '肉類']` |
 | 薯餅、薯條 | `['炸物']` |
 | 鬆餅系列、焙果系列、汽水、茶飲、玉米湯、蛋捲冰淇淋、冰炫風、蘋果派 | `['湯／甜點／飲料']` |
-| McCafe | `['咖啡／茶']` |
+| McCafé | `['咖啡／茶']` |
 
 `d.buttons` 的每個按鍵、`deal.products` 的每份商品都有 `categories` 陣列，順序照客戶圖上由上而下。只有沒有按鍵的四季沙拉是 `['none']`。
 
@@ -320,7 +320,7 @@ interface McdResult {
 ### 6.1 按下的按鍵和 `deals[].covers` 的關係
 
 - 每個按下的按鍵一定會出現在某張券的 `covers`，或者出現在 `uncovered`。
-- 一張券的 `covers` 可以**包含使用者沒按的按鍵**。例如「買汽水送McCafe」會蓋到 `soda` 和 `mccafe`，就算使用者沒按 McCafe，系統也可能選這張券，因為它的 McCafe 是送的。
+- 一張券的 `covers` 可以**包含使用者沒按的按鍵**。例如「買汽水送McCafé」會蓋到 `soda` 和 `mccafe`，就算使用者沒按 McCafé，系統也可能選這張券，因為它的 McCafé 是送的。
 
 ---
 
@@ -377,7 +377,7 @@ interface McdDealProduct {
 |---|---|
 | 買超值全餐送中薯（A經典配餐＋汽水），主餐牛肉類漢堡 | 主餐 `beef_burger`、配餐 `fries`、飲料 `soda`、贈品 `fries` |
 | 單點勁辣香鷄翅(一份兩塊)買一送一 | 買 `spicy_wings`、送 `spicy_wings` |
-| 買汽水送McCafe | A區 `soda`、B區（送） `mccafe` |
+| 買汽水送McCafé | A區 `soda`、B區（送） `mccafe` |
 
 | `source` | `role` 依序是 |
 |---|---|
@@ -478,7 +478,7 @@ d.result
     },
     {
       "id": "sweet-09",
-      "title": "買汽水送McCafe",
+      "title": "買汽水送McCafé",
       "source": "sweetheart",
       "covers": ["soda", "mccafe"],
       "priceMin": 38,
@@ -495,7 +495,7 @@ d.result
     },
     {
       "id": "sweet-09",
-      "title": "買汽水送McCafe",
+      "title": "買汽水送McCafé",
       "source": "sweetheart",
       "covers": ["soda", "mccafe"],
       "priceMin": 38,
@@ -524,7 +524,7 @@ d.result
 從這個例子可以看到：
 
 - `sweet-09` 出現**兩次**（甜心卡可以重複用），`savingsFrom` 150 ＝ 50 ＋ 50 ＋ 50。
-- 使用者沒按 McCafe，但結果裡有 McCafe，因為「買汽水送McCafe」送的就是它。
+- 使用者沒按 McCafé，但結果裡有 McCafé，因為「買汽水送McCafé」送的就是它。
 - 「省最多」會為了衝省額多疊券：這裡用了 3 張券、付 218 元，拿到 8 樣。
 
 ### 9.2 早餐：滿福堡＋麥香鷄＋鬆餅＋焙果，排序「省最多」（有按鍵沒券可用）

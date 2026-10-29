@@ -3,8 +3,9 @@ import Contain from '@/components/contain';
 import HiddenDiscount, { isHiddenDiscountAvailable } from '@/components/hiddenDiscount';
 import { Context } from '@/settings/constant';
 import { ActionType, LoadingProcessVersion } from '@/settings/type';
-import Click from 'lesca-click';
+import { trackPageView } from '@/utils';
 import OnloadProvider from 'lesca-react-onload';
+import QueryString from 'lesca-url-parameters';
 import { memo, useContext, useEffect, useState } from 'react';
 import Info from '../info';
 import Logo from '../logo';
@@ -13,8 +14,6 @@ import './index.less';
 import Instructions from './instructions';
 import Keyboard from './keyboard';
 import Screen from './screen';
-import { trackPageView } from '@/utils';
-import QueryString from 'lesca-url-parameters';
 
 const Calculator = memo(() => {
   const [, setContext] = useContext(Context);

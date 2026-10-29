@@ -141,7 +141,7 @@ export const Keyboards = {
       className: 'msoda',
     },
     {
-      name: 'McCafe',
+      name: 'McCafé',
       id: 'mccafe',
       className: 'mccafe',
     },
@@ -243,7 +243,7 @@ export const Keyboards = {
       className: 'msoda',
     },
     {
-      name: 'McCafe',
+      name: 'McCafé',
       id: 'mccafe',
       className: 'mccafe',
     },
