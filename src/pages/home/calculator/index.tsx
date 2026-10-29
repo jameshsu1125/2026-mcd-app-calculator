@@ -14,6 +14,7 @@ import Instructions from './instructions';
 import Keyboard from './keyboard';
 import Screen from './screen';
 import { trackPageView } from '@/utils';
+import QueryString from 'lesca-url-parameters';
 
 const Calculator = memo(() => {
   const [, setContext] = useContext(Context);
@@ -39,7 +40,8 @@ const Calculator = memo(() => {
   }, []);
 
   useEffect(() => {
-    if (!isHiddenDiscountAvailable()) return;
+    const shouldDisplayHiddenDiscount = QueryString.get('hiddenDiscount') === '1';
+    if (!isHiddenDiscountAvailable() && !shouldDisplayHiddenDiscount) return;
 
     const discountsArrays = ['mcd', 'chicken', 'mcf', 'mcn', 'mfries'];
     const getHiddenDiscounts = (ordered: boolean) => {
