@@ -137,4 +137,184 @@
       }
     }
   }
+
+  .idle-1 {
+    @img: './img/idle1/all.png';
+    @apply mt-10 w-11/12;
+
+    &::before {
+      padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+      // background-image: url(@img);
+    }
+
+    & > div:nth-child(1) {
+      top: 0%;
+      left: 0%;
+      width: (unit(image-width(@img2))) / (unit(image-width(@img))) * 100%;
+
+      @img2: './img/idle1/char.png';
+      @apply absolute origin-bottom;
+
+      &::before {
+        padding-bottom: (unit(image-height(@img2) / unit(image-width(@img2))) * 100%);
+        // background-image: url(@img2);
+        content: '';
+
+        @apply block w-full bg-contain bg-center bg-no-repeat;
+      }
+
+      .body {
+        top: 14.809%;
+        left: 15.109%;
+        width: 83.499%;
+
+        @img: './img/idle1/body.png';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .left-hand {
+        top: 51.581%;
+        left: 0%;
+        width: 37.177%;
+
+        @img: './img/idle1/left-hand.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .right-hand {
+        top: 31.78%;
+        right: 0.199%;
+        width: 29.026%;
+
+        @img: './img/idle1/right-hand.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .left-eye {
+        top: 30.283%;
+        left: 39.364%;
+        width: 5.169%;
+
+        @img: './img/idle1/left-eye.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .right-eye {
+        top: 30.283%;
+        left: 55.666%;
+        width: 5.169%;
+
+        @img: './img/idle1/right-eye.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .mouse {
+        top: 36.273%;
+        left: 45.726%;
+        width: 8.151%;
+
+        @img: './img/idle1/mouse.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .effect-0 {
+        top: 0%;
+        left: 20.08%;
+        width: 8.151%;
+
+        @img: './img/idle1/effect-0.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply animate-blank-5s block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .effect-1 {
+        top: 8.985%;
+        left: 78.926%;
+        width: 6.561%;
+
+        @img: './img/idle1/effect-1.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply animate-blank-5s block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .item {
+        top: 18.469%;
+        left: 99.602%;
+        width: 19.881%;
+
+        @img: './img/idle1/item.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply animate-swing-r8 block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+    }
+  }
 }
