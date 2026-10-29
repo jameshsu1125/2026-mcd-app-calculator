@@ -78,7 +78,7 @@ const Instructions = memo(() => {
       />
       <div className='pointer-events-none absolute h-full w-full'>
         <Focus target='.Calculator .contain .switch' number={1} text='切換早餐時段／午晚餐時段' />
-        <Focus target='.Calculator .contain .msoda' number={2} text='選擇2-6個想要的美味' />
+        <Focus target='.Calculator .contain .mcn' number={2} text='選擇2-6個想要的美味' />
         <Focus target='.Calculator .contain .del' number={3} text='改變心意，可刪除' />
         <Focus
           target='.Calculator .contain .enter'
