@@ -1,8 +1,8 @@
-<!-- Generator: Adobe Illustrator 25.0.0, SVG Export Plug-In  -->
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="13.8px"
-	 height="4.2px" viewBox="0 0 13.8 4.2" style="overflow:visible;enable-background:new 0 0 13.8 4.2;" xml:space="preserve">
-<defs>
-</defs>
-<path d="M8.4,4.2c-3,0-5.8-0.7-7.4-1.3C0.2,2.6-0.2,1.8,0.1,1C0.4,0.2,1.2-0.2,2,0.1c1.9,0.7,6.3,1.7,9.8,0.6c0.8-0.2,1.6,0.2,1.9,1
-	c0.2,0.8-0.2,1.6-1,1.9C11.3,4,9.8,4.2,8.4,4.2z"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="13.8" height="4.2" viewBox="0 0 13.8 4.2">
+<!-- 以嘴巴中心 (6.9,2.1) 左右輕轉 ±2.5°，角度再大嘴角會被 viewBox 裁掉 -->
+<path d="M8.4,4.2c-3,0-5.8-0.7-7.4-1.3C0.2,2.6-0.2,1.8,0.1,1C0.4,0.2,1.2-0.2,2,0.1c1.9,0.7,6.3,1.7,9.8,0.6c0.8-0.2,1.6,0.2,1.9,1c0.2,0.8-0.2,1.6-1,1.9C11.3,4,9.8,4.2,8.4,4.2z">
+	<animateTransform attributeName="transform" type="rotate" dur="4s" repeatCount="indefinite"
+		values="0 6.9 2.1;0 6.9 2.1;-2.5 6.9 2.1;2.5 6.9 2.1;0 6.9 2.1;0 6.9 2.1" keyTimes="0;0.3;0.4;0.55;0.65;1"
+		calcMode="spline" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1"/>
+</path>
 </svg>
