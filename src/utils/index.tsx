@@ -13,8 +13,11 @@ declare const gtag: (...args: any[]) => void;
 declare const fbq: (...args: any[]) => void;
 
 const shareDataWithoutImage = {
-  title: `這是一段 title 的文字`,
-  text: `這是一段 demo 的文字`,
+  title: import.meta.env.VITE_TITLE,
+  text: `快來試試，你是什麼類型的攻略達人？
+https://mcdtw.com/6/10/181
+麥當勞APP週年慶優惠送不停
+攻略達人，快到麥當勞APP集合啦🫡`,
   url: `${window.location.origin}${window.location.pathname}`,
 };
 

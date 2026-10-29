@@ -24,4 +24,5 @@ export const MESSAGE_KEYBOARD_INPUT_MIN = (
 export const MINIMAL_SAVING_AMOUNT = 130;
 export const MAXIMAL_SAVING_AMOUNT = 250;
 
-export const MCD_APP_URL = 'https://www.mcdonalds.com';
+export const MCD_APP_URL = 'https://links.mcdonaldsapps.com/uY_2KR';
+export const MCD_GET_HIDDEN_DISCOUNT_URL = 'https://links.mcdonaldsapps.com/VC4q-';
