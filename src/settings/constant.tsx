@@ -5,6 +5,7 @@ import {
   IAction,
   IState,
   LoadingProcessType,
+  LoadingProcessVersion,
   TContext,
   TLoadingProcessState,
   TModalState,
@@ -15,6 +16,7 @@ import HiddenDiscount from '@/components/hiddenDiscount';
 
 export const LoadingProcessState: TLoadingProcessState = {
   enabled: false,
+  version: LoadingProcessVersion.Legacy,
   type: LoadingProcessType.BounceSmooth,
   body: 'LOADING',
 };

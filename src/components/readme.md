@@ -26,7 +26,7 @@
 #### Usage
 
 ```JSX
-import { ActionType } from '@/settings/type';
+import { ActionType, LoadingProcessType, LoadingProcessVersion } from '@/settings/type';
 import { Context} from '@/settings/constant';
 
 const Pages = () => {
@@ -36,7 +36,11 @@ const Pages = () => {
       onClick={() => {
         setContext({ 
           type: ActionType.LoadingProcess, 
-          state: { enabled: true } 
+          state: {
+            enabled: true,
+            version: LoadingProcessVersion.Legacy,
+            type: LoadingProcessType.BounceSmooth,
+          }
         });
       }}
     >
@@ -51,8 +55,12 @@ const Pages = () => {
 | Properties            |         description         |  default |
 | :-------------------- | :-------------------------: | -------: |
 | **enabled**:_boolean_ |        append to DOM        |    false |
-| **type**:_string_     |     loading icon style      | 'spokes' |
-| **body**:_component_  | description text under icon |       '' |
+| **version**:_string_  |       loading design        |   'mcd' |
+| **type**:_string_     | legacy loading icon style   | 'bounceSmooth' |
+| **body**:_string_     | description text under icon | 'LOADING' |
+
+Set `version` to `LoadingProcessVersion.Legacy` to use the previous CSS-mask loading design.
+The default `LoadingProcessVersion.Mcd` uses the McDonald's animation.
 
 ### Container
 

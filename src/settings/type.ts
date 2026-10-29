@@ -22,6 +22,11 @@ export enum LoadingProcessType {
   BounceSmooth = 'bounceSmooth',
 }
 
+export enum LoadingProcessVersion {
+  Legacy = 'legacy',
+  Mcd = 'mcd',
+}
+
 export enum TransitionType {
   Unset = 0,
   FadeIn = 1,
@@ -34,6 +39,7 @@ export enum TransitionType {
 
 export type TLoadingProcessState = {
   enabled?: boolean;
+  version?: LoadingProcessVersion;
   type?: LoadingProcessType;
   body?: string;
 };
