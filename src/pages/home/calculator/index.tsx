@@ -1,6 +1,6 @@
 import Blockquote from '@/components/blockquote';
 import Contain from '@/components/contain';
-import HiddenDiscount from '@/components/hiddenDiscount';
+import HiddenDiscount, { isHiddenDiscountAvailable } from '@/components/hiddenDiscount';
 import { Context } from '@/settings/constant';
 import { ActionType } from '@/settings/type';
 import Click from 'lesca-click';
@@ -39,6 +39,8 @@ const Calculator = memo(() => {
   }, []);
 
   useEffect(() => {
+    if (!isHiddenDiscountAvailable()) return;
+
     const discountsArrays = ['mcd', 'chicken', 'mcf', 'mcn', 'mfries'];
     const getHiddenDiscounts = (ordered: boolean) => {
       const hidden = state.hiddenDiscounts;

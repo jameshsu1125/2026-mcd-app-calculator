@@ -4,7 +4,13 @@ import { memo } from 'react';
 import Button from '../button';
 import './index.less';
 
+const HIDDEN_DISCOUNT_AVAILABLE_AT = new Date('2026-11-17T23:59:59+08:00').getTime();
+
+export const isHiddenDiscountAvailable = () => Date.now() > HIDDEN_DISCOUNT_AVAILABLE_AT;
+
 const HiddenDiscount = memo(() => {
+  if (!isHiddenDiscountAvailable()) return null;
+
   return (
     <div className='HiddenDiscount'>
       <div className='headline'>
