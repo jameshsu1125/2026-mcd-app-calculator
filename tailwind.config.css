@@ -22,6 +22,8 @@
   --animate-shock: shock 0.15s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   --animate-shake: shake 0.62s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   --animate-hop-sway: hop-sway 1.2s ease-in-out infinite;
+  --animate-sway: sway 1.2s ease-in-out infinite;
+  --animate-breathe: breathe 2.4s ease-in-out infinite;
 
   --font-speedee: 'speedee', sans-serif;
 }

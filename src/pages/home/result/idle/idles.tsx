@@ -1,6 +1,6 @@
 import TweenerDivProvider from '@/components/tweenerProvider';
 import { Bezier } from 'lesca-use-tween';
-import { memo, useContext, useMemo } from 'react';
+import { memo, useContext, useMemo, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { ResultContext, ResultStepType } from '../config';
 import { Char } from './config';
@@ -72,6 +72,8 @@ const Effect1 = memo(() => {
 const Idles = memo(({ idleType }: { idleType: 0 | 1 | 2 | -1 | 4 | 3 | 5 }) => {
   const [{ step }] = useContext(ResultContext);
 
+  const [shouldAnimate, setShouldAnimate] = useState(false);
+
   const idleComponent = useMemo(() => {
     switch (idleType) {
       case 0:
@@ -92,15 +94,31 @@ const Idles = memo(({ idleType }: { idleType: 0 | 1 | 2 | -1 | 4 | 3 | 5 }) => {
     }
   }, [idleType]);
 
+  const characterAnimation = useMemo(() => {
+    switch (idleType) {
+      case 0:
+        return 'animate-breathe';
+      case 1:
+        return 'animate-hop-sway';
+      default:
+        return '';
+    }
+  }, [idleType]);
+
   return (
     <div className={twMerge('idle', `idle-${idleType}`)}>
       {idleType >= 0 ? (
         <TweenerDivProvider
-          className='animate-hop-sway'
+          className={twMerge(shouldAnimate ? characterAnimation : '')}
           initialStyle={Char[idleType].initialStyle}
           tweenTo={Char[idleType].tweenTo}
           shouldFadeIn={step === ResultStepType.fadeIn}
-          options={Char[idleType].options}
+          options={{
+            ...Char[idleType].options,
+            onEnd: () => {
+              setShouldAnimate(true);
+            },
+          }}
         >
           {idleComponent}
         </TweenerDivProvider>
