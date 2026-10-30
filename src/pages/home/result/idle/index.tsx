@@ -26,6 +26,8 @@ const Idle = memo(() => {
   const idleType = useMemo(() => {
     if (!view) return -1;
 
+    return 5;
+
     if (view.summary.savings <= MINIMAL_SAVING_AMOUNT) return 4;
     if (view.summary.savings >= MAXIMAL_SAVING_AMOUNT) return 3;
 

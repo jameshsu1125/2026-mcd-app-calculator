@@ -1,15 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="27" height="25.5" viewBox="0 0 27 25.5">
-<defs>
-	<clipPath id="i3-reye-clip">
-		<path d="M0,23.9l3.2,0.2c2-3.5,5.8-5.7,10.1-5.4c4.3,0.3,7.8,3,9.3,6.7l2.9,0.2L27,1.7L1.6,0L0,23.9z"/>
-	</clipPath>
-</defs>
-<g clip-path="url(#i3-reye-clip)">
-	<path fill="#FFFFFF" d="M2.9,13.3c-0.4,5.9,4.1,11,10,11.4c5.9,0.4,11-4.1,11.4-10s-4.1-11-10-11.4C8.4,2.9,3.2,7.4,2.9,13.3"/>
-	<path d="M4.3,13.4c-0.2,2.6,1.8,4.8,4.3,4.9c2.6,0.2,4.8-1.8,4.9-4.3c0.2-2.6-1.8-4.8-4.3-4.9C6.7,8.9,4.5,10.9,4.3,13.4">
-		<animateTransform attributeName="transform" type="translate" dur="4s" repeatCount="indefinite"
-			values="0 0;-1.2 0;-1.2 0;8 0;8 0;0 0" keyTimes="0;0.15;0.4;0.55;0.8;1"
-			calcMode="spline" keySplines="0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1"/>
-	</path>
-</g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="27" height="25.5" viewBox="0 0 27 25.5"><defs><clipPath id="i3-reye-clip"><path d="m0 23.9 3.2.2c2-3.5 5.8-5.7 10.1-5.4s7.8 3 9.3 6.7l2.9.2L27 1.7 1.6 0z"/></clipPath></defs><g clip-path="url(#i3-reye-clip)"><path fill="#fff" d="M2.9 13.3c-.4 5.9 4.1 11 10 11.4s11-4.1 11.4-10-4.1-11-10-11.4-11.1 4.1-11.4 10"/><path d="M4.3 13.4c-.2 2.6 1.8 4.8 4.3 4.9 2.6.2 4.8-1.8 4.9-4.3.2-2.6-1.8-4.8-4.3-4.9-2.5-.2-4.7 1.8-4.9 4.3"><animateTransform attributeName="transform" calcMode="spline" dur="4s" keySplines="0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1" keyTimes="0;0.15;0.4;0.55;0.8;1" repeatCount="indefinite" type="translate" values="0 0;-1.2 0;-1.2 0;8 0;8 0;0 0"/></path></g></svg>
