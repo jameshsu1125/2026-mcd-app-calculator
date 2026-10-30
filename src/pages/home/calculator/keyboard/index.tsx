@@ -3,7 +3,7 @@ import TweenerDivProvider from '@/components/tweenerProvider';
 import { MESSAGE_KEYBOARD_INPUT_MAX, MESSAGE_KEYBOARD_INPUT_MIN } from '@/settings/config';
 import { Context } from '@/settings/constant';
 import { ActionType, LoadingProcessVersion } from '@/settings/type';
-import { memo, useContext, useMemo } from 'react';
+import { memo, useContext, useEffect, useMemo } from 'react';
 import { HomeContext, HomePageType } from '../../config';
 import {
   CalculatorContext,
@@ -151,12 +151,30 @@ const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
 });
 
 const Keyboard = memo(() => {
+  const [{ sounds }] = useContext(Context);
   const [{ time }] = useContext(CalculatorContext);
 
   const keyboard = useMemo(
     () => (time === 'breakfast' ? Keyboards.breakfast : Keyboards.allDay),
     [time],
   );
+
+  useEffect(() => {
+    const handleUserInteraction = () => {
+      // TODO: 在這裡加入使用者點擊畫面時要執行的程式。
+      setTimeout(() => {
+        sounds?.instance?.stop('script');
+      }, 100);
+    };
+
+    window.addEventListener('mousedown', handleUserInteraction);
+    window.addEventListener('touchstart', handleUserInteraction, { passive: true });
+
+    return () => {
+      window.removeEventListener('mousedown', handleUserInteraction);
+      window.removeEventListener('touchstart', handleUserInteraction);
+    };
+  }, [sounds]);
 
   return (
     <div className='w-full shrink-0 px-5'>

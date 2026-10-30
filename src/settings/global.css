@@ -8,8 +8,19 @@ body {
   text-size-adjust: none;
   overscroll-behavior: none;
   font-family:
-    -apple-system, BlinkMacSystemFont, 'PingFang TC', 'Microsoft JhengHei', 'PingFang SC',
-    'Heiti TC', 'Heiti SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'DengXian', 'SimHei', sans-serif;
+    'SpeedeeMT',
+    -apple-system,
+    BlinkMacSystemFont,
+    'PingFang TC',
+    'Microsoft JhengHei',
+    'PingFang SC',
+    'Heiti TC',
+    'Heiti SC',
+    'Hiragino Sans GB',
+    'Microsoft YaHei',
+    'DengXian',
+    'SimHei',
+    sans-serif;
   @apply bg-backgroundColor text-textColor;
 }
 

@@ -209,7 +209,14 @@ const McdLoading = memo(
           {/* 中央圓盤 + 金拱門 */}
           <g className='mcd-icon-float'>
             <g transform='translate(600 320) scale(0.85) translate(-600 -320)'>
-              <circle cx='600' cy='320' r='98' fill='#ffbc0d' filter={ref('dropShadow')} />
+              <circle
+                cx='600'
+                cy='320'
+                r='98'
+                fill='#ffbc0d'
+                filter={ref('dropShadow')}
+                className='hidden'
+              />
               <circle
                 cx='600'
                 cy='320'
@@ -218,6 +225,7 @@ const McdLoading = memo(
                 stroke='#FFAE00'
                 strokeWidth='3.5'
                 strokeOpacity='0.45'
+                className='hidden'
               />
               <circle
                 cx='600'
@@ -228,6 +236,7 @@ const McdLoading = memo(
                 strokeWidth='1.2'
                 strokeDasharray='4 6'
                 strokeOpacity='0.35'
+                className='hidden'
               />
 
               <g opacity='0.15'>
