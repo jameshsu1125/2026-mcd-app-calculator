@@ -21,7 +21,7 @@ export const MESSAGE_KEYBOARD_INPUT_MIN = (
   </>
 );
 
-export const MINIMAL_SAVING_AMOUNT = 130;
+export const MINIMAL_SAVING_AMOUNT = 110; // 省額小於等於這個數字顯示「吃得精」
 export const MAXIMAL_SAVING_AMOUNT = 250;
 
 export const MCD_APP_URL = 'https://links.mcdonaldsapps.com/uY_2KR';

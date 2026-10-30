@@ -26,7 +26,7 @@ const Idle = memo(() => {
   const idleType = useMemo(() => {
     if (!view) return -1;
 
-    if (view.summary.savings <= MINIMAL_SAVING_AMOUNT) return 4;
+    if (view.summary.savings <= MINIMAL_SAVING_AMOUNT) return 4; // 吃得精
     if (view.summary.savings >= MAXIMAL_SAVING_AMOUNT) return 3;
 
     // 平手規則在 useResult 的 CATEGORY_TIE_PRIORITY（平手時咖啡／茶優先）
