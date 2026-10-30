@@ -118,6 +118,8 @@ const KeyButton = memo(({ className, index, dataset }: TKeyButtonProps) => {
                   ...prev,
                   hiddenDiscounts: [...prev.hiddenDiscounts, 'mcd'],
                 }));
+                sounds?.instance?.stopAll();
+                sounds?.instance?.play('mcd');
                 break;
             }
           } else {

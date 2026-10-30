@@ -6,6 +6,7 @@ import wrong from './mp3/mp3-wrong.mp3';
 import hungry from './mp3/mp3-hungry.mp3';
 import bird from './mp3/mp3-bird.mp3';
 import script from './mp3/mp3-script.mp3';
+import mcd from './mp3/mp3-mcd.mp3';
 
 /**
  * 所有音效設定。
@@ -21,4 +22,5 @@ export const SoundList = {
   hungry: { src: hungry, loop: false },
   bird: { src: bird, loop: false },
   script: { src: script, loop: false },
+  mcd: { src: mcd, loop: false },
 } satisfies Record<string, { src: string; loop: boolean }>;
