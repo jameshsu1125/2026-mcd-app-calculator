@@ -3,15 +3,13 @@ import TweenerDivProvider from '@/components/tweenerProvider';
 import useResult from '@/hooks/useResult';
 import { MAXIMAL_SAVING_AMOUNT, MINIMAL_SAVING_AMOUNT } from '@/settings/config';
 import { Bezier } from 'lesca-use-tween';
-import { memo, useContext, useMemo, useState } from 'react';
+import { memo, useContext, useMemo } from 'react';
 import { twMerge } from 'tailwind-merge';
 import Info from '../../info';
 import Logo from '../../logo';
-import { Char, Effects, Items } from './config';
-import './index.less';
 import { ResultContext, ResultStepType } from '../config';
 import Idles from './idles';
-import { TIdleType } from '@/settings/type';
+import './index.less';
 
 const CATEGORY_TYPE_TO_CLASS = {
   肉類: 'meat',
@@ -21,66 +19,12 @@ const CATEGORY_TYPE_TO_CLASS = {
   none: 'none',
 } as const;
 
-const Item = memo(({ index }: { index: number }) => {
-  const [{ step }] = useContext(ResultContext);
-  const [isSwing, setIsSwing] = useState(false);
-  const currentItem = useMemo(() => {
-    return Items[index] ?? [];
-  }, [index]);
-  return (
-    <>
-      {currentItem.map((item, i) => {
-        return (
-          <TweenerDivProvider
-            key={i}
-            className={twMerge(isSwing ? item.loopClass : '')}
-            initialStyle={item.initialStyle}
-            tweenTo={item.tweenTo}
-            shouldFadeIn={step === ResultStepType.fadeIn}
-            options={{
-              ...item.options,
-              onEnd: () => setIsSwing(true),
-            }}
-          />
-        );
-      })}
-    </>
-  );
-});
-
-const Effect = memo(({ index }: { index: number }) => {
-  const [{ step }] = useContext(ResultContext);
-  const [isSwing, setIsSwing] = useState(false);
-  const currentEffect = useMemo(() => {
-    return Effects[index] ?? [];
-  }, [index]);
-  return (
-    <>
-      {currentEffect.map((effect, i) => (
-        <TweenerDivProvider
-          key={i}
-          className={twMerge(isSwing ? effect.loopClass : '')}
-          initialStyle={effect.initialStyle}
-          tweenTo={effect.tweenTo}
-          shouldFadeIn={step === ResultStepType.fadeIn}
-          options={{
-            ...effect.options,
-            onEnd: () => setIsSwing(true),
-          }}
-        />
-      ))}
-    </>
-  );
-});
-
 const Idle = memo(() => {
   const [{ step }] = useContext(ResultContext);
   const view = useResult();
 
   const idleType = useMemo(() => {
     if (!view) return -1;
-
-    return 5;
 
     if (view.summary.savings <= MINIMAL_SAVING_AMOUNT) return 4;
     if (view.summary.savings >= MAXIMAL_SAVING_AMOUNT) return 3;
