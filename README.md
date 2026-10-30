@@ -148,7 +148,8 @@ Thank customers and some manufacturers for their support.
 
 - **開關**：在 `src/pages/.env.local` 設定 `VITE_IMAGE_SOURCE=local`（本機）或 `cdn`（Bunny），`VITE_CDN_URL=https://<zone>.b-cdn.net`，以及存放資料夾 `VITE_CDN_FOLDER=default`（必填，不能是根目錄）。
   `cdn` 模式下，建置時 `scripts/postcss-cdn-url.js` 會把 CSS 內所有圖片與字型的 `url()` 改成 CDN 網址（附 `?v=<hash>`），`index.html` 的 og:image 也一併改用 CDN。
-- **一鍵發布**：`npm run cdn:upload`（只上傳有變動的；`npm run cdn:upload -- --force` 全部重傳）。
+- **一鍵發布**：`npm run cdn:upload`（只上傳有變動的；`npm run cdn:upload -- --force` 全部重傳）。上傳後會自動清除這些檔案的 CDN 快取，需設定 `BUNNY_API_KEY`（Bunny 帳號的 API key）；沒設定時只上傳、不清快取。
+- **清除快取**：`npm run cdn:purge` 清除整個 `VITE_CDN_FOLDER` 資料夾；`npm run cdn:purge -- pages/home/img/a.png` 只清指定檔案。
   需在 `.env.local` 設定 `BUNNY_STORAGE_ZONE`、`BUNNY_STORAGE_PASSWORD`、`BUNNY_SFTP_HOST`（依 zone 區域，例如 `sg.storage.bunnycdn.com`）。
 - **CDN 路徑**：`src/components/button/img/x.svg` → `<CDN>/<VITE_CDN_FOLDER>/components/button/img/x.svg`；`public/img/a.jpg` → `<CDN>/<VITE_CDN_FOLDER>/img/a.jpg`。
 
