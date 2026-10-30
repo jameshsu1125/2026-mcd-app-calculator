@@ -1,8 +1,11 @@
-<!-- Generator: Adobe Illustrator 25.0.0, SVG Export Plug-In  -->
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="12.9px"
-	 height="6.7px" viewBox="0 0 12.9 6.7" style="overflow:visible;enable-background:new 0 0 12.9 6.7;" xml:space="preserve">
-<defs>
-</defs>
-<path d="M5.7,6.7c-2.5,0-4.6-1.1-5.6-3c-0.4-0.7-0.1-1.6,0.7-2c0.7-0.4,1.6-0.1,2,0.7c0.4,0.9,1.7,1.4,3.2,1.3C7.5,3.6,9.3,2.9,10,1
-	c0.3-0.8,1.1-1.2,1.9-0.9c0.8,0.3,1.2,1.1,0.9,1.9c-1,2.7-3.5,4.5-6.6,4.7C6.1,6.7,5.9,6.7,5.7,6.7z"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="12.9" height="6.7" viewBox="0 0 12.9 6.7">
+<!-- 眨眼中的閉眼弧線，沒有眼球；以中心做輕微壓扁（只縮不放），像用力眨一下 -->
+<g transform="translate(6.45 3.35)">
+	<g>
+		<animateTransform attributeName="transform" type="scale" dur="4s" repeatCount="indefinite"
+			values="1 1;1 1;0.94 0.75;1 1;1 1" keyTimes="0;0.4;0.47;0.56;1"
+			calcMode="spline" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1"/>
+		<path transform="translate(-6.45 -3.35)" d="M5.7,6.7c-2.5,0-4.6-1.1-5.6-3c-0.4-0.7-0.1-1.6,0.7-2c0.7-0.4,1.6-0.1,2,0.7c0.4,0.9,1.7,1.4,3.2,1.3C7.5,3.6,9.3,2.9,10,1c0.3-0.8,1.1-1.2,1.9-0.9c0.8,0.3,1.2,1.1,0.9,1.9c-1,2.7-3.5,4.5-6.6,4.7C6.1,6.7,5.9,6.7,5.7,6.7z"/>
+	</g>
+</g>
 </svg>

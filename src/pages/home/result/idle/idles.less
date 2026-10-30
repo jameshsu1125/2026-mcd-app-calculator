@@ -317,4 +317,167 @@
       }
     }
   }
+
+  .idle-2 {
+    @img: './img/idle2/all.png';
+    @apply mt-10 w-3/4;
+
+    &::before {
+      padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+      // background-image: url(@img);
+    }
+
+    & > div:nth-child(1) {
+      top: 4.618%;
+      left: 0%;
+      width: (unit(image-width(@img2))) / (unit(image-width(@img))) * 100%;
+
+      @img2: './img/idle2/char.png';
+      @apply absolute origin-bottom;
+
+      &::before {
+        padding-bottom: (unit(image-height(@img2) / unit(image-width(@img2))) * 100%);
+        // background-image: url(@img2);
+        content: '';
+
+        @apply block w-full bg-contain bg-center bg-no-repeat;
+      }
+
+      .body {
+        top: 0%;
+        left: 6.522%;
+        width: 78.019%;
+
+        @img: './img/idle2/body.png';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .left-hand {
+        top: 32.842%;
+        left: 1.842%;
+        width: 19.565%;
+
+        @img: './img/idle2/left-hand.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .right-hand {
+        top: 36.421%;
+        right: 2.242%;
+        width: 24.396%;
+
+        @img: './img/idle2/right-hand.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .left-eye {
+        top: 22.316%;
+        left: 47.585%;
+        width: 8.937%;
+
+        @img: './img/idle2/left-eye.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .right-eye {
+        top: 20.211%;
+        left: 61.353%;
+        width: 9.179%;
+
+        @img: './img/idle2/right-eye.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .mouse {
+        top: 28.842%;
+        left: 55.797%;
+        width: 7.246%;
+
+        @img: './img/idle2/mouse.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .item {
+        top: -4.632%;
+        left: 84.541%;
+        width: 19.082%;
+
+        @img: './img/idle2/item.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply animate-bounce-r20 block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+    }
+
+    .effect-0 {
+      top: 75.502%;
+      left: 85.581%;
+      width: 9.07%;
+
+      @img: './img/idle2/effect-0.svg';
+      @apply absolute;
+
+      &::before {
+        padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+        background-image: url(@img);
+        content: '';
+
+        @apply block w-full animate-ping bg-contain bg-center bg-no-repeat;
+      }
+    }
+  }
 }

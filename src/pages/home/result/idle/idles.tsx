@@ -69,6 +69,40 @@ const Effect1 = memo(() => {
   );
 });
 
+const Idle2 = memo(() => {
+  const [{ step }] = useContext(ResultContext);
+  return (
+    <>
+      <div className='body' />
+      <div className='left-hand' />
+      <div className='right-hand' />
+      <div className='left-eye' />
+      <div className='right-eye' />
+      <div className='mouse' />
+      <TweenerDivProvider
+        className='item'
+        initialStyle={{ opacity: 0, y: -150 }}
+        tweenTo={{ opacity: 1, y: 0 }}
+        shouldFadeIn={step === ResultStepType.fadeIn}
+        options={{ duration: 250, delay: 700, easing: Bezier.outBack }}
+      />
+    </>
+  );
+});
+
+const Effect2 = memo(() => {
+  const [{ step }] = useContext(ResultContext);
+  return (
+    <TweenerDivProvider
+      className='effect-0'
+      initialStyle={{ opacity: 0, scale: 2 }}
+      tweenTo={{ opacity: 1, scale: 1 }}
+      shouldFadeIn={step === ResultStepType.fadeIn}
+      options={{ duration: 250, delay: 750, easing: Bezier.outBack }}
+    />
+  );
+});
+
 const Idles = memo(({ idleType }: { idleType: 0 | 1 | 2 | -1 | 4 | 3 | 5 }) => {
   const [{ step }] = useContext(ResultContext);
 
@@ -80,6 +114,8 @@ const Idles = memo(({ idleType }: { idleType: 0 | 1 | 2 | -1 | 4 | 3 | 5 }) => {
         return <Idle0 />;
       case 1:
         return <Idle1 />;
+      case 2:
+        return <Idle2 />;
       default:
         return null;
     }
@@ -89,6 +125,8 @@ const Idles = memo(({ idleType }: { idleType: 0 | 1 | 2 | -1 | 4 | 3 | 5 }) => {
     switch (idleType) {
       case 1:
         return <Effect1 />;
+      case 2:
+        return <Effect2 />;
       default:
         return null;
     }
@@ -100,6 +138,9 @@ const Idles = memo(({ idleType }: { idleType: 0 | 1 | 2 | -1 | 4 | 3 | 5 }) => {
         return 'animate-breathe';
       case 1:
         return 'animate-hop-sway';
+      case 2:
+        return 'animate-float-sway';
+
       default:
         return '';
     }
