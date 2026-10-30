@@ -480,4 +480,151 @@
       }
     }
   }
+
+  .idle-3 {
+    @img: './img/idle3/all.png';
+    @apply mt-10 w-2/3;
+
+    &::before {
+      padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+      // background-image: url(@img);
+    }
+
+    & > div:nth-child(1) {
+      top: 4.263%;
+      left: 0%;
+      width: (unit(image-width(@img2))) / (unit(image-width(@img))) * 100%;
+
+      @img2: './img/idle3/char.png';
+      @apply absolute origin-bottom;
+
+      &::before {
+        padding-bottom: (unit(image-height(@img2) / unit(image-width(@img2))) * 100%);
+        // background-image: url(@img2);
+        content: '';
+
+        @apply block w-full bg-contain bg-center bg-no-repeat;
+      }
+
+      .body {
+        top: 0%;
+        left: 0.308%;
+        width: 72.308%;
+
+        @img: './img/idle3/body.png';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .left-hand {
+        top: 28.015%;
+        left: 16.308%;
+        width: 54.462%;
+
+        @img: './img/idle3/left-hand.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .right-hand {
+        top: 38.59%;
+        right: 0.308%;
+        width: 31.692%;
+
+        @img: './img/idle3/right-hand.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .left-eye {
+        top: 10.761%;
+        left: 16.923%;
+        width: 24.923%;
+
+        @img: './img/idle3/left-eye.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .right-eye {
+        top: 11.874%;
+        left: 40.308%;
+        width: 24.308%;
+
+        @img: './img/idle3/right-eye.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .item-0 {
+        top: -4.267%;
+        left: 76.308%;
+        width: 39.077%;
+
+        @img: './img/idle3/item.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+          animation-duration: 10s;
+
+          @apply animate-float-sway-reverse block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .item-1 {
+        top: 16.141%;
+        left: 76.308%;
+        width: 39.077%;
+
+        @img: './img/idle3/item.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply animate-float-sway block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+    }
+  }
 }

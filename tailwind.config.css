@@ -25,6 +25,7 @@
   --animate-sway: sway 1.2s ease-in-out infinite;
   --animate-breathe: breathe 2.4s ease-in-out infinite;
   --animate-float-sway: float-sway 6s ease-in-out infinite;
+  --animate-float-sway-reverse: float-sway 5s ease-in-out infinite reverse;
 
   --font-speedee: 'speedee', sans-serif;
 }

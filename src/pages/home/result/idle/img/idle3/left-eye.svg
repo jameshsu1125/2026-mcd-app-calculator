@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="27" height="25.5" viewBox="0 0 27 25.5">
+<defs>
+	<clipPath id="i3-leye-clip">
+		<path d="M0,23.9l2.9,0.2c2-3.5,5.8-5.7,10.1-5.4c4.3,0.3,7.8,3,9.3,6.7l3.2,0.2L27,1.7L1.6,0L0,23.9z"/>
+	</clipPath>
+</defs>
+<!-- clip 放在外層，只移動瞳孔：看左 → 看右 → 回原位（位移不超出眼白） -->
+<g clip-path="url(#i3-leye-clip)">
+	<path fill="#FFFFFF" d="M24,14.7c-0.4,5.9-5.5,10.4-11.4,10c-5.9-0.4-10.4-5.5-10-11.4S8.1,2.9,14,3.3C19.9,3.7,24.4,8.8,24,14.7"/>
+	<path d="M22.5,14.6c-0.2,2.6-2.4,4.5-4.9,4.3c-2.6-0.2-4.5-2.4-4.3-4.9c0.2-2.6,2.4-4.5,4.9-4.3C20.8,9.8,22.7,12.1,22.5,14.6">
+		<animateTransform attributeName="transform" type="translate" dur="4s" repeatCount="indefinite"
+			values="0 0;-8 0;-8 0;1.4 0;1.4 0;0 0" keyTimes="0;0.15;0.4;0.55;0.8;1"
+			calcMode="spline" keySplines="0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1"/>
+	</path>
+</g>
+</svg>
