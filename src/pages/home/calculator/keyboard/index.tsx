@@ -162,9 +162,12 @@ const Keyboard = memo(() => {
   useEffect(() => {
     const handleUserInteraction = () => {
       // TODO: 在這裡加入使用者點擊畫面時要執行的程式。
-      setTimeout(() => {
+      requestAnimationFrame(() => {
         sounds?.instance?.stop('script');
-      }, 100);
+        sounds?.instance?.stop('bird');
+        sounds?.instance?.stop('hungry');
+        sounds?.instance?.stop('mcd');
+      });
     };
 
     window.addEventListener('mousedown', handleUserInteraction);
