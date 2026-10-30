@@ -627,4 +627,279 @@
       }
     }
   }
+
+  .idle-4 {
+    @img: './img/idle4/all.png';
+    @apply mt-10 w-3/4;
+
+    &::before {
+      padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+      // background-image: url(@img);
+    }
+
+    & > div:nth-child(1) {
+      top: 7.89%;
+      left: 0%;
+      width: (unit(image-width(@img2))) / (unit(image-width(@img))) * 100%;
+
+      @img2: './img/idle4/char.png';
+      @apply absolute origin-bottom;
+
+      &::before {
+        padding-bottom: (unit(image-height(@img2) / unit(image-width(@img2))) * 100%);
+        // background-image: url(@img2);
+        content: '';
+
+        @apply block w-full bg-contain bg-center bg-no-repeat;
+      }
+
+      .body {
+        top: 0%;
+        left: 6.522%;
+        width: 70.652%;
+
+        @img: './img/idle4/body.png';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .left-hand {
+        top: 34.48%;
+        left: -1.607%;
+        width: 43.7%;
+
+        @img: './img/idle4/left-hand.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .right-hand {
+        top: 22.153%;
+        right: -2.932%;
+        width: 58.31%;
+
+        @img: './img/idle4/right-hand.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .eyes {
+        top: 6.175%;
+        left: 16.304%;
+        width: 43.207%;
+
+        @img: './img/idle4/eyes.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .item {
+        top: 2.39%;
+        left: 81.522%;
+        width: 37.5%;
+
+        @img: './img/idle4/item.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply animate-swing-r8 block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+    }
+
+    .effect-0 {
+      top: 0.734%;
+      left: 56.164%;
+      width: 6.621%;
+
+      @img: './img/idle4/effect-0.svg';
+      @apply absolute;
+
+      &::before {
+        padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+        background-image: url(@img);
+        content: '';
+
+        @apply animate-swing-r8 block w-full bg-contain bg-center bg-no-repeat;
+      }
+    }
+
+    .effect-1 {
+      top: 0.183%;
+      left: 72.374%;
+      width: 8.676%;
+
+      @img: './img/idle4/effect-1.svg';
+      @apply absolute;
+
+      &::before {
+        padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+        background-image: url(@img);
+        content: '';
+
+        @apply animate-swing-r8-reverse block w-full bg-contain bg-center bg-no-repeat;
+      }
+    }
+  }
+
+  .idle-5 {
+    @img: './img/idle5/all.png';
+    @apply mt-10 -mb-10 w-7/12;
+
+    &::before {
+      padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+      // background-image: url(@img);
+    }
+
+    & > div:nth-child(1) {
+      top: 16.144%;
+      left: 0%;
+      width: (unit(image-width(@img2))) / (unit(image-width(@img))) * 100%;
+
+      @img2: './img/idle5/char.png';
+      @apply absolute origin-bottom;
+
+      &::before {
+        padding-bottom: (unit(image-height(@img2) / unit(image-width(@img2))) * 100%);
+        // background-image: url(@img2);
+        content: '';
+
+        @apply block w-full bg-contain bg-center bg-no-repeat;
+      }
+
+      .body {
+        top: 0%;
+        left: 0%;
+        width: 100%;
+
+        @img: './img/idle5/body.png';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .left-hand {
+        top: 21.536%;
+        left: 5.075%;
+        width: 23.582%;
+
+        @img: './img/idle5/left-hand.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .left-eye {
+        top: 2.06%;
+        left: 34.03%;
+        width: 33.731%;
+
+        @img: './img/idle5/left-eye.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .right-eye {
+        top: 2.622%;
+        left: 57.015%;
+        width: 27.761%;
+
+        @img: './img/idle5/right-eye.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+
+      .item {
+        top: -3.558%;
+        left: 0.896%;
+        width: 26.567%;
+
+        @img: './img/idle5/item.svg';
+        @apply absolute;
+
+        &::before {
+          padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+          background-image: url(@img);
+          content: '';
+
+          @apply animate-swing-r8 block w-full bg-contain bg-center bg-no-repeat;
+        }
+      }
+    }
+
+    .effect {
+      top: 0.157%;
+      left: 63.284%;
+      width: 31.642%;
+
+      @img: './img/idle5/effect.svg';
+      @apply absolute;
+
+      &::before {
+        padding-bottom: (unit(image-height(@img) / unit(image-width(@img))) * 100%);
+        background-image: url(@img);
+        content: '';
+
+        @apply block w-full bg-contain bg-center bg-no-repeat;
+      }
+    }
+  }
 }

@@ -130,6 +130,79 @@ const Idle3 = memo(() => {
   );
 });
 
+const Idle4 = memo(() => {
+  const [{ step }] = useContext(ResultContext);
+  return (
+    <>
+      <div className='body' />
+      <div className='left-hand' />
+      <div className='right-hand' />
+      <div className='eyes' />
+      <TweenerDivProvider
+        className='item'
+        initialStyle={{ opacity: 0, y: -150 }}
+        tweenTo={{ opacity: 1, y: 0 }}
+        shouldFadeIn={step === ResultStepType.fadeIn}
+        options={{ duration: 250, delay: 650, easing: Bezier.outBack }}
+      />
+    </>
+  );
+});
+
+const Effect4 = memo(() => {
+  const [{ step }] = useContext(ResultContext);
+  return (
+    <>
+      <TweenerDivProvider
+        className='effect-0'
+        initialStyle={{ opacity: 0, scale: 2 }}
+        tweenTo={{ opacity: 1, scale: 1 }}
+        shouldFadeIn={step === ResultStepType.fadeIn}
+        options={{ duration: 250, delay: 750, easing: Bezier.outBack }}
+      />
+      <TweenerDivProvider
+        className='effect-1'
+        initialStyle={{ opacity: 0, scale: 2 }}
+        tweenTo={{ opacity: 1, scale: 1 }}
+        shouldFadeIn={step === ResultStepType.fadeIn}
+        options={{ duration: 250, delay: 850, easing: Bezier.outBack }}
+      />
+    </>
+  );
+});
+
+const Idle5 = memo(() => {
+  const [{ step }] = useContext(ResultContext);
+  return (
+    <>
+      <div className='body' />
+      <div className='left-hand' />
+      <div className='left-eye' />
+      <div className='right-eye' />
+      <TweenerDivProvider
+        className='item'
+        initialStyle={{ opacity: 0, y: 150 }}
+        tweenTo={{ opacity: 1, y: 0 }}
+        shouldFadeIn={step === ResultStepType.fadeIn}
+        options={{ duration: 250, delay: 650, easing: Bezier.outBack }}
+      />
+    </>
+  );
+});
+
+const Effect5 = memo(() => {
+  const [{ step }] = useContext(ResultContext);
+  return (
+    <TweenerDivProvider
+      className='effect'
+      initialStyle={{ opacity: 0, scale: 2 }}
+      tweenTo={{ opacity: 1, scale: 1 }}
+      shouldFadeIn={step === ResultStepType.fadeIn}
+      options={{ duration: 250, delay: 750, easing: Bezier.outBack }}
+    />
+  );
+});
+
 const Idles = memo(({ idleType }: { idleType: 0 | 1 | 2 | -1 | 4 | 3 | 5 }) => {
   const [{ step }] = useContext(ResultContext);
 
@@ -145,6 +218,10 @@ const Idles = memo(({ idleType }: { idleType: 0 | 1 | 2 | -1 | 4 | 3 | 5 }) => {
         return <Idle2 />;
       case 3:
         return <Idle3 />;
+      case 4:
+        return <Idle4 />;
+      case 5:
+        return <Idle5 />;
       default:
         return null;
     }
@@ -156,6 +233,10 @@ const Idles = memo(({ idleType }: { idleType: 0 | 1 | 2 | -1 | 4 | 3 | 5 }) => {
         return <Effect1 />;
       case 2:
         return <Effect2 />;
+      case 4:
+        return <Effect4 />;
+      case 5:
+        return <Effect5 />;
       default:
         return null;
     }
@@ -170,6 +251,10 @@ const Idles = memo(({ idleType }: { idleType: 0 | 1 | 2 | -1 | 4 | 3 | 5 }) => {
       case 2:
         return 'animate-float-sway';
       case 3:
+        return 'animate-breathe';
+      case 4:
+        return 'animate-breathe';
+      case 5:
         return 'animate-breathe';
 
       default:

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="38.3" height="33.4" viewBox="0 0 38.3 33.4">
+<defs>
+	<clipPath id="i5-leye-white">
+		<polygon points="0,20.2 1,23 38.3,33.4 37.7,2 22.1,0"/>
+	</clipPath>
+	<clipPath id="i5-leye-pupil">
+		<path d="M16.8,4.9L3.9,16.6c-0.1,0.6-0.1,1.3-0.1,2c0,1.9,0.4,3.8,1.1,5.5l20.6,5.7c3.5-2.5,5.8-6.6,5.8-11.2c0-7.6-6.2-13.8-13.8-13.8C17.3,4.8,17,4.9,16.8,4.9"/>
+	</clipPath>
+</defs>
+<path clip-path="url(#i5-leye-white)" fill="#FFFFFF" d="M31.3,18.6c0,7.6-6.2,13.8-13.8,13.8S3.8,26.2,3.8,18.6S9.9,4.8,17.5,4.8S31.3,11,31.3,18.6"/>
+<!-- clip 放在外層，只移動瞳孔：從左上往右看再回來 -->
+<g clip-path="url(#i5-leye-pupil)">
+	<path d="M18.6,11.7c0,3.8-3.1,6.9-6.9,6.9c-3.8,0-6.9-3.1-6.9-6.9c0-3.8,3.1-6.9,6.9-6.9C15.5,4.8,18.6,7.900,18.6,11.7">
+		<animateTransform attributeName="transform" type="translate" dur="4s" repeatCount="indefinite"
+			values="0 0;0 0;6 2;6 2;0 0;0 0" keyTimes="0;0.2;0.32;0.68;0.8;1"
+			calcMode="spline" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1"/>
+	</path>
+</g>
+</svg>
